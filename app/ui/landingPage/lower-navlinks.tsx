@@ -1,0 +1,43 @@
+'use client';
+
+import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import {
+    NewspaperIcon,
+    HomeIcon,
+} from '@heroicons/react/24/outline';
+
+const links = [
+    { name: 'Blog', href: '/blog', icon: NewspaperIcon },
+    { name: 'SELL MY PROPERTY', href: '/sell_property', icon: HomeIcon }
+];
+
+export default function LowerNav() {
+    const pathname = usePathname();
+
+    return (
+        <div className="flex items-center justify-between">
+            <Link href = "/">
+            <Image src="/logo.png" width={200} height={200} alt="Logo"  />
+            </Link>
+           
+            <div className="flex space-x-3">
+                {links.map((link) => {
+                    const LinkIcon = link.icon;
+
+                    return (
+                        <Link
+                            key={link.name}
+                            href={link.href}
+                            className={`flex items-center space-x-2 bg-gray-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ${pathname === link.href ? 'bg-blue-700' : 'bg-gray-500'}`}
+                        >
+                            <LinkIcon className="w-6" />
+                            <p className="block">{link.name}</p>
+                        </Link>
+                    );
+                })}
+            </div>
+        </div>
+    );
+}
