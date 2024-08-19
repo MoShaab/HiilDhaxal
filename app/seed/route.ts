@@ -107,7 +107,7 @@ async function seedBookings() {
 }
 
 export async function GET() {
-  
+  const client = await connectToDb();
   try {
     await client.sql`BEGIN`;
     await seedProperties();
