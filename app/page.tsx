@@ -2,7 +2,6 @@
 import UpperNav from './ui/landingPage/upper-navlinks';
 import LowerNav from './ui/landingPage/lower-navlinks';
 import HeroArea from './ui/landingPage/hero-area';
-import DisplayProperty from './ui/landingPage/display-properties';
 import DisplayFromDb from './ui/landingPage/displayfromdb';
 import {fetchFeaturedProperty} from '@/app/lib/data';
 
