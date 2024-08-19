@@ -2,10 +2,16 @@ import { db } from '@vercel/postgres';
 import { properties, users, bookings } from '../lib/data/placeholder-data';
 import { NextResponse } from 'next/server';
 
-const client = await db.connect();
+
+
+async function connectToDb() {
+  const client = await db.connect();
+  return client;
+}
 
 
 async function seedProperties() {
+  const client = await connectToDb();
   await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
 
   // Drop and create the properties table
@@ -42,7 +48,7 @@ async function seedProperties() {
 
 
 async function seedUsers() {
- 
+  const client = await connectToDb();
   await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
 
   // Drop and create the users table
@@ -72,6 +78,7 @@ async function seedUsers() {
 }
 
 async function seedBookings() {
+  const client = await connectToDb();
   await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
 
   // Drop and create the bookings table
