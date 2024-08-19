@@ -106,8 +106,10 @@ async function seedBookings() {
   return insertedBookings;
 }
 
+
 export async function GET() {
   const client = await connectToDb();
+  
   try {
     await client.sql`BEGIN`;
     await seedProperties();
@@ -117,12 +119,12 @@ export async function GET() {
 
     return NextResponse.json({ message: 'Database seeded successfully' });
 
-    
-
-   
   } catch (error) {
     await client.sql`ROLLBACK`;
-    return NextResponse.json({ error: error.message || 'An error occurred' }, { status: 500 });
+
+    const errorMessage = error instanceof Error ? error.message : 'An error occurred';
+    return NextResponse.json({ error: errorMessage }, { status: 500 });
+
   } finally {
     client.release();
   }
