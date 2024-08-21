@@ -15,7 +15,7 @@ export default function DisplayAgents({ featuredAgents }: { featuredAgents: Agen
         {featuredAgents.map((agent) => {
           return (
             <div key={agent.id} className="block group">
-              <Link href={agent.social_media.facebook} passHref>
+              <Link href={agent.facebook} passHref>
                 <div className="relative w-full h-64">
                   <Image
                     src={agent.image_url} // Updated to use the agent's image
@@ -32,13 +32,13 @@ export default function DisplayAgents({ featuredAgents }: { featuredAgents: Agen
                 </h3>
                 <p className="text-md text-black">{agent.role}</p>
                 <div className="flex justify-center space-x-4 mt-2">
-                  <Link href={agent.social_media.facebook} className="text-blue-600" aria-label="Facebook">
+                  <Link href={agent.facebook} className="text-blue-600" aria-label="Facebook">
                     <i className="fab fa-facebook-f"></i>
                   </Link>
-                  <Link href={agent.social_media.instagram} className="text-pink-500" aria-label="Instagram">
+                  <Link href={agent.instagram} className="text-pink-500" aria-label="Instagram">
                     <i className="fab fa-instagram"></i>
                   </Link>
-                  <Link href={agent.social_media.twitter} className="text-blue-400" aria-label="Twitter">
+                  <Link href={agent.twitter} className="text-blue-400" aria-label="Twitter">
                     <i className="fab fa-twitter"></i>
                   </Link>
                 </div>

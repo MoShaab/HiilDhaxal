@@ -98,6 +98,7 @@ async function seedBookings() {
 async function seedAgents() {
   const client = await connectToDb();
   await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
+  await client.sql`DROP TABLE IF EXISTS agents CASCADE`;
 
   await client.sql`
     CREATE TABLE IF NOT EXISTS agents (
@@ -105,7 +106,9 @@ async function seedAgents() {
       name VARCHAR(255),
       role VARCHAR(255),
       image_url VARCHAR(255),
-      social_media JSONB,
+      facebook VARCHAR(255),
+      instagram VARCHAR(255),
+      twitter VARCHAR(255),
       created_at TIMESTAMP DEFAULT NOW()
     );
   `;
@@ -113,19 +116,22 @@ async function seedAgents() {
   const insertedAgents = await Promise.all(
     agents.map(async (agent) => {
       return client.sql`
-        INSERT INTO agents (id, name, role, image_url, social_media)
-        VALUES (${agent.id}, ${agent.name}, ${agent.role}, ${agent.image_url}, ${agent.social_media})
+        INSERT INTO agents (id, name, role, image_url, facebook, instagram, twitter)
+        VALUES (${agent.id}, ${agent.name}, ${agent.role}, ${agent.image_url}, ${agent.facebook}, ${agent.instagram}, ${agent.twitter})
         ON CONFLICT (id) DO UPDATE
         SET name = EXCLUDED.name,
           role = EXCLUDED.role,
           image_url = EXCLUDED.image_url,
-          social_media = EXCLUDED.social_media;
+          facebook = EXCLUDED.facebook,
+          instagram = EXCLUDED.instagram,
+          twitter = EXCLUDED.twitter;
       `;
     })
   );
 
   return insertedAgents;
 }
+
 
 export async function GET() {
   const client = await connectToDb();

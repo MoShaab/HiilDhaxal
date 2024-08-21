@@ -61,32 +61,27 @@ export const agents = [
         name: "Alex Mbuvi",
         role: "Sales Agent",
         image_url: "/agents/alex.jpg",
-        social_media: {
-            facebook: "https://facebook.com",
-            instagram: "https://instagram.com",
-            twitter: "https://twitter.com"
-        }
+        facebook: "https://facebook.com",
+        instagram: "https://instagram.com",
+        twitter: "https://twitter.com"
     },
     {
         id: 'b2c3d4e5-6789-01ab-cdef-2345678901bc',
         name: "Sylvia Walker",
         role: "Sales Agent",
         image_url: "/agents/sylvia.jpg",
-        social_media: {
-            facebook: "https://facebook.com",
-            instagram: "https://instagram.com",
-            twitter: "https://twitter.com"
-        }
+        facebook: "https://facebook.com",
+        instagram: "https://instagram.com",
+        twitter: "https://twitter.com"
+        
     },
     {
         id: 'c4b3d4e5-6789-01ab-cdef-2345678901bc',
         name: "John Brown",
         role: "Sales Agent",
         image_url: "/agents/john.jpg",
-        social_media: {
-            facebook: "https://facebook.com",
-            instagram: "https://instagram.com",
-            twitter: "https://twitter.com"
-        }
+        facebook: "https://facebook.com",
+        instagram: "https://instagram.com",
+        twitter: "https://twitter.com"
     }
 ];
