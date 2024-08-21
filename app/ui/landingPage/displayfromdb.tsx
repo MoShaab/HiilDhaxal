@@ -24,8 +24,8 @@ export default async function DisplayFromDb({
                 console.log('Image URL:', property.image_path);
                 
                 return(
-            <Link href = {property.image_path}>
-                <div  key={property.id} className="block group"
+            <Link href = {property.image_path} key={property.id}>
+                <div   className="block group"
                 
                 >
                     
