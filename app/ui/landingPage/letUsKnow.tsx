@@ -4,7 +4,7 @@ import { lusitana, inter } from '@/app/ui/fonts';
 export default function LetUsKnow() {
   return (
     <>
-      <main className="relative w-full h-screen flex items-center justify-center bg-cover ">
+      <main className="relative w-full h-[70vh] flex items-center justify-center bg-cover ">
         <div className="absolute inset-0 mt-15">
           <Image
             src="/interior-desktop.jpg"
