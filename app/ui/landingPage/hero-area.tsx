@@ -8,7 +8,7 @@ export default function HeroArea(){
 
     return(
         <>
-         <main className="relative w-full h-screen flex justify-center items-center py-5 bg-cover">
+         <main className="relative w-full h-[70vh] flex justify-center items-center py-5 bg-cover">
         <div className=" absolute inset-0 mt-15">
 
         <div>

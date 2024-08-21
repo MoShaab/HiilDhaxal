@@ -17,12 +17,13 @@ export default function LowerNav() {
     const pathname = usePathname();
 
     return (
-        <div className="flex items-center justify-between">
-            <Link href = "/">
-            <Image src="/logo.png" width={200} height={200} alt="Logo"  />
+        <div className="flex flex-col md:flex-row items-center justify-between">
+            <Link href="/">
+                <Image src="/logo.png" width={200} height={200} alt="Logo" />
             </Link>
            
-            <div className="flex space-x-3">
+            {/* Links displayed on desktop */}
+            <div className="hidden md:flex space-x-3">
                 {links.map((link) => {
                     const LinkIcon = link.icon;
 
@@ -37,6 +38,16 @@ export default function LowerNav() {
                         </Link>
                     );
                 })}
+            </div>
+
+            {/* Breadcrumbs displayed on mobile */}
+            <div className="flex md:hidden mt-4 space-x-2 text-sm text-blue-600">
+                {links.map((link) => (
+                    <Link key={link.name} href={link.href} className="flex items-center space-x-1">
+                        <p className="block">{link.name}</p>
+                        {pathname !== link.href && <span>/</span>}
+                    </Link>
+                ))}
             </div>
         </div>
     );

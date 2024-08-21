@@ -1,26 +1,17 @@
 import { db } from '@vercel/postgres';
-import { properties, users, bookings } from '../lib/data/placeholder-data';
+import { properties, users, bookings, agents } from '../lib/data/placeholder-data';
 import { NextResponse } from 'next/server';
-
-
 
 async function connectToDb() {
   const client = await db.connect();
   return client;
 }
 
-
 async function seedProperties() {
   const client = await connectToDb();
   await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
 
-  // Drop and create the properties table
-  // await client.sql`
-  // DROP TABLE IF EXISTS PROPERTIES CASCADE;
-  // `
- 
   await client.sql`
-    
     CREATE TABLE IF NOT EXISTS properties (
       id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
       title VARCHAR(255),
@@ -44,22 +35,16 @@ async function seedProperties() {
           location = EXCLUDED.location, 
           image_path = EXCLUDED.image_path;
       `;
-
     })
   );
 
-   return insertedProperties;
+  return insertedProperties;
 }
-
-
 
 async function seedUsers() {
   const client = await connectToDb();
   await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
 
-  // Drop and create the users table
- 
-  
   await client.sql`
     CREATE TABLE IF NOT EXISTS users (
       id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
@@ -87,8 +72,6 @@ async function seedBookings() {
   const client = await connectToDb();
   await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
 
-  // Drop and create the bookings table
- 
   await client.sql`
     CREATE TABLE IF NOT EXISTS bookings (
       id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
@@ -112,6 +95,37 @@ async function seedBookings() {
   return insertedBookings;
 }
 
+async function seedAgents() {
+  const client = await connectToDb();
+  await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
+
+  await client.sql`
+    CREATE TABLE IF NOT EXISTS agents (
+      id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+      name VARCHAR(255),
+      role VARCHAR(255),
+      image_url VARCHAR(255),
+      social_media JSONB,
+      created_at TIMESTAMP DEFAULT NOW()
+    );
+  `;
+
+  const insertedAgents = await Promise.all(
+    agents.map(async (agent) => {
+      return client.sql`
+        INSERT INTO agents (id, name, role, image_url, social_media)
+        VALUES (${agent.id}, ${agent.name}, ${agent.role}, ${agent.image_url}, ${agent.social_media})
+        ON CONFLICT (id) DO UPDATE
+        SET name = EXCLUDED.name,
+          role = EXCLUDED.role,
+          image_url = EXCLUDED.image_url,
+          social_media = EXCLUDED.social_media;
+      `;
+    })
+  );
+
+  return insertedAgents;
+}
 
 export async function GET() {
   const client = await connectToDb();
@@ -121,6 +135,7 @@ export async function GET() {
     await seedProperties();
     await seedUsers();
     await seedBookings();
+    await seedAgents(); // Add seeding for agents
     await client.sql`COMMIT`;
 
     return NextResponse.json({ message: 'Database seeded successfully' });
