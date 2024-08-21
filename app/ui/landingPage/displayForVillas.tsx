@@ -72,7 +72,7 @@ displayVillas: Property[];
 
 
 <div className="flex justify-center">
-  <div className =  "p-8 mb-20 bg-gray-500 hover:bg-blue-700 text-white font-bold py-2 rounded">  View All  </div>
+  <div className =  "p-8 mb-10 bg-gray-500 hover:bg-blue-700 text-white font-bold py-2 rounded">  View All  </div>
 </div>
     
     
