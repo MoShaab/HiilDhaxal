@@ -8,28 +8,34 @@ export default function HeroArea(){
 
     return(
         <>
-         <main className="flex justify-center items-center py-5 bg-cover">
-        <div className="relative text-center text-white">
+         <main className="relative w-full h-screen flex justify-center items-center py-5 bg-cover">
+        <div className=" absolute inset-0 mt-15">
+
+        <div>
           <Image
             src="/hero-desktop.png"
-            width={1000}
-            height={760}
+            layout="fill"
+            objectFit="cover"
             className="hidden md:block"
             alt="Hero Image Desktop"
           />
           <Image
             src="/hero-mobile.jpg"
-            width={560}
-            height={620}
+            
+            layout="fill"
+            objectFit="cover"
             className="block md:hidden"
             alt="Hero Image Mobile"
           />
+          <div className="absolute inset-0 bg-black opacity-50"></div>
 
-          <div className="absolute inset-0 flex flex-col items-center justify-center mt-60">
-            <h1 className={`${inter.className} text-xl text-white md:text-3xl font-bold`}>
+         </div>
+
+          <div className="absolute inset-0 flex flex-col items-center justify-center mt-60 text-center text-white">
+            <h1 className={`${inter.className} text-xl md:text-3xl font-bold`}>
               Find Your Perfect Home
             </h1>
-            <p className={`${lusitana.className} text-xl text-white md:text-3xl`}>
+            <p className={`${lusitana.className} text-xl md:text-3xl`}>
               Search your dream home on the largest property marketplace
             </p>
 

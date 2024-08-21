@@ -37,8 +37,14 @@ async function seedProperties() {
       return client.sql`
         INSERT INTO properties (id, title, description, price, location, image_path)
         VALUES (${property.id}, ${property.title}, ${property.description}, ${property.price}, ${property.location}, ${property.image_path})
-        ON CONFLICT (id) DO NOTHING;
+        ON CONFLICT (id) DO UPDATE
+        SET title = EXCLUDED.title, 
+          description = EXCLUDED.description, 
+          price = EXCLUDED.price, 
+          location = EXCLUDED.location, 
+          image_path = EXCLUDED.image_path;
       `;
+
     })
   );
 

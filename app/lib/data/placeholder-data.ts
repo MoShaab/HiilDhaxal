@@ -3,7 +3,7 @@
 export const properties = [
     {
         id: '410544b2-4001-4271-9855-fec4b6a6442a',  // Add UUID for property ID
-        title: "Modern Apartment in the City Center",
+        title: "Apartment for Rent & Sale",
         description: "A beautiful apartment located in the heart of the city.",
         price: 120.00,
         location: "Kisumu",
@@ -12,20 +12,20 @@ export const properties = [
     },
     {
         id: 'd6e15727-9fe1-4961-8c5b-ea44a9bd81aa',  // Add UUID for property ID
-        title: "Cozy Cottage in the Countryside",
+        title: "Home for Rent & Sale",
         description: "A quiet retreat in the countryside, perfect for relaxation.",
         price: 80.00,
         location: "Nairobi",
-        image_path:"/servicesProperty/home.jpg",
+        image_path:"/servicesProperty/home.jpg"
        
     },
     {
         id: 'd6e15727-9fe1-4961-8c5b-ed84a9bd81aa',  // Add UUID for property ID
-        title: "A place to call home",
+        title: "Villa for Rent & Sale",
         description: "A Luxurious villa, perfect for comfort.",
         price: 80.00,
         location: "Nairobi",
-        image_path:"/servicesProperty/villa.jpg",
+        image_path:"/servicesProperty/villa.jpg"
        
     }
 ];

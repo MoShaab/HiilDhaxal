@@ -10,7 +10,7 @@ export default async function DisplayFromDb({
     featuredProperty: Property[];
     
     }){
-        console.log('Services Property:', featuredProperty);
+        console.log('Featured Property:', featuredProperty);
         
 
         return(
@@ -24,7 +24,7 @@ export default async function DisplayFromDb({
                 console.log('Image URL:', property.image_path);
                 
                 return(
-
+            <Link href = {property.image_path}>
                 <div  key={property.id} className="block group"
                 
                 >
@@ -46,9 +46,11 @@ export default async function DisplayFromDb({
                             <p className="text-md text-black">
                                 {property.description}
                             </p>
+                            <p  className={`${lusitana.className} mb-4 text-black text-xl md:text-2xl`}> {property.price} </p>
                         </div>
                     
                 </div>
+                </Link>
                 
                 );   
             }
