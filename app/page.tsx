@@ -25,7 +25,7 @@ export default async function Page(){
       <UpperNav />
       <LowerNav />
       <HeroArea />
-      <Search  placeholder="Search invoices..."/>
+      <Search  placeholder="Search properties..."/>
       {/* {<DisplayProperty/>} */}
       <DisplayFromDb featuredProperty = {featuredProperty} />
       <DisplayVillas displayVillas = {displayVillas} />
