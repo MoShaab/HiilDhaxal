@@ -2,7 +2,6 @@
 import UpperNav from './ui/landingPage/upper-navlinks';
 import LowerNav from './ui/landingPage/lower-navlinks';
 import HeroArea from './ui/landingPage/hero-area';
-import {Search} from './ui/landingPage/hero-area';
 import DisplayFromDb from './ui/landingPage/displayfromdb';
 import DisplayVillas from './ui/landingPage/displayForVillas';
 import LetUsKnow from './ui/landingPage/letUsKnow';
@@ -25,7 +24,7 @@ export default async function Page(){
       <UpperNav />
       <LowerNav />
       <HeroArea />
-      <Search  placeholder="Search properties..."/>
+
       {/* {<DisplayProperty/>} */}
       <DisplayFromDb featuredProperty = {featuredProperty} />
       <DisplayVillas displayVillas = {displayVillas} />

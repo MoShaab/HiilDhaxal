@@ -52,3 +52,53 @@ export async function fetchFeaturedAgents(): Promise<Agent[]> {
     throw new Error('Failed to fetch the latest agents.');
   }
 }
+
+const ITEMS_PER_PAGE = 3;
+
+export async function fetchFilteredProperties(
+query: string,
+currentPage:number,
+){
+  const offset = (currentPage-1)*ITEMS_PER_PAGE;
+
+  try{
+    const properties = await sql<Property>`
+    SELECT * FROM properties
+    WHERE
+     properties.title ILIKE ${`%${query}%`} OR
+     properties.description ILIKE ${`%${query}%`} OR
+     properties.location ILIKE ${`%${query}%`} OR
+     properties.price::text ILIKE ${`%${query}%`}
+    
+    ORDER BY properties.created_at DESC
+    LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
+
+    `;
+    return properties.rows;
+  }catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch properties.');
+  }
+
+}
+
+export async function fetchPropertiesPages(query: string) {
+  try {
+    const count = await sql`SELECT COUNT(*)
+    FROM properties
+    
+    WHERE
+    properties.title ILIKE ${`%${query}%`} OR
+    properties.description ILIKE ${`%${query}%`} OR
+    properties.location ILIKE ${`%${query}%`} OR
+    properties.price::text ILIKE ${`%${query}%`}
+   
+  `;
+
+    const totalPages = Math.ceil(Number(count.rows[0].count) / ITEMS_PER_PAGE);
+    return totalPages;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch properties.');
+  }
+}
