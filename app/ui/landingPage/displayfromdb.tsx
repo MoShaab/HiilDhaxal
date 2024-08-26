@@ -15,9 +15,9 @@ export default async function DisplayFromDb({
 
         return(
             <div>
-            <h2 className="text-blue-500 text-center">Our Services</h2>
+            <h2 className="text-blue-500 text-center text-3xl mt-10">Our Services</h2>
         
-            <p className='font-bold text-black text-center'>Best Properties For Sale</p>
+            <p className='font-bold text-black text-center text-3xl'>Best Properties For Sale</p>
 
             <div className="mt-10 ml-10 mr-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {featuredProperty.map((property) => {
@@ -49,7 +49,7 @@ export default async function DisplayFromDb({
                             <p className={`${lusitana.className} mb-4 text-black text-xl md:text-2xl`}>
                                 {property.location}
                             </p>
-                            <p  className={`${lusitana.className} mb-4 text-black text-xl md:text-2xl`}> {property.price} </p>
+                            <p  className={`${lusitana.className} mb-4 text-black text-xl md:text-2xl`}> KSH {property.price} </p>
                         </div>
                     
                 </div>

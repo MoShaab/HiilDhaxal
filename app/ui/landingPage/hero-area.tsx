@@ -34,7 +34,7 @@ export default  function HeroArea(){
          </div>
 
           <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white">
-            <h1 className={`${inter.className} text-xl md:text-3xl font-bold`}>
+            <h1 className={`${inter.className} text-2xl md:text-3xl font-bold`}>
               Find Your Perfect Home
             </h1>
             <p className={`${lusitana.className} text-xl md:text-3xl`}>
@@ -42,7 +42,7 @@ export default  function HeroArea(){
               
             </p>
 
-            <div className = "mt-10">
+            <div className = "mt-10 text-lg text-3xl">
             <Search placeholder='search properties' />
             </div>
 

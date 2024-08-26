@@ -14,7 +14,7 @@ export default function Form() {
     <div className="rounded-md bg-gray-50 p-4 md:p-6">
       {/* Property Title */}
       <div className="mb-4">
-        <label htmlFor="title" className="mb-2 block text-sm font-medium">
+        <label htmlFor="title" className="mb-2 block text-lg text-3xl font-medium">
           Property Title
         </label>
         <div className="relative">
@@ -23,7 +23,7 @@ export default function Form() {
             name="title"
             type="text"
             placeholder="Enter property title"
-            className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+            className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-lg text-3xl outline-2 placeholder:text-gray-500"
           />
           <HomeIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500" />
         </div>
@@ -31,7 +31,7 @@ export default function Form() {
   
       {/* Property Description */}
       <div className="mb-4">
-        <label htmlFor="description" className="mb-2 block text-sm font-medium">
+        <label htmlFor="description" className="mb-2 block text-lg text-3xl font-medium">
           Property Description
         </label>
         <div className="relative">
@@ -39,7 +39,7 @@ export default function Form() {
             id="description"
             name="description"
             placeholder="Enter property description"
-            className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+            className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-lg text-3xl outline-2 placeholder:text-gray-500"
           />
           <DocumentTextIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500" />
         </div>
@@ -47,7 +47,7 @@ export default function Form() {
   
       {/* Property Price */}
       <div className="mb-4">
-        <label htmlFor="price" className="mb-2 block text-sm font-medium">
+        <label htmlFor="price" className="mb-2 block text-lg text-3xl font-medium">
           Property Price
         </label>
         <div className="relative mt-2 rounded-md">
@@ -57,7 +57,7 @@ export default function Form() {
             type="number"
             step="0.01"
             placeholder="Enter property price KSH"
-            className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+            className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-lg text-3xl outline-2 placeholder:text-gray-500"
           />
           
         </div>
@@ -65,7 +65,7 @@ export default function Form() {
   
       {/* Property Location */}
       <div className="mb-4">
-        <label htmlFor="location" className="mb-2 block text-sm font-medium">
+        <label htmlFor="location" className="mb-2 block text-lg text-3xl font-medium">
           Property Location
         </label>
         <div className="relative">
@@ -74,7 +74,7 @@ export default function Form() {
             name="location"
             type="text"
             placeholder="Enter property location"
-            className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+            className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-lg text-3xl outline-2 placeholder:text-gray-500"
           />
           <MapPinIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500" />
         </div>
@@ -82,7 +82,7 @@ export default function Form() {
   
       {/* Property Images */}
       <div className="mb-4">
-        <label htmlFor="images" className="mb-2 block text-sm text-gray-700 font-medium">
+        <label htmlFor="images" className="mb-2 block text-lg text-3xl text-gray-700 font-medium">
           Upload Property Images
         </label>
         <div className="relative">
@@ -91,7 +91,7 @@ export default function Form() {
             name="images"
             type="file"
             multiple
-            className="block w-full text-sm text-gray-500 file:mr-4 file:rounded-md file:border-0 file:bg-gray-200 file:py-2 file:px-4 file:text-sm file:font-semibold file:text-gray-700 hover:file:bg-gray-300"
+            className="block w-full text-lg text-3xl text-gray-500 file:mr-4 file:rounded-md file:border-0 file:bg-gray-200 file:py-2 file:px-4 file:text-sm file:font-semibold file:text-gray-700 hover:file:bg-gray-300"
           />
           
         </div>
@@ -101,7 +101,7 @@ export default function Form() {
     <div className="mt-6 flex justify-end gap-4">
       <Link
         href="/properties"
-        className="flex h-10 items-center rounded-lg bg-gray-100 px-4 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-200"
+        className="flex h-10 items-center rounded-lg bg-gray-100 px-4 text-lg text-3xl font-medium text-gray-600 transition-colors hover:bg-gray-200"
       >
         Cancel
       </Link>

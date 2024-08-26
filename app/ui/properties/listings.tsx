@@ -14,14 +14,12 @@ export default async function PropertyListings({
 
     return (
         <div>
-            <h2 className="text-blue-500 text-center">You are at the right place</h2>
-            <p className='font-bold text-black text-center'>feel free to browse our large database</p>
+            <h2 className="text-blue-500 text-center text-3xl">You are at the right place</h2>
+            <p className='font-bold text-black text-center text-3xl'>feel free to browse our large database</p>
 
             <div className="mt-10 ml-10 mr-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {properties.map((property) => {
-                    // const imageUrl = property.image_path.startsWith('/') 
-                    //     ? property.image_path 
-                    //     : `/${property.image_path}`;
+                 
 
                     console.log('Image URL:', property.image_path );
 
@@ -48,7 +46,7 @@ export default async function PropertyListings({
                                         {property.location}
                                     </p>
                                     <p className={`${lusitana.className} mb-4 text-black text-xl md:text-2xl`}>
-                                        {property.price}
+                                       KSH {property.price}
                                     </p>
                                 </div>
                             </div>

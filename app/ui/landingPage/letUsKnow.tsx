@@ -28,13 +28,13 @@ export default function LetUsKnow() {
           <h1 className={`${inter.className} text-xl md:text-3xl font-bold`}>
             Didn’t Find What You Were Looking For?
           </h1>
-          <p className={`${lusitana.className} text-xl md:text-3xl`}>
+          <p className={`${lusitana.className} text-3xl md:text-3xl`}>
             Search your dream home on the largest property marketplace
           </p>
             <div className="flex justify-center">
                 <div className =  "p-8 mt-20 bg-blue-700 hover:bg-gray-500 text-white font-bold py-2 rounded">  Let Us Know  </div>
             </div>
-        </div>
+        </div>3
       </main>
     </>
   );
