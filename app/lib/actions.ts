@@ -39,10 +39,11 @@ export async function createListing(formData: FormData) {
         `;
 
         // Revalidate and redirect after successful insertion
-        // revalidatePath('/properties/sell_properties');
-        // redirect('/properties/sell_properties');
+         
     } catch (error) {
         console.error('Error occurred while creating the listing:', error);
         throw new Error('Failed to create listing.'); // Handle this appropriately in your application
     }
+    revalidatePath('/properties/success');
+    redirect('/properties/success');
 }

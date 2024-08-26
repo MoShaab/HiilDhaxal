@@ -6,7 +6,7 @@ import PropertyListings from "@/app/ui/properties/listings";
 import Link from 'next/link';
 import { fetchPropertiesPages } from '@/app/lib/data';
 
-
+export const revalidate = 0;
 export default async function Page({
     searchParams,
   }: {

@@ -46,6 +46,9 @@ export default async function DisplayFromDb({
                             <p className="text-md text-black">
                                 {property.description}
                             </p>
+                            <p className={`${lusitana.className} mb-4 text-black text-xl md:text-2xl`}>
+                                {property.location}
+                            </p>
                             <p  className={`${lusitana.className} mb-4 text-black text-xl md:text-2xl`}> {property.price} </p>
                         </div>
                     

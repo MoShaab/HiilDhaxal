@@ -7,7 +7,12 @@ export async function fetchFeaturedProperty(): Promise<Property[]> {
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
     // The type here should be Property, not Property[]
-    const result = await sql<Property>`SELECT * FROM properties`;
+    const result = await sql<Property>`SELECT * FROM properties
+    ORDER BY created_at asc
+    LIMIT 6
+    
+    
+    `;
 
     // Return the properties directly
     return result.rows;
@@ -27,6 +32,8 @@ export async function fetchDisplayVillas(): Promise<Property[]> {
     const result = await sql<Property>`
       SELECT * FROM properties
       WHERE title ILIKE '%villa%'
+      ORDER BY created_at asc
+    LIMIT 3
     `;
 
     return result.rows;
