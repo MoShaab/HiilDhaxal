@@ -10,7 +10,7 @@ import {
 
 const links = [
     { name: 'Blog', href: '/blog', icon: NewspaperIcon },
-    { name: 'SELL MY PROPERTY', href: '/sell_property', icon: HomeIcon }
+    { name: 'SELL MY PROPERTY', href: '/properties/sell_property/create', icon: HomeIcon }
 ];
 
 export default function LowerNav() {

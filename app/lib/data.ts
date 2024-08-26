@@ -1,5 +1,5 @@
 import { sql } from '@vercel/postgres';
-import { Property, Agent } from './definitions';
+import { Property, Agent, User } from './definitions';
 
 export async function fetchFeaturedProperty(): Promise<Property[]> {
   try {
@@ -102,3 +102,4 @@ export async function fetchPropertiesPages(query: string) {
     throw new Error('Failed to fetch properties.');
   }
 }
+
