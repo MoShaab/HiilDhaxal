@@ -5,6 +5,7 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import path from 'path';
 import { writeFile } from 'fs/promises';
+import { UpdateListing } from '../ui/properties/buttons';
 
 const FormSchema = z.object({
     title: z.string(),
@@ -38,12 +39,52 @@ export async function createListing(formData: FormData) {
         VALUES (${title}, ${description}, ${price}, ${location}, ${'/uploads/' + filename})
         `;
 
-        // Revalidate and redirect after successful insertion
+        
          
     } catch (error) {
         console.error('Error occurred while creating the listing:', error);
-        throw new Error('Failed to create listing.'); // Handle this appropriately in your application
+        throw new Error('Failed to create listing.'); // Handle this appropriately
     }
+    // Revalidate and redirect after successful insertion
     revalidatePath('/properties/success');
     redirect('/properties/success');
 }
+
+export async function updateListing(id: string, formData: FormData) {
+    const {  title, description, price, location, images  } = FormSchema.parse({
+        title: formData.get('title'),
+        description: formData.get('description'),
+        price: formData.get('price'),
+        location: formData.get('location'),
+        images: formData.get('images'),
+    });
+    const filename = `${Date.now()}_${images.name.replace(/\s/g, '_')}`;
+    const imagePath = path.join('public/uploads', filename);
+   
+    try{
+        const buffer = Buffer.from(await images.arrayBuffer());
+        await writeFile(path.join(process.cwd(), imagePath), buffer);
+
+        await sql`
+        UPDATE properties
+        SET title = ${title}, description = ${description},  price = ${price}, location = ${location}, image_path = ${'/uploads/' + filename}
+        WHERE id = ${id}
+      `;
+
+    } catch (error) {
+        console.error('Error occurred while update the listing:', error);
+        throw new Error('Failed to update listing.'); // Handle this appropriately
+    }
+    
+   
+   
+   
+    revalidatePath('/properties/success');
+    redirect('/properties/success');
+}
+
+
+export async function deleteListing(id: string) {
+    await sql`DELETE FROM properties WHERE id = ${id}`;
+    revalidatePath('/properties');
+  }

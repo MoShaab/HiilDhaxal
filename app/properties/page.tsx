@@ -20,7 +20,7 @@ export default async function Page({
     const totalPages = await fetchPropertiesPages(query);
  
     return (
-        <div className="w-full min-h-screen bg-gray-100">
+        <div className="w-full min-h-screen bg-gray-400">
           <div className="flex items-center justify-between">
             <h1 className={`${lusitana.className} text-black text-2xl`}>Property Listings</h1>
             

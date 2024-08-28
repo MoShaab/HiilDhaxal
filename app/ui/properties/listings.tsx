@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { fetchFilteredProperties } from '@/app/lib/data';
+import { UpdateListing, DeleteListing } from '@/app/ui/properties/buttons';
 import Link from 'next/link';
 import { lusitana } from '@/app/ui/fonts';
 
@@ -14,17 +15,18 @@ export default async function PropertyListings({
 
     return (
         <div>
-            <h2 className="text-blue-500 text-center text-3xl">You are at the right place</h2>
+            <h2 className = {`${lusitana.className} text-black text-3xl text-center`}>You are at the right place!</h2>
             <p className='font-bold text-black text-center text-3xl'>feel free to browse our large database</p>
 
             <div className="mt-10 ml-10 mr-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {properties.map((property) => {
+                {properties?.map((property) => {
                  
 
-                    console.log('Image URL:', property.image_path );
+                    
 
                     return (
-                        <Link href={`/properties/${property.id}`} key={property.id}>
+                    <div key={property.id} className="block group">
+                        <Link href={`/properties/${property.id}`}>
                             <div className="block group">
                                 <div className="relative w-full h-64">
                                     <Image
@@ -51,8 +53,21 @@ export default async function PropertyListings({
                                 </div>
                             </div>
                         </Link>
+
+                        <div className="flex justify-end gap-2 ">
+                    <UpdateListing id={property.id} />
+                    <DeleteListing id={property.id} />
+                  </div>
+
+                 
+
+                        </div>
+                        
                     );
+                    
                 })}
+                
+                 
             </div>
         </div>
     );

@@ -1,4 +1,5 @@
 import { sql } from '@vercel/postgres';
+import { properties } from './data/placeholder-data';
 import { Property, Agent, User } from './definitions';
 
 export async function fetchFeaturedProperty(): Promise<Property[]> {
@@ -110,3 +111,19 @@ export async function fetchPropertiesPages(query: string) {
   }
 }
 
+export async function fetchPropertyById(id: string) {
+  try {
+    const data = await sql<Property>`
+      SELECT *
+      FROM properties
+      WHERE properties.id = ${id};
+    `;
+    
+
+    
+    return data.rows[0];
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch property.');
+  }
+}

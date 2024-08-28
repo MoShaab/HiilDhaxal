@@ -6,11 +6,17 @@ import {
   MapPinIcon,
 } from '@heroicons/react/24/outline';
 import { Button } from '@/app/ui/button';
-import { createListing } from '@/app/lib/actions';
+import { updateListing } from '@/app/lib/actions';
+import { Property } from '@/app/lib/definitions';
 
-export default function Form() {
+export default function Form({
+    listings
+}:{
+    listings:Property;
+}) {
+    const updateListingWithId = updateListing.bind(null, listings.id);
   return (
-    <form action={createListing} className="max-w-md mx-auto text-black">
+    <form action={updateListingWithId} className="max-w-md mx-auto text-black">
     <div className="rounded-md bg-gray-50 p-4 md:p-6">
       {/* Property Title */}
       <div className="mb-4">
@@ -24,6 +30,7 @@ export default function Form() {
             type="text"
             placeholder="Enter property title"
             className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-lg text-3xl outline-2 placeholder:text-gray-500"
+            defaultValue={listings.title}
           />
           <HomeIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500" />
         </div>
@@ -40,6 +47,7 @@ export default function Form() {
             name="description"
             placeholder="Enter property description"
             className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-lg text-3xl outline-2 placeholder:text-gray-500"
+            defaultValue={listings.description}
           />
           <DocumentTextIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500" />
         </div>
@@ -58,6 +66,7 @@ export default function Form() {
             step="0.01"
             placeholder="Enter property price KSH"
             className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-lg text-3xl outline-2 placeholder:text-gray-500"
+            defaultValue={listings.price}
           />
           
         </div>
@@ -75,6 +84,7 @@ export default function Form() {
             type="text"
             placeholder="Enter property location"
             className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-lg text-3xl outline-2 placeholder:text-gray-500"
+            defaultValue={listings.location}
           />
           <MapPinIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500" />
         </div>
@@ -92,6 +102,7 @@ export default function Form() {
             type="file"
             multiple
             className="block w-full text-lg text-3xl text-gray-500 file:mr-4 file:rounded-md file:border-0 file:bg-gray-200 file:py-2 file:px-4 file:text-sm file:font-semibold file:text-gray-700 hover:file:bg-gray-300"
+            
           />
           
         </div>
@@ -105,7 +116,7 @@ export default function Form() {
       >
         Cancel
       </Link>
-      <Button type="submit">Create Listing</Button>
+      <Button type="submit"> Edit Listing</Button>
     </div>
   </form>
   
