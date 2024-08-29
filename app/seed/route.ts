@@ -1,6 +1,8 @@
+import bcrypt from 'bcrypt';
 import { db } from '@vercel/postgres';
 import { properties, users, bookings, agents } from '../lib/data/placeholder-data';
 import { NextResponse } from 'next/server';
+
 
 async function connectToDb() {
   const client = await db.connect();
@@ -57,9 +59,10 @@ async function seedUsers() {
 
   const insertedUsers = await Promise.all(
     users.map(async (user) => {
+      const hashedPassword = await bcrypt.hash(user.password, 10);
       return client.sql`
         INSERT INTO users (id, name, email, password)
-        VALUES (${user.id}, ${user.name}, ${user.email}, ${user.password})
+        VALUES (${user.id}, ${user.name}, ${user.email}, ${hashedPassword})
         ON CONFLICT (id) DO NOTHING;
       `;
     })

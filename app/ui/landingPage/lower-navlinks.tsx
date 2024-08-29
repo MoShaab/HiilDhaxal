@@ -1,26 +1,41 @@
-'use client';
+
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+
 import {
-    NewspaperIcon,
+    UserCircleIcon ,
     HomeIcon,
 } from '@heroicons/react/24/outline';
+import { signOut } from '@/auth';
+import { PowerIcon } from '@heroicons/react/24/outline';
 
 const links = [
-    { name: 'Blog', href: '/blog', icon: NewspaperIcon },
+    { name: 'Log In', href: '/login', icon: UserCircleIcon  },
     { name: 'SELL MY PROPERTY', href: '/properties/sell_property/create', icon: HomeIcon }
+    
 ];
 
 export default function LowerNav() {
-    const pathname = usePathname();
+    
 
     return (
         <div className="flex flex-col md:flex-row items-center justify-between">
             <Link href="/">
                 <Image src="/logo.png" width={200} height={200} alt="Logo" />
             </Link>
+
+            <form
+          action={async () => {
+            'use server';
+            await signOut();
+          }}
+        >
+          <button className="flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-400 p-3 text-sm font-medium hover:bg-sky-300 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3">
+            <PowerIcon className="w-6" />
+            <div className="hidden md:block">Sign Out</div>
+          </button>
+        </form>
            
             {/* Links displayed on desktop */}
             <div className="hidden md:flex space-x-3">
@@ -31,7 +46,7 @@ export default function LowerNav() {
                         <Link
                             key={link.name}
                             href={link.href}
-                            className={`flex items-center space-x-2 bg-gray-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ${pathname === link.href ? 'bg-blue-700' : 'bg-gray-500'}`}
+                            className={`flex items-center space-x-2 bg-gray-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded  'bg-blue-700' : 'bg-gray-500'}`}
                         >
                             <LinkIcon className="w-6" />
                             <p className="block">{link.name}</p>
@@ -45,7 +60,7 @@ export default function LowerNav() {
                 {links.map((link) => (
                     <Link key={link.name} href={link.href} className="flex items-center space-x-1">
                         <p className="block">{link.name}</p>
-                        {pathname !== link.href && <span>/</span>}
+                        
                     </Link>
                 ))}
             </div>

@@ -15,8 +15,17 @@ export default async function PropertyListings({
 
     return (
         <div>
+               
+        <div className = "flex w-full flex-col px-3 py-4 md:px-2">
+      
+        </div>
+
             <h2 className = {`${lusitana.className} text-black text-3xl text-center`}>You are at the right place!</h2>
+           
             <p className='font-bold text-black text-center text-3xl'>feel free to browse our large database</p>
+            
+        
+           
 
             <div className="mt-10 ml-10 mr-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {properties?.map((property) => {
