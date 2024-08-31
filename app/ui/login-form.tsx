@@ -24,10 +24,10 @@ export default function LoginForm() {
     // Extract form data
     const form = event.currentTarget;
     const formData = new FormData(form);
-    const plainData = Object.fromEntries(formData.entries());
+
 
     // Pass plainData to formAction and handle response
-    const result = await formAction(plainData);
+    const result = await formAction(formData);
     if (result?.authenticated) {
       router.push('/properties'); // Redirect to home page on successful login
     } else {
