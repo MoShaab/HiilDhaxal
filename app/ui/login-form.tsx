@@ -14,7 +14,9 @@ import { useRouter } from 'next/navigation';
 
 export default function LoginForm() {
   const router = useRouter();
-  const [errorMessage, formAction, isPending] = useFormState(authenticate);
+  const [errorMessage, formAction, isPending] = useFormState(authenticate,{
+    message: "",
+  });
 
   const handleSubmit = async (event) => {
     event.preventDefault();
