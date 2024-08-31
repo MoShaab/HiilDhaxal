@@ -1,6 +1,5 @@
 import { sql } from '@vercel/postgres';
-import { properties } from './data/placeholder-data';
-import { Property, Agent, User } from './definitions';
+import { Property, Agent } from './definitions';
 
 export async function fetchFeaturedProperty(): Promise<Property[]> {
   try {

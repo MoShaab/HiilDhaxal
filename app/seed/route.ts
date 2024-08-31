@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 import { db } from '@vercel/postgres';
-import { properties, users, bookings, agents } from '../lib/data/placeholder-data';
+import { users, agents } from '../lib/data/placeholder-data';
 import { NextResponse } from 'next/server';
 
 
