@@ -7,7 +7,7 @@ import Link from 'next/link';
 export default function DisplayAllVillas({
     displayAllVillas,
 }:{
-displayVillas: Property[];
+displayAllVillas: Property[];
 })
 {
     console.log('Display Villas:', displayAllVillas);
