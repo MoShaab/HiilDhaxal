@@ -1,5 +1,5 @@
 'use client';
-
+import { FormEvent } from 'react';
 import { lusitana } from '@/app/ui/fonts';
 import {
   AtSymbolIcon,
@@ -18,11 +18,12 @@ export default function LoginForm() {
     message: "",
   });
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     // Extract form data
-    const formData = new FormData(event.target);
+    const form = event.currentTarget;
+    const formData = new FormData(form);
     const plainData = Object.fromEntries(formData.entries());
 
     // Pass plainData to formAction and handle response
