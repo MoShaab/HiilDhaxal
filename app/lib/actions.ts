@@ -82,7 +82,7 @@ export async function updateListing(id: string, formData: FormData) {
 
   const imagePaths: string[] = [];
 
-  if (images.length > 0) {
+  if (images && images.length > 0) {
     try {
       for (const image of images) {
         const filename = `${Date.now()}_${image.name.replace(/\s/g, '_')}`;
