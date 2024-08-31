@@ -25,6 +25,10 @@ async function seedProperties() {
     );
   `;
 
+ 
+       
+}
+
 async function seedUsers() {
   const client = await connectToDb();
   await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
@@ -68,6 +72,7 @@ async function seedBookings() {
   `;
 
 
+}
 
 async function seedAgents() {
   const client = await connectToDb();
