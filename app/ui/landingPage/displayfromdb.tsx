@@ -22,16 +22,18 @@ export default async function DisplayFromDb({
             <div className="mt-10 ml-10 mr-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {featuredProperty.map((property) => {
                 console.log('Image URL:', property.image_path);
+                const images = JSON.parse(property.image_path);
+                    const thumbnail = images[0]; 
                 
                 return(
-            <Link href = {property.image_path} key={property.id}>
+            <Link href = {`/properties/${property.id}/details`} key={property.id}>
                 <div   className="block group"
                 
                 >
                     
                         <div className="relative w-full h-64">
                         <Image
-                            src={property.image_path}
+                            src={thumbnail}
                             alt={property.title}
                             fill
                             style={{ objectFit: 'cover' }}

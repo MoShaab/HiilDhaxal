@@ -1,25 +1,26 @@
+
 import Image from 'next/image';
 import { lusitana } from '@/app/ui/fonts';
 import { Property } from '@/app/lib/definitions';
 import Link from 'next/link';
 
-export default async function DisplayVillas({
-    displayVillas,
+export default function DisplayAllVillas({
+    displayAllVillas,
 }:{
 displayVillas: Property[];
 })
 {
-    console.log('Display Villas:', displayVillas);
+    console.log('Display Villas:', displayAllVillas);
     
 
     return(
     <div>
-        <h2 className="text-blue-500 text-3xl text-center mt-10">Browse Properties</h2>
+        <h2 className="text-blue-500 text-3xl text-center">Browse Properties</h2>
     
         <p className='font-bold text-black text-center text-3xl'>Villa for Rent & Sale</p>
 
         <div className="mt-10 ml-10 mr-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {displayVillas.map((property) => {
+        {displayAllVillas.map((property) => {
             console.log('Image URL:', property.image_path);
             const images = JSON.parse(property.image_path);
                     const thumbnail = images[0]; 
@@ -73,14 +74,7 @@ displayVillas: Property[];
         )}
     </div>
 
-    
 
-
-<div className="flex justify-center">
-    <Link href = "/properties/villas">
-  <div className =  "p-8 mb-10 bg-gray-500 hover:bg-blue-700 text-white font-bold py-2 rounded">  View All  </div>
-  </Link>
-</div>
     
     
   </div>

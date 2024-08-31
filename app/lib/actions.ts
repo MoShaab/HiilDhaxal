@@ -1,4 +1,5 @@
 'use server';
+
 import { z } from 'zod';
 import { sql } from '@vercel/postgres';
 import { revalidatePath } from 'next/cache';
@@ -8,103 +9,148 @@ import { writeFile } from 'fs/promises';
 import { signIn } from '@/auth';
 import { AuthError } from 'next-auth';
 
+// Define the schema for form data validation
 const FormSchema = z.object({
-    title: z.string(),
-    description: z.string(),
-    price: z.coerce.number(),
-    location: z.string(),
-    images: z.instanceof(File),
+  title: z.string(),
+  description: z.string(),
+  price: z.coerce.number(),
+  location: z.string(),
+  images: z.array(z.instanceof(File)),
 });
 
+// Function to create a new listing
 export async function createListing(formData: FormData) {
-    const { title, description, price, location, images } = FormSchema.parse({
-        title: formData.get('title'),
-        description: formData.get('description'),
-        price: formData.get('price'),
-        location: formData.get('location'),
-        images: formData.get('images'),
-    });
+  // Extract the form fields and convert the images to an array
+  const { title, description, price, location, images } = FormSchema.parse({
+    title: formData.get('title'),
+    description: formData.get('description'),
+    price: parseFloat(formData.get('price') as string), // Convert to number
+    location: formData.get('location'),
+    images: formData.getAll('images') as File[],
+  });
 
-    // Define file name and path
-    const filename = `${Date.now()}_${images.name.replace(/\s/g, '_')}`;
-    const imagePath = path.join('public/uploads', filename);
+  // Validate images
+  FormSchema.shape.images.parse(images);
+  console.log('Form Data:', formData);
+  console.log('Images:', images);
 
-    try {
-        // Write file to the public/uploads directory
-        const buffer = Buffer.from(await images.arrayBuffer());
-        await writeFile(path.join(process.cwd(), imagePath), buffer);
 
-        // Insert listing into the database with the correct image path
-        await sql`
-        INSERT INTO properties (title, description, price, location, image_path)
-        VALUES (${title}, ${description}, ${price}, ${location}, ${'/uploads/' + filename})
-        `;
 
-        
-         
-    } catch (error) {
-        console.error('Error occurred while creating the listing:', error);
-        throw new Error('Failed to create listing.'); // Handle this appropriately
+  const imagePaths: string[] = [];
+
+  try {
+    for (const image of images) {
+      const filename = `${Date.now()}_${image.name.replace(/\s/g, '_')}`;
+      const imagePath = path.join('public/uploads', filename);
+
+      // Save the image file
+      const buffer = Buffer.from(await image.arrayBuffer());
+      await writeFile(path.join(process.cwd(), imagePath), buffer);
+
+      // Save the relative path to the array
+      imagePaths.push('/uploads/' + filename);
     }
-    // Revalidate and redirect after successful insertion
-    revalidatePath('/properties/success');
-    redirect('/properties/success');
+
+    // Insert listing into the database with the image paths as an array or JSON string
+    await sql`
+      INSERT INTO properties (title, description, price, location, image_path)
+      VALUES (${title}, ${description}, ${price}, ${location}, ${JSON.stringify(imagePaths)})
+    `;
+
+  } catch (error) {
+    console.error('Error occurred while creating the listing:', error);
+    throw new Error('Failed to create listing.');
+  }
+
+  // Revalidate and redirect after successful insertion
+  revalidatePath('/properties/success');
+  redirect('/properties/success');
 }
 
+// Function to update an existing listing
+// Function to update an existing listing
 export async function updateListing(id: string, formData: FormData) {
-    const {  title, description, price, location, images  } = FormSchema.parse({
-        title: formData.get('title'),
-        description: formData.get('description'),
-        price: formData.get('price'),
-        location: formData.get('location'),
-        images: formData.get('images'),
-    });
-    const filename = `${Date.now()}_${images.name.replace(/\s/g, '_')}`;
-    const imagePath = path.join('public/uploads', filename);
-   
-    try{
-        const buffer = Buffer.from(await images.arrayBuffer());
+  const { title, description, price, location, images } = FormSchema.partial({
+    images: true,  // Make images optional for updates
+  }).parse({
+    title: formData.get('title'),
+    description: formData.get('description'),
+    price: parseFloat(formData.get('price') as string), // Convert to number
+    location: formData.get('location'),
+    images: formData.getAll('images') as File[],
+  });
+
+  const imagePaths: string[] = [];
+
+  if (images.length > 0) {
+    try {
+      for (const image of images) {
+        const filename = `${Date.now()}_${image.name.replace(/\s/g, '_')}`;
+        const imagePath = path.join('public/uploads', filename);
+
+        // Save the image file
+        const buffer = Buffer.from(await image.arrayBuffer());
         await writeFile(path.join(process.cwd(), imagePath), buffer);
 
-        await sql`
+        // Save the relative path to the array
+        imagePaths.push('/uploads/' + filename);
+      }
+
+      // Update the listing in the database with the new image paths
+      await sql`
         UPDATE properties
-        SET title = ${title}, description = ${description},  price = ${price}, location = ${location}, image_path = ${'/uploads/' + filename}
+        SET title = ${title}, description = ${description}, price = ${price}, location = ${location}, image_path = ${JSON.stringify(imagePaths)}
         WHERE id = ${id}
       `;
-
     } catch (error) {
-        console.error('Error occurred while update the listing:', error);
-        throw new Error('Failed to update listing.'); // Handle this appropriately
+      console.error('Error occurred while updating the listing:', error);
+      throw new Error('Failed to update listing.');
     }
-    
-   
-   
-   
-    revalidatePath('/properties/success');
-    redirect('/properties/success');
+  } else {
+    try {
+      // Update the listing without modifying image paths
+      await sql`
+        UPDATE properties
+        SET title = ${title}, description = ${description}, price = ${price}, location = ${location}
+        WHERE id = ${id}
+      `;
+    } catch (error) {
+      console.error('Error occurred while updating the listing:', error);
+      throw new Error('Failed to update listing.');
+    }
+  }
+
+  // Revalidate and redirect after successful update
+  revalidatePath('/properties/success');
+  redirect('/properties/success');
 }
 
-
+// Function to delete a listing
 export async function deleteListing(id: string) {
-    await sql`DELETE FROM properties WHERE id = ${id}`;
+  try {
+    await sql`
+      DELETE FROM properties WHERE id = ${id}
+    `;
     revalidatePath('/properties');
+  } catch (error) {
+    console.error('Error occurred while deleting the listing:', error);
+    throw new Error('Failed to delete listing.');
   }
+}
 
-  export async function authenticate(
-    prevState: string | undefined,
-    formData: FormData,
-  ) {
-    try {
-      await signIn('credentials', formData);
-    } catch (error) {
-      if (error instanceof AuthError) {
-        switch (error.type) {
-          case 'CredentialsSignin':
-            return 'Invalid credentials.';
-          default:
-            return 'Something went wrong.';
-        }
+// Function to authenticate a user
+export async function authenticate(prevState: string | undefined, formData: FormData) {
+  try {
+    await signIn('credentials', formData);
+  } catch (error) {
+    if (error instanceof AuthError) {
+      switch (error.type) {
+        case 'CredentialsSignin':
+          return 'Invalid credentials.';
+        default:
+          return 'Something went wrong.';
       }
-      throw error;
     }
+    throw error;
   }
+}

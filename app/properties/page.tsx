@@ -51,7 +51,7 @@ export default async function Page({
         </div>
         <div className="mt-6 flex items-center text-lg justify-between gap-2 md:mt-8">
           <Search placeholder="Search properties" />
-          {/* <CreateInvoice /> */}
+          
         </div>
         <div className="mt-8">
           <PropertyListings query={query} currentPage={currentPage} />

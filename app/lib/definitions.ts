@@ -11,7 +11,7 @@ export type Property = {
   description: string;
   price: number;
   location: string;
-  image_path: string;
+  image_path: string[];
 };
 
 export type Booking = {

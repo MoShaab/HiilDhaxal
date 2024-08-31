@@ -5,7 +5,7 @@ import { Property, Agent, User } from './definitions';
 export async function fetchFeaturedProperty(): Promise<Property[]> {
   try {
     console.log('Fetching properties data...');
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    
 
     // The type here should be Property, not Property[]
     const result = await sql<Property>`SELECT * FROM properties
@@ -27,7 +27,7 @@ export async function fetchFeaturedProperty(): Promise<Property[]> {
 export async function fetchDisplayVillas(): Promise<Property[]> {
   try {
     console.log('Fetching villas data...');
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+
 
     // The type here should be Property, not Property[]
     const result = await sql<Property>`
@@ -48,7 +48,7 @@ export async function fetchDisplayVillas(): Promise<Property[]> {
 export async function fetchFeaturedAgents(): Promise<Agent[]> {
   try {
     console.log('Fetching agents data...');
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+
 
     // The type here should be Agent, not Agent[]
     const result = await sql<Agent>`SELECT * FROM agents`;
@@ -125,5 +125,28 @@ export async function fetchPropertyById(id: string) {
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch property.');
+  }
+}
+
+
+
+export async function fetchDisplayAllVillas(): Promise<Property[]> {
+  try {
+    console.log('Fetching all villas data...');
+   
+    // The type here should be Property, not Property[]
+    const result = await sql<Property>`
+      SELECT * FROM properties
+      WHERE title ILIKE '%villa%' OR
+      description ILIKE '%villa%'
+
+      ORDER BY created_at asc
+    `;
+
+    return result.rows;
+  } 
+  catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch the latest villa displays.');
   }
 }

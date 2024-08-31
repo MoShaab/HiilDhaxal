@@ -16,7 +16,7 @@ export default function Form({
 }) {
     const updateListingWithId = updateListing.bind(null, listings.id);
   return (
-    <form action={updateListingWithId} className="max-w-md mx-auto text-black">
+    <form action={updateListingWithId} encType="multipart/form-data" className="max-w-md mx-auto text-black">
     <div className="rounded-md bg-gray-50 p-4 md:p-6">
       {/* Property Title */}
       <div className="mb-4">

@@ -1,6 +1,8 @@
 import { PencilIcon, PlusIcon, TrashIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
-import { deleteListing} from '@/app/lib/actions';
+import { deleteListing } from '@/app/lib/actions';
+import { auth } from "@/auth"
+
 
 export function CreateListing() {
   return (
@@ -14,7 +16,12 @@ export function CreateListing() {
   );
 }
 
-export function UpdateListing({ id }: { id: string }) {
+export async function UpdateListing({ id }: { id: string }) {
+  const session = await auth();
+
+  // Only render the Update button if the user is logged in
+  if (!session) return null;
+
   return (
     <Link
       href={`/properties/${id}/edit`}
@@ -26,10 +33,15 @@ export function UpdateListing({ id }: { id: string }) {
   );
 }
 
-export function DeleteListing({ id }: { id: string }) {
-    const deleteListingWithId = deleteListing.bind(null, id);
+export async function DeleteListing({ id }: { id: string }) {
+  const session = await auth();
+  const deleteListingWithId = deleteListing.bind(null, id);
+
+  // Only render the Delete button if the user is logged in
+  if (!session) return null;
+
   return (
-    <form action = {deleteListingWithId}>
+    <form action={deleteListingWithId}>
       <button className="rounded-md border p-2 hover:bg-black bg-gray-700 ">
         <span>Delete Listing</span>
         <TrashIcon className="w-6 ml-8" />

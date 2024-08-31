@@ -20,7 +20,7 @@ async function seedProperties() {
       description TEXT,
       price DECIMAL(10, 2),
       location VARCHAR(255),
-      image_path VARCHAR(255),
+      image_path JSONB,
       created_at TIMESTAMP DEFAULT NOW()
     );
   `;
