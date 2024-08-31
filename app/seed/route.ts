@@ -25,23 +25,8 @@ async function seedProperties() {
     );
   `;
 
-  const insertedProperties = await Promise.all(
-    properties.map(async (property) => {
-      return client.sql`
-        INSERT INTO properties (id, title, description, price, location, image_path)
-        VALUES (${property.id}, ${property.title}, ${property.description}, ${property.price}, ${property.location}, ${property.image_path})
-        ON CONFLICT (id) DO UPDATE
-        SET title = EXCLUDED.title, 
-          description = EXCLUDED.description, 
-          price = EXCLUDED.price, 
-          location = EXCLUDED.location, 
-          image_path = EXCLUDED.image_path;
-      `;
-    })
-  );
 
-  return insertedProperties;
-}
+     
 
 async function seedUsers() {
   const client = await connectToDb();
@@ -85,18 +70,6 @@ async function seedBookings() {
     );
   `;
 
-  const insertedBookings = await Promise.all(
-    bookings.map(async (booking) => {
-      return client.sql`
-        INSERT INTO bookings (id, user_id, property_id, booking_date)
-        VALUES (${booking.id}, ${booking.user_id}, ${booking.property_id}, ${booking.booking_date})
-        ON CONFLICT (id) DO NOTHING;
-      `;
-    })
-  );
-
-  return insertedBookings;
-}
 
 async function seedAgents() {
   const client = await connectToDb();
