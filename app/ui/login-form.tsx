@@ -16,7 +16,9 @@ export default function LoginForm() {
   const router = useRouter();
   const [errorMessage, formAction, isPending] = useFormState(
     authenticate,
-    undefined,
+    {
+      message: "",
+    },
   );
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -29,6 +31,8 @@ export default function LoginForm() {
 
     // Pass plainData to formAction and handle response
     const result: AuthResult = await formAction(formData);
+    console.log('Authentication Result:', result);  // Check if this is undefined or as expected
+    
     if (result?.authenticated) {
       router.push('/properties'); // Redirect to home page on successful login
     } else {

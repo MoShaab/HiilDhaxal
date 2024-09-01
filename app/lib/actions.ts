@@ -145,7 +145,7 @@ export type AuthResult = {
   message?: string;
 };
 
-export async function authenticate(prevState: AuthResult | undefined, formData: FormData): Promise<AuthResult> {
+export async function authenticate(prevState: AuthResult, formData: FormData): Promise<AuthResult> {
   try {
     await signIn('credentials', formData);
     return { authenticated: true };
