@@ -139,27 +139,21 @@ export async function deleteListing(id: string) {
 }
 
 
-
-export type AuthResult = {
-  authenticated: boolean;
-};
-
-export async function authenticate(prevState: AuthResult, formData: FormData): Promise<AuthResult> {
+export async function authenticate(
+  prevState: string | undefined,
+  formData: FormData,
+) {
   try {
     await signIn('credentials', formData);
-    return { authenticated: true };
   } catch (error) {
     if (error instanceof AuthError) {
-    
       switch (error.type) {
         case 'CredentialsSignin':
-          return { authenticated: false };
-          default:
-            return { authenticated: false };
+          return 'Invalid credentials.';
+        default:
+          return 'Something went wrong.';
       }
-    
     }
-    throw error;  // Re-throw unexpected errors
+    throw error;
   }
 }
-
