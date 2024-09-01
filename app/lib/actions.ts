@@ -139,45 +139,27 @@ export async function deleteListing(id: string) {
 }
 
 
+
 export type AuthResult = {
   authenticated: boolean;
   message?: string;
 };
 
-// Function to authenticate a user
 export async function authenticate(prevState: string | undefined, formData: FormData): Promise<AuthResult> {
   try {
-    const result = await signIn('credentials', {
-      redirect: false, // Prevent NextAuth from redirecting automatically
-      ...Object.fromEntries(formData.entries()), // Convert FormData to an object
-    });
-
-    if (result?.error) {
-      return {
-        authenticated: false,
-        message: result.error,
-      };
-    }
-
-    return {
-      authenticated: true,
-      message: 'Login successful.',
-    };
+    await signIn('credentials', formData);
+    return { authenticated: true };
   } catch (error) {
-    let message = 'Something went wrong.';
     if (error instanceof AuthError) {
+      let message = 'Something went wrong.';
       switch (error.type) {
         case 'CredentialsSignin':
           message = 'Invalid credentials.';
           break;
-        default:
-          message = 'Something went wrong.';
-          break;
       }
+      return { authenticated: false, message };
     }
-    return {
-      authenticated: false,
-      message,
-    };
+    throw error;  // Re-throw unexpected errors
   }
 }
+
