@@ -156,7 +156,7 @@ export async function authenticate(prevState: AuthResult, formData: FormData): P
           message = 'Invalid credentials.';
           break;
       }
-      return { authenticated: false, message };
+      return { authenticated: false };
     }
     throw error;  // Re-throw unexpected errors
   }
