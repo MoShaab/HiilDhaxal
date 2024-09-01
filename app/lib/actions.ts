@@ -142,7 +142,6 @@ export async function deleteListing(id: string) {
 
 export type AuthResult = {
   authenticated: boolean;
-  message?: string;
 };
 
 export async function authenticate(prevState: AuthResult, formData: FormData): Promise<AuthResult> {
