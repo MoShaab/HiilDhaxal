@@ -16,7 +16,7 @@ export default function LoginForm() {
   const router = useRouter();
   const [errorMessage, formAction] = useFormState(
     authenticate,
-    false,
+
   );
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
