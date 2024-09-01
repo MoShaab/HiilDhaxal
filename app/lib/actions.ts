@@ -9,8 +9,6 @@ import { writeFile } from 'fs/promises';
 import { signIn } from '@/auth';
 import { AuthError } from 'next-auth';
 
-
-
 // Define the schema for form data validation
 const FormSchema = z.object({
   title: z.string(),
@@ -84,7 +82,7 @@ export async function updateListing(id: string, formData: FormData) {
 
   const imagePaths: string[] = [];
 
-  if (images && images.length > 0) {
+  if (images &&images.length > 0) {
     try {
       for (const image of images) {
         const filename = `${Date.now()}_${image.name.replace(/\s/g, '_')}`;
@@ -140,21 +138,22 @@ export async function deleteListing(id: string) {
   }
 }
 
-type FormState = {
-  message: string;
-}
+export type AuthResult = {
+  authenticated: boolean;
+  // add other fields as necessary
+};
 
 // Function to authenticate a user
-export async function authenticate(prevState: FormState | undefined, formData: FormData) {
+export async function authenticate(prevState: string | undefined, formData: FormData) {
   try {
     await signIn('credentials', formData);
   } catch (error) {
     if (error instanceof AuthError) {
       switch (error.type) {
         case 'CredentialsSignin':
-          return {message: 'Invalid credentials.'}
+          return 'Invalid credentials.';
         default:
-          return {message: 'Something went wrong.'}
+          return 'Something went wrong.';
       }
     }
     throw error;

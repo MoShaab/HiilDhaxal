@@ -9,14 +9,15 @@ import {
 import { ArrowRightIcon } from '@heroicons/react/20/solid';
 import { Button } from '@/app/ui/button';
 import { useFormState } from 'react-dom';
-import { authenticate } from '@/app/lib/actions';
+import { authenticate, AuthResult  } from '@/app/lib/actions';
 import { useRouter } from 'next/navigation';
 
 export default function LoginForm() {
   const router = useRouter();
-  const [errorMessage, formAction, isPending] = useFormState(authenticate,{
-    message: "",
-  });
+  const [errorMessage, formAction, isPending] = useFormState(
+    authenticate,
+    undefined,
+  );
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -27,7 +28,7 @@ export default function LoginForm() {
 
 
     // Pass plainData to formAction and handle response
-    const result = await formAction(formData);
+    const result: AuthResult = await formAction(formData);
     if (result?.authenticated) {
       router.push('/properties'); // Redirect to home page on successful login
     } else {
@@ -83,7 +84,7 @@ export default function LoginForm() {
             </div>
           </div>
         </div>
-        <Button className="mt-4 w-full" aria-disabled={isPending}>
+        <Button className="mt-4 w-full " aria-disabled={isPending}>
           Log in <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
         </Button>
         <div
