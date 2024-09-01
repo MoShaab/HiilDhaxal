@@ -150,13 +150,14 @@ export async function authenticate(prevState: AuthResult, formData: FormData): P
     return { authenticated: true };
   } catch (error) {
     if (error instanceof AuthError) {
-      let message = 'Something went wrong.';
+    
       switch (error.type) {
         case 'CredentialsSignin':
-          message = 'Invalid credentials.';
-          break;
+          return { authenticated: false };
+          default:
+            return { authenticated: false };
       }
-      return { authenticated: false };
+    
     }
     throw error;  // Re-throw unexpected errors
   }
