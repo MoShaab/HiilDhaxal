@@ -11,7 +11,7 @@ import { signOut } from '@/auth';
 import { PowerIcon } from '@heroicons/react/24/outline';
 
 const links = [
-    { name: 'Log In', href: '/login', icon: UserCircleIcon  },
+    { name: 'Admin Log In', href: '/login', icon: UserCircleIcon  },
     { name: 'SELL MY PROPERTY', href: '/properties/sell_property/create', icon: HomeIcon }
     
 ];
