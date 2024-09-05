@@ -20,7 +20,7 @@ displayAllVillas: Property[];
         <p className='font-bold text-black text-center text-3xl'>Villa for Rent & Sale</p>
 
         <div className="mt-10 ml-10 mr-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {displayAllVillas?.map((property) => {
+        {displayAllVillas.map((property) => {
             console.log('Image URL:', property.image_path);
             const images = JSON.parse(property.image_path);
                     const thumbnail = images[0]; 

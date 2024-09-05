@@ -1,131 +1,158 @@
 'use server';
-
+import { S3 } from '@aws-sdk/client-s3';
 import { z } from 'zod';
 import { sql } from '@vercel/postgres';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
-import path from 'path';
-import { writeFile } from 'fs/promises';
+import { randomUUID } from 'crypto';
 import { signIn } from '@/auth';
 import { AuthError } from 'next-auth';
 
-// Define the schema for form data validation
+// Initialize the S3 client for Cloudflare R2 using environment variables
+const s3Client = new S3({
+  region: 'auto',  // Cloudflare uses auto-region detection
+  endpoint: process.env.ENDPOINT?? "",
+  credentials: {
+    accessKeyId: process.env.R2_ACCESS_KEY_ID ?? "",  // Access key from your .env.local
+    secretAccessKey: process.env.R2_SECRET_ACCESS_KEY ?? "",  // Secret key from your .env.local
+  },
+});
+
+// Define schema for the form data
 const FormSchema = z.object({
   title: z.string(),
   description: z.string(),
   price: z.coerce.number(),
   location: z.string(),
-  images: z.array(z.instanceof(File)),
+  images: z.array(z.instanceof(File)),  // Expecting images to be of File type
 });
 
-// Function to create a new listing
+// Function to upload files to Cloudflare R2
+async function uploadToR2(file: File): Promise<string> {
+  const filename = `${randomUUID()}_${file.name.replace(/\s/g, '_')}`;  // Create unique filename
+
+  // Convert file to a Buffer
+  const buffer = Buffer.from(await file.arrayBuffer());
+
+  // Upload to R2
+  await s3Client.putObject({
+    Bucket: process.env.R2_BUCKET_NAME,  // Your R2 bucket name from .env.local
+    Key: filename,  // Unique file name
+    Body: buffer,  // File content as buffer
+    ContentType: file.type,  // Set correct MIME type
+  });
+
+  // Return the file URL constructed with the public bucket URL
+  return `https://pub-3ea46b7dcfbf4dd9828bfd06c1989ace.r2.dev/${filename}`;  // Return the full public URL
+}
+
+// Create a new listing and upload images
 export async function createListing(formData: FormData) {
-  // Extract the form fields and convert the images to an array
   const { title, description, price, location, images } = FormSchema.parse({
     title: formData.get('title'),
     description: formData.get('description'),
-    price: parseFloat(formData.get('price') as string), // Convert to number
+    price: parseFloat(formData.get('price') as string),  // Ensure price is parsed to number
     location: formData.get('location'),
-    images: formData.getAll('images') as File[],
+    images: formData.getAll('images') as File[],  // Collect all images
   });
-
-  // Validate images
-  FormSchema.shape.images.parse(images);
-  console.log('Form Data:', formData);
-  console.log('Images:', images);
-
-
-
-  const imagePaths: string[] = [];
 
   try {
-    for (const image of images) {
-      const filename = `${Date.now()}_${image.name.replace(/\s/g, '_')}`;
-      const imagePath = path.join('public/uploads', filename);
-
-      // Save the image file
-      const buffer = Buffer.from(await image.arrayBuffer());
-      await writeFile(path.join(process.cwd(), imagePath), buffer);
-
-      // Save the relative path to the array
-      imagePaths.push('/uploads/' + filename);
-    }
-
-    // Insert listing into the database with the image paths as an array or JSON string
-    await sql`
-      INSERT INTO properties (title, description, price, location, image_path)
-      VALUES (${title}, ${description}, ${price}, ${location}, ${JSON.stringify(imagePaths)})
-    `;
-
-  } catch (error) {
-    console.error('Error occurred while creating the listing:', error);
-    throw new Error('Failed to create listing.');
-  }
-
-  // Revalidate and redirect after successful insertion
-  revalidatePath('/properties/success');
-  redirect('/properties/success');
-}
-
-// Function to update an existing listing
-// Function to update an existing listing
-export async function updateListing(id: string, formData: FormData) {
-  const { title, description, price, location, images } = FormSchema.partial({
-    images: true,  // Make images optional for updates
-  }).parse({
-    title: formData.get('title'),
-    description: formData.get('description'),
-    price: parseFloat(formData.get('price') as string), // Convert to number
-    location: formData.get('location'),
-    images: formData.getAll('images') as File[],
-  });
-
-  const imagePaths: string[] = [];
-
-  if (images &&images.length > 0) {
+    const imageUrls: string[] = [];
+  
     try {
       for (const image of images) {
-        const filename = `${Date.now()}_${image.name.replace(/\s/g, '_')}`;
-        const imagePath = path.join('public/uploads', filename);
-
-        // Save the image file
-        const buffer = Buffer.from(await image.arrayBuffer());
-        await writeFile(path.join(process.cwd(), imagePath), buffer);
-
-        // Save the relative path to the array
-        imagePaths.push('/uploads/' + filename);
+        const imageUrl = await uploadToR2(image);
+        imageUrls.push(imageUrl);
       }
-
-      // Update the listing in the database with the new image paths
-      await sql`
-        UPDATE properties
-        SET title = ${title}, description = ${description}, price = ${price}, location = ${location}, image_path = ${JSON.stringify(imagePaths)}
-        WHERE id = ${id}
-      `;
-    } catch (error) {
-      console.error('Error occurred while updating the listing:', error);
-      throw new Error('Failed to update listing.');
+    } catch (imageError) {
+      console.error('Image upload error:', imageError);
+  
+      throw new Error('Failed to upload images.');
     }
-  } else {
+  
     try {
-      // Update the listing without modifying image paths
       await sql`
-        UPDATE properties
-        SET title = ${title}, description = ${description}, price = ${price}, location = ${location}
-        WHERE id = ${id}
+        INSERT INTO properties (title, description, price, location, image_path)
+        VALUES (${title}, ${description}, ${price}, ${location}, ${JSON.stringify(imageUrls)})
       `;
-    } catch (error) {
-      console.error('Error occurred while updating the listing:', error);
-      throw new Error('Failed to update listing.');
+    } catch (dbError) {
+      console.error('Database insertion error:', dbError);
+      throw new Error('Failed to insert listing into database.');
     }
+  
+    
+  
+  } catch (error) {
+    console.error('Error creating listing:', error);
+    throw new Error('Failed to create listing.');
   }
-
-  // Revalidate and redirect after successful update
-  revalidatePath('/properties/success');
+  // Revalidate and redirect
+  revalidatePath('/properties');
   redirect('/properties/success');
+  
 }
 
-// Function to delete a listing
+
+
+// // Function to update an existing listing
+// // Function to update an existing listing
+// export async function updateListing(id: string, formData: FormData) {
+//   const { title, description, price, location, images } = FormSchema.partial({
+//     images: true,  // Make images optional for updates
+//   }).parse({
+//     title: formData.get('title'),
+//     description: formData.get('description'),
+//     price: parseFloat(formData.get('price') as string), // Convert to number
+//     location: formData.get('location'),
+//     images: formData.getAll('images') as File[],
+//   });
+
+//   const imagePaths: string[] = [];
+
+//   if (images &&images.length > 0) {
+//     try {
+//       for (const image of images) {
+//         const filename = `${Date.now()}_${image.name.replace(/\s/g, '_')}`;
+//         const imagePath = path.join('public/uploads', filename);
+
+//         // Save the image file
+//         const buffer = Buffer.from(await image.arrayBuffer());
+//         await writeFile(path.join(process.cwd(), imagePath), buffer);
+
+//         // Save the relative path to the array
+//         imagePaths.push('/uploads/' + filename);
+//       }
+
+//       // Update the listing in the database with the new image paths
+//       await sql`
+//         UPDATE properties
+//         SET title = ${title}, description = ${description}, price = ${price}, location = ${location}, image_path = ${JSON.stringify(imagePaths)}
+//         WHERE id = ${id}
+//       `;
+//     } catch (error) {
+//       console.error('Error occurred while updating the listing:', error);
+//       throw new Error('Failed to update listing.');
+//     }
+//   } else {
+//     try {
+//       // Update the listing without modifying image paths
+//       await sql`
+//         UPDATE properties
+//         SET title = ${title}, description = ${description}, price = ${price}, location = ${location}
+//         WHERE id = ${id}
+//       `;
+//     } catch (error) {
+//       console.error('Error occurred while updating the listing:', error);
+//       throw new Error('Failed to update listing.');
+//     }
+//   }
+
+//   // Revalidate and redirect after successful update
+//   revalidatePath('/properties/success');
+//   redirect('/properties/success');
+// }
+
+// // Function to delete a listing
 export async function deleteListing(id: string) {
   try {
     await sql`
