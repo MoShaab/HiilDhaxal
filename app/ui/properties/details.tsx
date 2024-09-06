@@ -19,7 +19,7 @@ export default async function PropertyDetails({ property }: { property: Property
 
         if (['jpg', 'jpeg', 'png', 'gif'].includes(fileExtension!)) {
             return (
-                <Link key={index} href={`/properties/${property.id}/details`}>
+                <Link key={index} href={mediaPath}>
                     <div className="relative w-full h-64 cursor-pointer overflow-hidden">
                         <Image
                             src={mediaPath}
