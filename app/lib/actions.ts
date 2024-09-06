@@ -94,63 +94,60 @@ export async function createListing(formData: FormData) {
 
 
 
-// // Function to update an existing listing
-// // Function to update an existing listing
-// export async function updateListing(id: string, formData: FormData) {
-//   const { title, description, price, location, images } = FormSchema.partial({
-//     images: true,  // Make images optional for updates
-//   }).parse({
-//     title: formData.get('title'),
-//     description: formData.get('description'),
-//     price: parseFloat(formData.get('price') as string), // Convert to number
-//     location: formData.get('location'),
-//     images: formData.getAll('images') as File[],
-//   });
 
-//   const imagePaths: string[] = [];
+// Function to update an existing listing
+export async function updateListing(id: string, formData: FormData) {
+  const { title, description, price, location, images } = FormSchema.partial({
+    images: true, // Make images optional
+  }).parse({
+    title: formData.get('title'),
+    description: formData.get('description'),
+    price: parseFloat(formData.get('price') as string),
+    location: formData.get('location'),
+    images: formData.getAll('images') as File[],
+  });
 
-//   if (images &&images.length > 0) {
-//     try {
-//       for (const image of images) {
-//         const filename = `${Date.now()}_${image.name.replace(/\s/g, '_')}`;
-//         const imagePath = path.join('public/uploads', filename);
+  const imageUrls: string[] = [];
 
-//         // Save the image file
-//         const buffer = Buffer.from(await image.arrayBuffer());
-//         await writeFile(path.join(process.cwd(), imagePath), buffer);
+  // Upload new images if provided
+  if (images && images.length > 0) {
+    try {
+      for (const image of images) {
+        const imageUrl = await uploadToR2(image);
+        imageUrls.push(imageUrl);
+      }
+    } catch (error) {
+      console.error('Image upload error:', error);
+      throw new Error('Failed to upload images.');
+    }
+  }
 
-//         // Save the relative path to the array
-//         imagePaths.push('/uploads/' + filename);
-//       }
+  // Update the listing in the database
+  try {
+    if (imageUrls.length > 0) {
+      // Update with new image paths
+      await sql`
+        UPDATE properties
+        SET title = ${title}, description = ${description}, price = ${price}, location = ${location}, image_path = ${JSON.stringify(imageUrls)}
+        WHERE id = ${id}
+      `;
+    } else {
+      // Update without changing image paths
+      await sql`
+        UPDATE properties
+        SET title = ${title}, description = ${description}, price = ${price}, location = ${location}
+        WHERE id = ${id}
+      `;
+    }
+  } catch (error) {
+    console.error('Database update error:', error);
+    throw new Error('Failed to update listing.');
+  }
 
-//       // Update the listing in the database with the new image paths
-//       await sql`
-//         UPDATE properties
-//         SET title = ${title}, description = ${description}, price = ${price}, location = ${location}, image_path = ${JSON.stringify(imagePaths)}
-//         WHERE id = ${id}
-//       `;
-//     } catch (error) {
-//       console.error('Error occurred while updating the listing:', error);
-//       throw new Error('Failed to update listing.');
-//     }
-//   } else {
-//     try {
-//       // Update the listing without modifying image paths
-//       await sql`
-//         UPDATE properties
-//         SET title = ${title}, description = ${description}, price = ${price}, location = ${location}
-//         WHERE id = ${id}
-//       `;
-//     } catch (error) {
-//       console.error('Error occurred while updating the listing:', error);
-//       throw new Error('Failed to update listing.');
-//     }
-//   }
-
-//   // Revalidate and redirect after successful update
-//   revalidatePath('/properties/success');
-//   redirect('/properties/success');
-// }
+  // Revalidate and redirect
+  revalidatePath('/properties/success');
+  redirect('/properties/success');
+}
 
 // // Function to delete a listing
 export async function deleteListing(id: string) {
