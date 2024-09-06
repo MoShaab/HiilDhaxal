@@ -8,10 +8,15 @@ import { randomUUID } from 'crypto';
 import { signIn } from '@/auth';
 import { AuthError } from 'next-auth';
 
+const endpoint = process.env.R2_ENDPOINT ?? '';
+
+if (!endpoint) {
+  throw new Error('Cloudflare R2 endpoint is not set. Please check your environment variables.');
+}
 // Initialize the S3 client for Cloudflare R2 using environment variables
 const s3Client = new S3({
   region: 'auto',  // Cloudflare uses auto-region detection
-  endpoint: process.env.ENDPOINT?? "",
+  endpoint: process.env.R2_ENDPOINT?? "",
   credentials: {
     accessKeyId: process.env.R2_ACCESS_KEY_ID ?? "",  // Access key from your .env.local
     secretAccessKey: process.env.R2_SECRET_ACCESS_KEY ?? "",  // Secret key from your .env.local
