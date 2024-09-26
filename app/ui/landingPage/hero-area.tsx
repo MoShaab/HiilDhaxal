@@ -1,54 +1,29 @@
 
-import Image from 'next/image';
-import { lusitana, inter } from '@/app/ui/fonts';
-
-
-
 export default  function HeroArea(){
 
 
     return(
         <>
-         <main className="relative w-full h-[70vh] flex justify-center items-center py-5 bg-cover">
-        <div className=" absolute inset-0 mt-15">
-
-        <div>
-          <Image
-            src="/hero-desktop.png"
-            layout="fill"
-            objectFit="cover"
-            className="hidden md:block"
-            alt="Hero Image Desktop"
-          />
-          <Image
-            src="/hero-mobile.jpg"
-            
-            layout="fill"
-            objectFit="cover"
-            className="block md:hidden"
-            alt="Hero Image Mobile"
-          />
-          <div className="absolute inset-0 bg-black opacity-50"></div>
-
-         </div>
-
-          <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white">
-            <h1 className={`${inter.className} text-2xl md:text-3xl font-bold`}>
-              Find Your Perfect Home
-            </h1>
-           
-
-            <div className = "mt-10 text-lg text-3xl">
-           
-            </div>
-
-
-          </div>
-
-
+   <section className="relative h-screen bg-cover bg-center" style={{ backgroundImage: 'url(/hero-bg.jpg)' }}>
+      <div className="absolute inset-0 bg-black opacity-50"></div>
+      <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4 sm:px-6 lg:px-8">
+        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight">
+          Find Your Dream Property
+        </h1>
+        <p className="mt-4 text-lg sm:text-xl lg:text-2xl text-gray-300">
+          Discover the best properties in the most exclusive locations.
+        </p>
+        <div className="mt-8">
+          <a
+            href="/properties"
+            className="px-8 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition duration-300 ease-in-out"
+          >
+            Explore Listings
+          </a>
         </div>
-        
-      </main>
+      </div>
+    </section>
+  
       
         </>
     )

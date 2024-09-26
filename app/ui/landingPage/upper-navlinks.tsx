@@ -14,7 +14,7 @@ export default function UpperNavlinks() {
     const pathname = usePathname();
 
     return (
-        <div className="flex flex-col md:flex-row items-center justify-between p-4 bg-black text-white">
+        <div className="flex flex-col md:flex-row items-center justify-between p-7 bg-gray-800 text-white">
             
             {/* Contact Links */}
             <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4 text-center md:text-left">

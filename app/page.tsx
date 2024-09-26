@@ -21,7 +21,7 @@ export default async function Page(){
     <main>
     <div className="min-h-screen bg-gray-100">
      
-      <UpperNav />
+     
       <LowerNav />
       <HeroArea />
 
@@ -31,6 +31,7 @@ export default async function Page(){
       <LetUsKnow />
       <DisplayAgents featuredAgents={featuredAgents} />
       <Achieved />
+      <UpperNav />
       
     
   
