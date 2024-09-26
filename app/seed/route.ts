@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 import { db } from '@vercel/postgres';
-import { users, agents } from '../lib/data/placeholder-data';
+import { agents } from '../lib/data/placeholder-data';
 import { NextResponse } from 'next/server';
 
 
@@ -29,6 +29,22 @@ async function seedProperties() {
        
 }
 
+async function seedInviteCodes(){
+  const client = await connectToDb();
+  await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
+  
+  await client.sql`
+  CREATE TABLE IF NOT EXISTS invites (
+    id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+    code VARCHAR(255) UNIQUE NOT NULL,
+    used BOOLEAN DEFAULT false,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    used_at TIMESTAMP
+);
+
+  `;
+}
+
 async function seedUsers() {
   const client = await connectToDb();
   await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
@@ -36,25 +52,25 @@ async function seedUsers() {
   await client.sql`
     CREATE TABLE IF NOT EXISTS users (
       id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
-      name VARCHAR(255),
+      username VARCHAR(255),
       email VARCHAR(255) UNIQUE,
       password VARCHAR(255),
       created_at TIMESTAMP DEFAULT NOW()
     );
   `;
 
-  const insertedUsers = await Promise.all(
-    users.map(async (user) => {
-      const hashedPassword = await bcrypt.hash(user.password, 10);
-      return client.sql`
-        INSERT INTO users (id, name, email, password)
-        VALUES (${user.id}, ${user.name}, ${user.email}, ${hashedPassword})
-        ON CONFLICT (id) DO NOTHING;
-      `;
-    })
-  );
+  // const insertedUsers = await Promise.all(
+  //   users.map(async (user) => {
+  //     const hashedPassword = await bcrypt.hash(user.password, 10);
+  //     return client.sql`
+  //       INSERT INTO users (id, username, email, password)
+  //       VALUES (${user.id}, ${user.name}, ${user.email}, ${hashedPassword})
+  //       ON CONFLICT (id) DO NOTHING;
+  //     `;
+  //   })
+  // );
 
-  return insertedUsers;
+  // return insertedUsers;
 }
 
 async function seedBookings() {
@@ -118,6 +134,7 @@ export async function GET() {
   try {
     await client.sql`BEGIN`;
     await seedProperties();
+    await seedInviteCodes();
     await seedUsers();
     await seedBookings();
     await seedAgents(); // Add seeding for agents

@@ -1,7 +1,6 @@
 
 import Image from 'next/image';
 import { lusitana, inter } from '@/app/ui/fonts';
-import Search from '../search';
 
 
 
@@ -37,13 +36,10 @@ export default  function HeroArea(){
             <h1 className={`${inter.className} text-2xl md:text-3xl font-bold`}>
               Find Your Perfect Home
             </h1>
-            <p className={`${lusitana.className} text-xl md:text-3xl`}>
-              Search your dream home on the largest property marketplace
-              
-            </p>
+           
 
             <div className = "mt-10 text-lg text-3xl">
-            <Search placeholder='search properties' />
+           
             </div>
 
 

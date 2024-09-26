@@ -4,9 +4,10 @@ import { z } from 'zod';
 import { sql } from '@vercel/postgres';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
-import { randomUUID } from 'crypto';
+import { randomUUID} from 'crypto';
 import { signIn } from '@/auth';
 import { AuthError } from 'next-auth';
+import bcrypt from 'bcrypt';
 
 const endpoint = process.env.R2_ENDPOINT ?? '';
 
@@ -190,5 +191,80 @@ export async function authenticate(
   }
 
   
+  redirect('/properties');
+}
+
+
+// Generate a unique code
+function generateInviteCode() {
+  const inviteCode = Math.floor(100000 + Math.random() * 900000);
+  return inviteCode.toString();  
+}
+
+export async function createInvite() {
+  const inviteCode = generateInviteCode();
+
+  try {
+    // Insert invite code into the database
+    await sql`
+      INSERT INTO invites (code)
+      VALUES (${inviteCode})
+    `;
+
+    return inviteCode; // Return the code for further use (e.g., sending via email)
+  } catch (error) {
+    console.error('Error generating invite:', error);
+    throw new Error('Failed to generate invite code.');
+  }
+}
+
+
+
+
+// Define schema for sign-up form data
+const SignUpSchema = z.object({
+  username: z.string().min(3, 'Username should be at least 3 characters'),
+  email: z.string().email('Invalid email address'),
+  password: z.string().min(6, 'Password should be at least 6 characters'),
+  inviteCode: z.string(),
+});
+
+// Function to handle user sign-up
+export async function signUpUser(formData: FormData) {
+  const { username, email, password, inviteCode } = SignUpSchema.parse({
+    username: formData.get('username'),
+    email: formData.get('email'),
+    password: formData.get('password'),
+    inviteCode: formData.get('inviteCode')
+  });
+
+  try {
+
+     // Check if the invite code is valid and unused
+     const invite = await sql`SELECT * FROM invites WHERE code = ${inviteCode} AND used = false`;
+     console.log('Invite result:', invite);
+
+     if (!invite.rows.length) {
+       throw new Error('Invalid or already used invite code.');
+     }
+    // Hash the password before storing it
+    
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Insert user into the database
+    await sql`
+      INSERT INTO users (username, email, password)
+      VALUES (${username}, ${email}, ${hashedPassword})
+    `;
+
+    // Mark invite code as used
+    await sql`UPDATE invites SET used = true WHERE code = ${inviteCode}`;
+    
+  } catch (error) {
+    console.error('Sign-up error:', error);
+    throw new Error('Failed to sign up the user.');
+  }
+ // Revalidate the necessary path and redirect to the success page
+  revalidatePath('/signup');
   redirect('/properties');
 }
