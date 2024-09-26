@@ -5,6 +5,10 @@ export const authConfig = {
     signIn: '/login',
   },
   callbacks: {
+    async redirect({ url, baseUrl }) {
+      // Redirect to /properties after login
+      return baseUrl + '/properties';
+    },
     authorized({ auth, request: { nextUrl } }) {
       console.log("Auth User:", auth?.user);
       console.log("Next URL:", nextUrl.pathname);

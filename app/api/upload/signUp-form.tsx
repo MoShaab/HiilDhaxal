@@ -39,7 +39,7 @@ export default function Form() {
             </label>
             <div className="relative">
               <input
-                className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm text-3xl text-black outline-2 placeholder:text-gray-500"
+                className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-lg text-3xl text-black outline-2 placeholder:text-gray-500"
                 id="email"
                 type="email"
                 name="email"
@@ -59,7 +59,7 @@ export default function Form() {
             </label>
             <div className="relative">
               <input
-                className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm 3xl text-black outline-2 placeholder:text-gray-500"
+                className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-lg 3xl text-black outline-2 placeholder:text-gray-500"
                 id="password"
                 type="password"
                 name="password"
@@ -81,12 +81,12 @@ export default function Form() {
                 Invite Code
                 </label>
                 <input 
-                className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm 3xl text-black outline-2 placeholder:text-gray-500"
+                className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-lg 3xl text-black outline-2 placeholder:text-gray-500"
                 type="text" 
                 id = "inviteCode"
                 name="inviteCode" 
                 required
-                placeholder="Enter code send to your email"
+                placeholder="Enter code sent to your email"
                  />
               
              </div>

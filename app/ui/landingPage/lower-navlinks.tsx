@@ -6,13 +6,15 @@ import Link from 'next/link';
 import {
     UserCircleIcon ,
     HomeIcon,
+    UserPlusIcon,
 } from '@heroicons/react/24/outline';
 import { signOut } from '@/auth';
 import { PowerIcon } from '@heroicons/react/24/outline';
 
 const links = [
     { name: 'Admin Log In', href: '/login', icon: UserCircleIcon  },
-    { name: 'SELL MY PROPERTY', href: '/properties/sell_property/create', icon: HomeIcon }
+    { name: 'SELL MY PROPERTY', href: '/properties/sell_property/create', icon: HomeIcon },
+    {name: 'Sign Up', href: '/signup', icon: UserPlusIcon}
     
 ];
 

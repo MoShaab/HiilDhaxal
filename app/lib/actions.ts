@@ -191,6 +191,7 @@ export async function authenticate(
   }
 
   
+  revalidatePath('/login');
   redirect('/properties');
 }
 
@@ -244,7 +245,7 @@ export async function signUpUser(formData: FormData) {
      const invite = await sql`SELECT * FROM invites WHERE code = ${inviteCode} AND used = false`;
      console.log('Invite result:', invite);
 
-     if (!invite.rows.length) {
+     if (!invite.rowCount) {
        throw new Error('Invalid or already used invite code.');
      }
     // Hash the password before storing it
