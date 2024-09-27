@@ -15,6 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <script src="//code.tidio.co/uxesf4jarnatcc2fltflyi4wtx6taknq.js" async></script>
       <body className={inter.className}>{children}</body>
     </html>
   );

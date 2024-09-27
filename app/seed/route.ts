@@ -1,4 +1,4 @@
-import bcrypt from 'bcrypt';
+
 import { db } from '@vercel/postgres';
 import { agents } from '../lib/data/placeholder-data';
 import { NextResponse } from 'next/server';
@@ -44,6 +44,9 @@ async function seedInviteCodes(){
 
   `;
 }
+
+
+
 
 async function seedUsers() {
   const client = await connectToDb();
