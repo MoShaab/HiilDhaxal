@@ -22,7 +22,7 @@ export default function TestimonialSection() {
         name: "David Oloo",
         image: "/david-oloo.jpg",
         title: "Satisfied Buyer",
-        review: "Silveroak Real Estate  offered exceptional service and great attention to detail. Their properties are top-notch, and I couldn’t be happier with my new apartment.",
+        review: "Silveroak Real Estate  offered exceptional service and great attention to detail. Their properties are top-notch, and I couldn&apos;t be happier with my new apartment.",
       },
       {
         name: "Jama Nuur",
@@ -59,7 +59,7 @@ export default function TestimonialSection() {
                   {testimonial.name}
                 </h3>
                 <p className="text-lg text-gray-500">{testimonial.title}</p>
-                <p className={`${lusitana.className} text-xl md:text-xl text-gray-700`}>"{testimonial.review}"</p>
+                <p className={`${lusitana.className} text-xl md:text-xl text-gray-700`}>&quot{testimonial.review}&quot</p>
               </div>
             ))}
           </div>

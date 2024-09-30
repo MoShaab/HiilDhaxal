@@ -26,7 +26,7 @@ export default function LetUsKnow() {
 
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white">
           <h1 className={`${inter.className} text-xl md:text-3xl font-bold`}>
-            Didn’t Find What You Were Looking For?
+            Didn&apos;t Find What You Were Looking For?
           </h1>
           <p className={`${lusitana.className} text-3xl md:text-3xl`}>
             Don't fret! We got you covered.
