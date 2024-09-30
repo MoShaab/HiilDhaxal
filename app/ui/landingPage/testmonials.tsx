@@ -59,7 +59,7 @@ export default function TestimonialSection() {
                   {testimonial.name}
                 </h3>
                 <p className="text-lg text-gray-500">{testimonial.title}</p>
-                <p className={`${lusitana.className} text-xl md:text-xl text-gray-700`}>&quot{testimonial.review}&quot</p>
+                <p className={`${lusitana.className} text-xl md:text-xl text-gray-700`}>&quot;{testimonial.review}&quot;</p>
               </div>
             ))}
           </div>
