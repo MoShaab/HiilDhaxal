@@ -7,6 +7,7 @@ import DisplayVillas from './ui/landingPage/displayForVillas';
 import LetUsKnow from './ui/landingPage/letUsKnow';
 import DisplayAgents from './ui/landingPage/agents';
 import Achieved from './ui/landingPage/achievements';
+import TestimonialSection from './ui/landingPage/testmonials';
 import {fetchFeaturedProperty, fetchDisplayVillas, fetchFeaturedAgents} from '@/app/lib/data';
 
 
@@ -31,6 +32,7 @@ export default async function Page(){
       <LetUsKnow />
       <DisplayAgents featuredAgents={featuredAgents} />
       <Achieved />
+      <TestimonialSection />
       <UpperNav />
       
     

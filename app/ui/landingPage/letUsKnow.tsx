@@ -29,7 +29,7 @@ export default function LetUsKnow() {
             Didn’t Find What You Were Looking For?
           </h1>
           <p className={`${lusitana.className} text-3xl md:text-3xl`}>
-            Search your dream home on the largest property marketplace
+            Don't fret! We got you covered.
           </p>
             <div className="flex justify-center">
                 <div className =  "p-8 mt-20 bg-blue-700 hover:bg-gray-500 text-white font-bold py-2 rounded">  Let Us Know  </div>

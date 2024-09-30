@@ -1,10 +1,16 @@
+'use client';
 import Image from 'next/image';
-import { lusitana } from '@/app/ui/fonts';
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import { Agent } from '@/app/lib/definitions'; // Assuming you've defined Agent type
 import Link from 'next/link';
 import { FaFacebook, FaTwitter, FaInstagram, } from 'react-icons/fa';
 
 export default function DisplayAgents({ featuredAgents }: { featuredAgents: Agent[] }) {
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+  }, []);
   console.log('Featured Agents:', featuredAgents);
 
   return (
@@ -15,7 +21,7 @@ export default function DisplayAgents({ featuredAgents }: { featuredAgents: Agen
       <div className="mt-10 ml-10 mr-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {featuredAgents.map((agent) => {
           return (
-            <div key={agent.id} className="block group">
+            <div data-aos="fade-up" key={agent.id} className="block group">
               
                 <div className="relative w-full h-64">
                   <Image
