@@ -5,7 +5,7 @@ import '@/app/ui/global.css';
 
 export const metadata: Metadata = {
   title: "Silveroak",
-  description: "Developed by Grafame Tech",
+  description: "Developed by HomeX Technologies",
 };
 
 export default function RootLayout({
