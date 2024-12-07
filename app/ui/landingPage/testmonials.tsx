@@ -22,7 +22,7 @@ export default function TestimonialSection() {
         name: "David Oloo",
         image: "/david-oloo.jpg",
         title: "Satisfied Buyer",
-        review: "Silveroak Real Estate  offered exceptional service and great attention to detail. Their properties are top-notch, and I couldn&apos;t be happier with my new apartment.",
+        review: "Silveroak Real Estate  offered exceptional service and great attention to detail. Their properties are top-notch, and I  Couldn&apos;t be happier with my new apartment.",
       },
       {
         name: "Jama Nuur",
