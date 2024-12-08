@@ -18,7 +18,7 @@ async function seedProperties() {
       id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
       title VARCHAR(255),
       description TEXT,
-      price DECIMAL(10, 2),
+      
       location VARCHAR(255),
       image_path JSONB,
       created_at TIMESTAMP DEFAULT NOW()

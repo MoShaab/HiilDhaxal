@@ -53,24 +53,8 @@ export default function Form({
         </div>
       </div>
   
-      {/* Property Price */}
-      <div className="mb-4">
-        <label htmlFor="price" className="mb-2 block text-lg text-3xl font-medium">
-          Property Price
-        </label>
-        <div className="relative mt-2 rounded-md">
-          <input
-            id="price"
-            name="price"
-            type="number"
-            step="0.01"
-            placeholder="Enter property price KSH"
-            className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-lg text-3xl outline-2 placeholder:text-gray-500"
-            defaultValue={listings.price}
-          />
+     
           
-        </div>
-      </div>
   
       {/* Property Location */}
       <div className="mb-4">

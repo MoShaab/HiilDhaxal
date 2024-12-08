@@ -18,6 +18,16 @@ export default function Page(){
         </div>
         </Link>
 
+        <Link href = '/properties/sell_property/create'>
+        <div>
+            
+
+        <div className="flex justify-center">
+                <div className =  "p-8 mt-20 bg-blue-700 hover:bg-gray-500 text-white font-bold py-2 rounded">  Add another record  </div>
+            </div>
+        </div>
+        </Link>
+
 
         </div>
 

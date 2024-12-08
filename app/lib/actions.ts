@@ -4,7 +4,7 @@ import { z } from 'zod';
 import { sql } from '@vercel/postgres';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
-import { randomUUID} from 'crypto';
+import { randomUUID } from 'crypto';
 import { signIn } from '@/auth';
 import { AuthError } from 'next-auth';
 import bcrypt from 'bcrypt';
@@ -14,13 +14,14 @@ const endpoint = process.env.R2_ENDPOINT ?? '';
 if (!endpoint) {
   throw new Error('Cloudflare R2 endpoint is not set. Please check your environment variables.');
 }
+
 // Initialize the S3 client for Cloudflare R2 using environment variables
 const s3Client = new S3({
-  region: 'auto',  // Cloudflare uses auto-region detection
-  endpoint: process.env.R2_ENDPOINT?? "",
+  region: 'auto', // Cloudflare uses auto-region detection
+  endpoint: process.env.R2_ENDPOINT ?? '',
   credentials: {
-    accessKeyId: process.env.R2_ACCESS_KEY_ID ?? "",  // Access key from your .env.local
-    secretAccessKey: process.env.R2_SECRET_ACCESS_KEY ?? "",  // Secret key from your .env.local
+    accessKeyId: process.env.R2_ACCESS_KEY_ID ?? '', // Access key from your .env.local
+    secretAccessKey: process.env.R2_SECRET_ACCESS_KEY ?? '', // Secret key from your .env.local
   },
 });
 
@@ -28,43 +29,41 @@ const s3Client = new S3({
 const FormSchema = z.object({
   title: z.string(),
   description: z.string(),
-  price: z.coerce.number(),
   location: z.string(),
-  images: z.array(z.instanceof(File)),  // Expecting images to be of File type
+  images: z.array(z.instanceof(File)), // Expecting images to be of File type
 });
 
 // Function to upload files to Cloudflare R2
 async function uploadToR2(file: File): Promise<string> {
-  const filename = `${randomUUID()}_${file.name.replace(/\s/g, '_')}`;  // Create unique filename
+  const filename = `${randomUUID()}_${file.name.replace(/\s/g, '_')}`; // Create unique filename
 
   // Convert file to a Buffer
   const buffer = Buffer.from(await file.arrayBuffer());
 
   // Upload to R2
   await s3Client.putObject({
-    Bucket: process.env.R2_BUCKET_NAME,  // Your R2 bucket name from .env.local
-    Key: filename,  // Unique file name
-    Body: buffer,  // File content as buffer
-    ContentType: file.type,  // Set correct MIME type
+    Bucket: process.env.R2_BUCKET_NAME, // Your R2 bucket name from .env.local
+    Key: filename, // Unique file name
+    Body: buffer, // File content as buffer
+    ContentType: file.type, // Set correct MIME type
   });
 
   // Return the file URL constructed with the public bucket URL
-  return `https://pub-3ea46b7dcfbf4dd9828bfd06c1989ace.r2.dev/${filename}`;  // Return the full public URL
+  return `https://pub-3ea46b7dcfbf4dd9828bfd06c1989ace.r2.dev/${filename}`; // Return the full public URL
 }
 
 // Create a new listing and upload images
 export async function createListing(formData: FormData) {
-  const { title, description, price, location, images } = FormSchema.parse({
+  const { title, description, location, images } = FormSchema.parse({
     title: formData.get('title'),
     description: formData.get('description'),
-    price: parseFloat(formData.get('price') as string),  // Ensure price is parsed to number
     location: formData.get('location'),
-    images: formData.getAll('images') as File[],  // Collect all images
+    images: formData.getAll('images') as File[], // Collect all images
   });
 
   try {
     const imageUrls: string[] = [];
-  
+
     try {
       for (const image of images) {
         const imageUrl = await uploadToR2(image);
@@ -72,22 +71,18 @@ export async function createListing(formData: FormData) {
       }
     } catch (imageError) {
       console.error('Image upload error:', imageError);
-  
       throw new Error('Failed to upload images.');
     }
-  
+
     try {
       await sql`
-        INSERT INTO properties (title, description, price, location, image_path)
-        VALUES (${title}, ${description}, ${price}, ${location}, ${JSON.stringify(imageUrls)})
+        INSERT INTO properties (title, description, location, image_path)
+        VALUES (${title}, ${description}, ${location}, ${JSON.stringify(imageUrls)})
       `;
     } catch (dbError) {
       console.error('Database insertion error:', dbError);
       throw new Error('Failed to insert listing into database.');
     }
-  
-    
-  
   } catch (error) {
     console.error('Error creating listing:', error);
     throw new Error('Failed to create listing.');
@@ -95,20 +90,15 @@ export async function createListing(formData: FormData) {
   // Revalidate and redirect
   revalidatePath('/properties');
   redirect('/properties/success');
-  
 }
-
-
-
 
 // Function to update an existing listing
 export async function updateListing(id: string, formData: FormData) {
-  const { title, description, price, location, images } = FormSchema.partial({
+  const { title, description, location, images } = FormSchema.partial({
     images: true, // Make images optional
   }).parse({
     title: formData.get('title'),
     description: formData.get('description'),
-    price: parseFloat(formData.get('price') as string),
     location: formData.get('location'),
     images: formData.getAll('images') as File[],
   });
@@ -134,14 +124,14 @@ export async function updateListing(id: string, formData: FormData) {
       // Update with new image paths
       await sql`
         UPDATE properties
-        SET title = ${title}, description = ${description}, price = ${price}, location = ${location}, image_path = ${JSON.stringify(imageUrls)}
+        SET title = ${title}, description = ${description}, location = ${location}, image_path = ${JSON.stringify(imageUrls)}
         WHERE id = ${id}
       `;
     } else {
       // Update without changing image paths
       await sql`
         UPDATE properties
-        SET title = ${title}, description = ${description}, price = ${price}, location = ${location}
+        SET title = ${title}, description = ${description}, location = ${location}
         WHERE id = ${id}
       `;
     }
@@ -155,7 +145,7 @@ export async function updateListing(id: string, formData: FormData) {
   redirect('/properties/success');
 }
 
-// // Function to delete a listing
+// Function to delete a listing
 export async function deleteListing(id: string) {
   try {
     await sql`
@@ -167,6 +157,9 @@ export async function deleteListing(id: string) {
     throw new Error('Failed to delete listing.');
   }
 }
+
+// Other functions remain unchanged...
+
 
 
 export async function authenticate(
