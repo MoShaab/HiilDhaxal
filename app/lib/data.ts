@@ -21,7 +21,10 @@ export async function fetchDisplayVillas(): Promise<Property[]> {
     console.log('Fetching villas data...');
     const result = await sql<Property>`
       SELECT * FROM properties
-      WHERE title ILIKE '%villa%'
+      WHERE title ILIKE '%gabay%' OR
+            description ILIKE '%gabay%'
+
+
       ORDER BY created_at ASC
       LIMIT 3
     `;
@@ -101,8 +104,8 @@ export async function fetchDisplayAllVillas(): Promise<Property[]> {
     console.log('Fetching all villas data...');
     const result = await sql<Property>`
       SELECT * FROM properties
-      WHERE title ILIKE '%villa%' OR
-            description ILIKE '%villa%'
+      WHERE title ILIKE '%gabay%' OR
+            description ILIKE '%gabay%'
       ORDER BY created_at ASC
     `;
     return result.rows;
