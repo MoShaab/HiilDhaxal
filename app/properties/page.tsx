@@ -1,4 +1,5 @@
 import Pagination from '@/app/ui/properties/pagination';
+import Search from '@/app/ui/search';
 import { lusitana } from '@/app/ui/fonts';
 import PropertyListings from "@/app/ui/properties/listings";
 import { fetchPropertiesPages } from '@/app/lib/data';
@@ -25,7 +26,7 @@ export default async function Page({
       <div className="container mx-auto px-4 py-6 md:py-10">
         <div className="flex items-center justify-between">
           <h1 className={`${lusitana.className} text-gray-900 text-4xl font-bold`}>
-            Property Listings
+            Hoyga Hiddaha Soomaaliyeed
           </h1>
            
         <Link href= '/'>
@@ -47,6 +48,10 @@ export default async function Page({
         </form>
 
 
+        </div>
+        <div className="mt-6 flex items-center text-lg justify-between gap-2 md:mt-8">
+          <Search placeholder="Baar Kaydka" />
+          
         </div>
        
         <div className="mt-8">
