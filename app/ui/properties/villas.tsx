@@ -52,7 +52,7 @@ displayAllVillas: Property[];
                         <p className={`${lusitana.className} mb-4 text-black text-xl md:text-2xl`}>
                             {property.location}
                         </p>
-                        <p  className={`${lusitana.className} mb-4 text-black text-xl md:text-2xl`}> KSH {property.price} </p>
+                       
                     </div>
 
                     

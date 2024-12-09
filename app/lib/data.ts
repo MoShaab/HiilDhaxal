@@ -82,7 +82,7 @@ export async function fetchPropertiesPages(query: string): Promise<number> {
   }
 }
 
-export async function fetchPropertyById(id: string): Promise<Property | undefined> {
+export async function fetchPropertyById(id: string){
   try {
     const data = await sql<Property>`
       SELECT *
