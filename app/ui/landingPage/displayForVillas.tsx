@@ -43,8 +43,8 @@ export default async function DisplayVillas({
 
     return (
         <div>
-            <h2 className="text-blue-500 text-3xl text-center mt-10">Ka bogo agab dhaqameed</h2>
-            <p className='font-bold text-black text-center text-3xl'>Villa for Rent & Sale</p>
+            <h2 className="text-blue-500 text-3xl text-center mt-10">Raadi Maansooyinka(Gabay)</h2>
+            <p className='font-bold text-black text-center text-3xl'>Murti iyo Madaddaalo</p>
 
             <div className="mt-10 ml-10 mr-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {displayVillas.map((property) => {
@@ -66,9 +66,7 @@ export default async function DisplayVillas({
                                     <p className={`${lusitana.className} mb-4 text-black text-xl md:text-2xl`}>
                                         {property.location}
                                     </p>
-                                    <p className={`${lusitana.className} mb-4 text-black text-xl md:text-2xl`}>
-                                        KSH {property.price}
-                                    </p>
+                                    
                                 </div>
                             </Link>
                         </div>

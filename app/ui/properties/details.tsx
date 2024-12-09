@@ -78,9 +78,7 @@ export default async function PropertyDetails({ property }: { property: Property
                 <p className={`${lusitana.className} mb-4 text-black text-xl md:text-2xl`}>
                     {property.location}
                 </p>
-                <p className={`${lusitana.className} mb-4 text-black text-xl md:text-2xl`}>
-                    KSH {property.price}
-                </p>
+                
             </div>
 
             <div className="flex justify-end gap-2 mt-4">
