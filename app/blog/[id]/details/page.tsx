@@ -1,17 +1,19 @@
 import { notFound } from 'next/navigation';
-import { fetchPropertyById } from '@/app/lib/data';
+import { fetchBlogById } from '@/app/lib/data';
 import { lusitana } from '@/app/ui/fonts';
-import PropertyDetails from '@/app/ui/properties/details';
+import FullBlogs from '@/app/ui/blogfull';
 import Link from 'next/link';
 import { signOut } from '@/auth';
 import { PowerIcon } from '@heroicons/react/24/outline';
 
 export default async function Page({ params }: { params: { id: string } }) {
-  const property = await fetchPropertyById(params.id);
+  const fullblogs = await fetchBlogById(params.id);
 
-  if (!property) {
+  if (!fullblogs) {
     notFound();
   }
+
+  console.log("full blog", fullblogs)
 
   return (
     <div className="w-full min-h-screen bg-gradient-to-b from-blue-100 via-white to-blue-50">
@@ -48,7 +50,7 @@ export default async function Page({ params }: { params: { id: string } }) {
 
         {/* Property Details */}
         <div className="mt-8">
-          <PropertyDetails property={property} />
+          <FullBlogs blogs ={fullblogs} />
         </div>
 
         {/* Footer with Somali Motifs */}

@@ -14,6 +14,13 @@ export type Property = {
   image_path: string;
 };
 
+export type Blog = {
+  id: string;
+  title: string;
+  content: string;
+  image_url: string;
+};
+
 export type Booking = {
   id: string;
   user_id: string;

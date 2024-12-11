@@ -4,8 +4,8 @@ import '@/app/ui/global.css';
 
 
 export const metadata: Metadata = {
-  title: "Silveroak",
-  description: "Developed by HomeX Technologies",
+  title: "HiddoJacayl",
+  description: "Developed by Shacab Technologies",
 };
 
 export default function RootLayout({

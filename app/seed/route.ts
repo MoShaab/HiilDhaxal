@@ -76,6 +76,24 @@ async function seedUsers() {
   // return insertedUsers;
 }
 
+async function seedBlog(){
+  const client= await connectToDb();
+  await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
+
+  await client.sql`
+
+  CREATE TABLE  IF NOT EXISTS blogs (
+    id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    content TEXT NOT NULL,
+    image_url JSONB,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  );
+  
+  
+  `;
+}
+
 async function seedBookings() {
   const client = await connectToDb();
   await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
@@ -139,6 +157,7 @@ export async function GET() {
     await seedProperties();
     await seedInviteCodes();
     await seedUsers();
+    await seedBlog();
     await seedBookings();
     await seedAgents(); // Add seeding for agents
     await client.sql`COMMIT`;

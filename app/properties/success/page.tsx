@@ -18,6 +18,9 @@ export default function Page(){
         </div>
         </Link>
 
+        {/* Add another record */}
+
+
         <Link href = '/properties/sell_property/create'>
         <div>
             

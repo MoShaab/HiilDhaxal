@@ -1,12 +1,12 @@
 import { sql } from '@vercel/postgres';
-import { Property, Agent } from './definitions';
+import { Property, Agent, Blog } from './definitions';
 
 export async function fetchFeaturedProperty(): Promise<Property[]> {
   try {
     console.log('Fetching properties data...');
     const result = await sql<Property>`
       SELECT * FROM properties
-      ORDER BY created_at ASC
+      ORDER BY RANDOM()
       LIMIT 6
     `;
     return result.rows;
@@ -25,7 +25,7 @@ export async function fetchDisplayVillas(): Promise<Property[]> {
             description ILIKE '%gabay%'
 
 
-      ORDER BY created_at ASC
+      ORDER BY RANDOM()
       LIMIT 3
     `;
     return result.rows;
@@ -99,6 +99,21 @@ export async function fetchPropertyById(id: string){
   }
 }
 
+
+export async function fetchBlogById(id: string){
+  try {
+    const data = await sql<Blog>`
+      SELECT *
+      FROM blogs
+      WHERE blogs.id = ${id};
+    `;
+    return data.rows;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch blog.');
+  }
+}
+
 export async function fetchDisplayAllVillas(): Promise<Property[]> {
   try {
     console.log('Fetching all villas data...');
@@ -106,11 +121,24 @@ export async function fetchDisplayAllVillas(): Promise<Property[]> {
       SELECT * FROM properties
       WHERE title ILIKE '%gabay%' OR
             description ILIKE '%gabay%'
-      ORDER BY created_at ASC
+      ORDER BY RANDOM()
     `;
     return result.rows;
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch the latest villa displays.');
+  }
+}
+
+// Fetch all blog posts
+export async function fetchBlogs() {
+  try {
+    const result = await sql`
+      SELECT * FROM blogs ORDER BY RANDOM()
+    `;
+    return result.rows;
+  } catch (error) {
+    console.error('Error fetching blogs:', error);
+    throw new Error('Failed to fetch blogs.');
   }
 }
