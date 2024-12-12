@@ -68,6 +68,27 @@ export async function fetchFilteredProperties(query: string, currentPage: number
   }
 }
 
+export async function fetchFilteredBlogs(query: string, currentPage: number): Promise<Blog[]> {
+  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+
+  try {
+    const blogs = await sql<Blog>`
+      SELECT * FROM blogs
+      WHERE
+        blogs.title ILIKE ${`%${query}%`} OR
+        blogs.content ILIKE ${`%${query}%`}
+        
+      ORDER BY blogs.created_at DESC
+      LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
+    `;
+    return blogs.rows;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch blogs.');
+  }
+}
+
+
 export async function fetchPropertiesPages(query: string): Promise<number> {
   try {
     const count = await sql`SELECT COUNT(*) FROM properties
@@ -84,6 +105,27 @@ export async function fetchPropertiesPages(query: string): Promise<number> {
     throw new Error('Failed to fetch properties.');
   }
 }
+
+
+
+
+export async function fetchBlogsPages(query: string): Promise<number> {
+  try {
+    const count = await sql`SELECT COUNT(*) FROM blogs
+      WHERE
+        blogs.title ILIKE ${`%${query}%`} OR
+        blogs.content ILIKE ${`%${query}%`}
+        
+    `;
+
+    const totalPages = Math.ceil(Number(count.rows[0].count) / ITEMS_PER_PAGE);
+    return totalPages;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch blogs.');
+  }
+}
+
 
 export async function fetchPropertyById(id: string){
   try {

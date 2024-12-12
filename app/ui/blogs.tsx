@@ -2,15 +2,17 @@ import Image from 'next/image';
 import { lusitana } from '@/app/ui/fonts';
 import { Blog } from '@/app/lib/definitions';
 import Link from 'next/link';
+import { fetchFilteredBlogs } from '../lib/data';
 
 export default async function DisplayBlogs({
-
-    blogs,
-    }:{
-    blogs: Blog[];
-    
-    }){
-        console.log('Blogs:', blogs);
+    query,
+    currentPage
+}: {
+    query: string;
+    currentPage: number;
+}){
+        
+        const blogs = await fetchFilteredBlogs(query, currentPage);
 
         const renderFile = (filePath: string) => {
             const fileExtension = filePath.split('.').pop()?.toLowerCase();
@@ -53,7 +55,7 @@ export default async function DisplayBlogs({
             <div className="mt-10 ml-10 mr-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {blogs.map((blog) => {
                 console.log('Image URL:', blog.image_url);
-                const images = blog.image_url;
+                const images = JSON.parse(blog.image_url);
                     const thumbnail = images[0]; 
                 
                 return(

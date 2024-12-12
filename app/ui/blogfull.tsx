@@ -2,45 +2,59 @@ import Image from 'next/image';
 import { UpdateListing, DeleteListing } from '@/app/ui/properties/buttons';
 import Link from 'next/link';
 import { lusitana } from '@/app/ui/fonts';
+import { notFound } from 'next/navigation';
 import { Blog } from '@/app/lib/definitions';
+import { fetchBlogs } from '../lib/data';
 
-export default async function FullBlogs({
-    blogs,
-}: {
-    blogs: Blog[];
-}) {
+export default async function PropertyDetails({ blogs }: { blogs: Blog }) {
+    if (!blogs) {
+        return notFound(); // Show a 404 page if the property is not found
+    }
 
-    
-   
+    // Parse media paths from JSON string
+    const mediaPaths = JSON.parse(blogs.image_url) as string[];
 
-    const renderFile = (filePath: string) => {
-        const fileExtension = filePath.split('.').pop()?.toLowerCase();
+    // Function to render different media types
+    const renderMedia = (mediaPath: string, index: number) => {
+        const fileExtension = mediaPath.split('.').pop()?.toLowerCase();
 
         if (['jpg', 'jpeg', 'png', 'gif'].includes(fileExtension!)) {
             return (
-                <Image
-                    src={filePath}
-                    alt="Blog Image"
-                    fill
-                    style={{ objectFit: 'cover' }}
-                    className="rounded-lg shadow-lg transition-transform duration-300 ease-in-out group-hover:scale-105"
-                />
+                <Link key={index} href={mediaPath}>
+                    <div className="relative w-full h-64 cursor-pointer overflow-hidden">
+                        <Image
+                            src={mediaPath}
+                            alt={blogs.title}
+                            fill
+                            style={{ objectFit: 'cover' }}
+                            className="rounded-lg shadow-lg transition-transform duration-300 ease-in-out transform hover:scale-125"
+                        />
+                    </div>
+                </Link>
             );
         } else if (fileExtension === 'pdf') {
             return (
-                <object data={filePath} type="application/pdf" width="100%" height="64">
-                    <p>PDF preview not available. <a href={filePath} target="_blank">Download the PDF</a>.</p>
-                </object>
+                <div key={index} className="relative w-full h-64 cursor-pointer overflow-hidden">
+                    <object data={mediaPath} type="application/pdf" width="100%" height="100%">
+                        <p>PDF preview not available. <a href={mediaPath} target="_blank">Download the PDF</a>.</p>
+                    </object>
+                </div>
             );
         } else if (['mp4', 'webm', 'ogg'].includes(fileExtension!)) {
             return (
-                <video width="100%" controls className="rounded-lg shadow-lg">
-                    <source src={filePath} type={`video/${fileExtension}`} />
-                    Your browser does not support the video tag.
-                </video>
+                <div key={index} className="relative w-full h-64 cursor-pointer overflow-hidden">
+                    <video width="100%" height="100%" controls className="rounded-lg shadow-lg">
+                        <source src={mediaPath} type={`video/${fileExtension}`} />
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
             );
         } else {
-            return <p>Unsupported file type.</p>;
+            return (
+                <div key={index} className="relative w-full h-64 cursor-pointer overflow-hidden">
+                    <p>Unsupported file type.</p>
+                </div>
+            );
         }
     };
 
@@ -49,40 +63,26 @@ export default async function FullBlogs({
             <div className="flex w-full flex-col px-3 py-4 md:px-2"></div>
 
             <h2 className={`${lusitana.className} text-black text-3xl text-center`}>Kaalay iska arag!</h2>
-            <p className='font-bold text-black text-center text-3xl'>Raadi oo ka bogo kaydkeenna</p>
 
-            <div className="mt-10 ml-10 mr-10 ">
-                {blogs.map((blog) => {
-                    const images = blog.image_url;
-                    const thumbnail = images[0]; // Get the first image as a thumbnail
+            <div className="mt-10 ml-10 mr-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                {/* Render each media item as a clickable thumbnail */}
+                {mediaPaths.map((media, i) => renderMedia(media, i))}
+            </div>
 
-                    return (
-                        <div key={blog.id}>
-                            <Link href={`/blog/${blog.id}/details`}>
-                                <div className="block group">
-                                    <div className="relative">
-                                        {renderFile(thumbnail)}
-                                    </div>
-                                    <div className="mt-4 text-center">
-                                        <h3 className="text-lg font-bold text-gray-800 group-hover:text-blue-500">
-                                            {blog.title}
-                                        </h3>
-                                        <p className= {`${lusitana.className} text-md text-2xl text-black`}>
-                                            {blog.content}
-                                        </p>
-                                        
-                                      
-                                    </div>
-                                </div>
-                            </Link>
+            <div className="mt-4 text-center">
+                <h3 className="text-lg font-semibold text-gray-800 group-hover:text-blue-500">
+                    {blogs.title}
+                </h3>
+                <p className="text-md text-black">
+                    {blogs.content}
+                </p>
+               
+                
+            </div>
 
-                            <div className="flex justify-end gap-2">
-                                <UpdateListing id={blog.id} />
-                                <DeleteListing id={blog.id} />
-                            </div>
-                        </div>
-                    );
-                })}
+            <div className="flex justify-end gap-2 mt-4">
+                <UpdateListing id={blogs.id} />
+                <DeleteListing id={blogs.id} />
             </div>
         </div>
     );
