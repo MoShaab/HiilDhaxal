@@ -4,15 +4,14 @@ import Link from 'next/link';
 import { lusitana } from '@/app/ui/fonts';
 import { notFound } from 'next/navigation';
 import { Blog } from '@/app/lib/definitions';
-import { fetchBlogs } from '../lib/data';
 
-export default async function PropertyDetails({ blogs }: { blogs: Blog }) {
+export default async function FullBlogs({ blogs }: { blogs: Blog }) {
     if (!blogs) {
         return notFound(); // Show a 404 page if the property is not found
     }
 
-    // Parse media paths from JSON string
-    const mediaPaths = blogs.image_url;
+    // Directly use the array of image URLs
+    const mediaPaths: string[] = Array.isArray(blogs.image_url) ? blogs.image_url : [];
 
     // Function to render different media types
     const renderMedia = (mediaPath: string, index: number) => {
@@ -76,8 +75,6 @@ export default async function PropertyDetails({ blogs }: { blogs: Blog }) {
                 <p className="text-md text-black">
                     {blogs.content}
                 </p>
-               
-                
             </div>
 
             <div className="flex justify-end gap-2 mt-4">
