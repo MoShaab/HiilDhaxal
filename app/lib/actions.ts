@@ -53,6 +53,11 @@ export async function createBlog(formData: FormData) {
     content: formData.get('content'),
     images: formData.getAll('images') as File[],
   });
+  console.log('Images:', images);
+  images.forEach((image, index) => {
+    console.log(`Image ${index + 1}:`, image);
+    console.log(`Type: ${image.constructor.name}, Name: ${image.name}, Size: ${image.size}`);
+  });
 
   const imageUrls: string[] = [];
 

@@ -12,7 +12,7 @@ export default async function PropertyDetails({ blogs }: { blogs: Blog }) {
     }
 
     // Parse media paths from JSON string
-    const mediaPaths = JSON.parse(blogs.image_url) as string[];
+    const mediaPaths = blogs.image_url;
 
     // Function to render different media types
     const renderMedia = (mediaPath: string, index: number) => {
