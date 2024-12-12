@@ -107,7 +107,7 @@ export async function fetchBlogById(id: string){
       FROM blogs
       WHERE blogs.id = ${id};
     `;
-    return data.rows;
+    return data.rows[0];
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch blog.');
