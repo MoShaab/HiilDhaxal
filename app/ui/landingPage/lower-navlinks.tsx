@@ -7,7 +7,8 @@ import {
     UserCircleIcon ,
     HomeIcon,
     UserPlusIcon,
-    DocumentTextIcon
+    DocumentTextIcon,
+    HeartIcon
 } from '@heroicons/react/24/outline';
 import { signOut } from '@/auth';
 import { PowerIcon } from '@heroicons/react/24/outline';
@@ -16,7 +17,7 @@ const links = [
     {name: 'Qormo', href: '/blog', icon: DocumentTextIcon},
     { name: 'Admin Log In', href: '/login', icon: UserCircleIcon  },
     { name: 'Create Listing', href: '/properties/sell_property/create', icon: HomeIcon },
-    {name: 'Sign Up', href: '/signup', icon: UserPlusIcon}
+    {name: 'Taageer Mashruucaan', href: 'https://www.paypal.com/donate/?hosted_button_id=RC3WBWZ9GNTSU', icon: HeartIcon}
     
 ];
 
