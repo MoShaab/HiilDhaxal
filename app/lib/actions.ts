@@ -7,6 +7,8 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { randomUUID } from 'crypto';
 import bcrypt from 'bcrypt';
+import { signIn } from '@/auth';
+import { AuthError } from 'next-auth';
 
 const endpoint = process.env.R2_ENDPOINT ?? '';
 
@@ -53,11 +55,7 @@ export async function createBlog(formData: FormData) {
     content: formData.get('content'),
     images: formData.getAll('images') as File[],
   });
-  console.log('Images:', images);
-  images.forEach((image, index) => {
-    console.log(`Image ${index + 1}:`, image);
-    console.log(`Type: ${image.constructor.name}, Name: ${image.name}, Size: ${image.size}`);
-  });
+ 
 
   const imageUrls: string[] = [];
 
@@ -184,6 +182,33 @@ export async function deleteListing(id: string) {
     console.error('Error occurred while deleting the listing:', error);
     throw new Error('Failed to delete listing.');
   }
+}
+
+
+export async function authenticate(
+  prevState: string | undefined,
+  formData: FormData,
+) {
+  try {
+    await signIn('credentials', formData);
+    
+
+  
+  } catch (error) {
+    if (error instanceof AuthError) {
+      switch (error.type) {
+        case 'CredentialsSignin':
+          return 'Invalid credentials.';
+        default:
+          return 'Something went wrong.';
+      }
+    }
+    throw error;
+  }
+
+  
+  revalidatePath('/login');
+  redirect('/properties');
 }
 
 const SignUpSchema = z.object({
