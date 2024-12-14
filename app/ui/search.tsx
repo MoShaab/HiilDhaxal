@@ -17,7 +17,7 @@ export default function Search({ placeholder }: { placeholder: string }) {
             params.delete('query');
         }
 
-        // Redirect to the property listings page with the search query
+        // Redirect to the listings page with the search query
         replace(`/properties?${params.toString()}`);
     }, 300);
 
