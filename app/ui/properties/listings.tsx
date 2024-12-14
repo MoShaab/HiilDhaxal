@@ -48,7 +48,7 @@ export default async function PropertyListings({
         <div>
             <div className="flex w-full flex-col px-3 py-4 md:px-2"></div>
 
-            <h2 className={`${lusitana.className} text-black text-3xl text-center`}>Kaalay iska arag!</h2>
+            <h2 className={`${lusitana.className} text-black text-3xl text-center`}>Aan ilaalinno dhaxalka Soomaaliyeed!</h2>
             <p className='font-bold text-black text-center text-3xl'>Raadi oo ka bogo kaydkeenna</p>
 
             <div className="mt-10 ml-10 mr-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

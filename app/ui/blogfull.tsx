@@ -61,7 +61,7 @@ export default async function FullBlogs({ blogs }: { blogs: Blog }) {
         <div>
             <div className="flex w-full flex-col px-3 py-4 md:px-2"></div>
 
-            <h2 className={`${lusitana.className} text-black text-3xl text-center`}>Kaalay iska arag!</h2>
+            <h2 className={`${lusitana.className} text-black text-3xl text-center`}>Aan ilaalinno dhaxalka Soomaaliyeed!</h2>
 
             <div className="mt-10 ml-10 mr-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 {/* Render each media item as a clickable thumbnail */}
