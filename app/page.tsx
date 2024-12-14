@@ -30,9 +30,9 @@ export default async function Page(){
       <DisplayFromDb featuredProperty = {featuredProperty} />
       <DisplayVillas displayVillas = {displayVillas} />
       <LetUsKnow />
-      <DisplayAgents featuredAgents={featuredAgents} />
+      {/* <DisplayAgents featuredAgents={featuredAgents} />
       <Achieved />
-      <TestimonialSection />
+      <TestimonialSection /> */}
       <UpperNav />
       
     
