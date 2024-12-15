@@ -10,7 +10,7 @@ export default async function Page() {
  
   return (
     
-    <main className = "min-h-screen bg-gray-100 ">
+    <main className = "flex min-h-screen bg-gray-100 ">
               <form
         action={async () => {
             'use server';

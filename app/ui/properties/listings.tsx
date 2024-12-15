@@ -16,7 +16,7 @@ export default async function PropertyListings({
     const renderFile = (filePath: string) => {
         const fileExtension = filePath.split('.').pop()?.toLowerCase();
 
-        if (['jpg', 'jpeg', 'png', 'gif'].includes(fileExtension!)) {
+        if (['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(fileExtension!)) {
             return (
                 <Image
                     src={filePath}
