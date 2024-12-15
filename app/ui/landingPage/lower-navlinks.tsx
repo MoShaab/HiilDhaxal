@@ -7,8 +7,7 @@ import {
     DocumentTextIcon,
     HeartIcon
 } from '@heroicons/react/24/outline';
-import { signOut } from '@/auth';
-import { PowerIcon } from '@heroicons/react/24/outline';
+
 
 const links = [
     { name: 'Qormo', href: '/blog', icon: DocumentTextIcon },
@@ -25,17 +24,7 @@ export default function LowerNav() {
                 <Image src="/logo.png" width={80} height={80} alt="Logo" />
             </Link>
 
-            <form
-                action={async () => {
-                    'use server';
-                    await signOut();
-                }}
-            >
-                <button className="flex h-[35px] md:h-[40px] items-center justify-center gap-2 rounded-md bg-gray-400 p-3 text-sm font-small hover:bg-sky-300 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3">
-                    <PowerIcon className="w-6" />
-                    <div className="hidden md:block">Sign Out</div>
-                </button>
-            </form>
+           
 
             {/* Links displayed on desktop */}
             <div className="hidden md:flex space-x-3">
