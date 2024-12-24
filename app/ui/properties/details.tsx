@@ -17,7 +17,7 @@ export default async function PropertyDetails({ property }: { property: Property
     const renderMedia = (mediaPath: string, index: number) => {
         const fileExtension = mediaPath.split('.').pop()?.toLowerCase();
 
-        if (['jpg', 'jpeg', 'png', 'gif'].includes(fileExtension!)) {
+        if (['jpg', 'jpeg', 'png', 'webp', 'gif'].includes(fileExtension!)) {
             return (
                 <Link key={index} href={mediaPath}>
                     <div className="relative w-full h-64 cursor-pointer overflow-hidden">
