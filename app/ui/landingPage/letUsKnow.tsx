@@ -26,13 +26,13 @@ export default function LetUsKnow() {
 
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white">
           <h1 className={`${inter.className} text-xl md:text-3xl font-bold`}>
-            Didn&apos;t Find What You Were Looking For?
+            Maadan  helin waxaad raadinaysay?
           </h1>
           <p className={`${lusitana.className} text-3xl md:text-3xl`}>
-            Don&apos;t fret! We got you covered.
+          Ha walwalin. Waa laguu soo habaynaa!😂
           </p>
             <div className="flex justify-center">
-                <div className =  "p-8 mt-20 bg-blue-700 hover:bg-gray-500 text-white font-bold py-2 rounded">  Let Us Know  </div>
+                <div className =  "p-8 mt-20 bg-blue-700 hover:bg-gray-500 text-white font-bold py-2 rounded">  Noo Sheeg  </div>
             </div>
         </div>3
       </main>
