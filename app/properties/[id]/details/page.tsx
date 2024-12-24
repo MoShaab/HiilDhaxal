@@ -7,6 +7,7 @@ import {
   ArrowLeftIcon
 } from '@heroicons/react/24/outline';
 
+export const revalidate = 0;
 export default async function Page({ params }: { params: { id: string } }) {
   const property = await fetchPropertyById(params.id);
 
