@@ -13,7 +13,7 @@ export default async function DisplayVillas({
     const renderFile = (filePath: string) => {
         const fileExtension = filePath.split('.').pop()?.toLowerCase();
 
-        if (['jpg', 'jpeg', 'png', 'gif'].includes(fileExtension!)) {
+        if (['jpg', 'jpeg', 'png','webp', 'gif'].includes(fileExtension!)) {
             return (
                 <Image
                     src={filePath}
