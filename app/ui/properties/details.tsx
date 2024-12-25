@@ -7,16 +7,18 @@ import { lusitana } from '@/app/ui/fonts';
 import { notFound } from 'next/navigation';
 import { Property } from '@/app/lib/definitions';
 
+
 export default function PropertyDetails({ property }: { property: Property }) {
+    // Ensure hooks are called unconditionally
+    const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+    const [currentIndex, setCurrentIndex] = useState(0);
+
     if (!property) {
         return notFound(); // Show a 404 page if the property is not found
     }
 
     // Parse media paths from JSON string
     const mediaPaths = JSON.parse(property.image_path) as string[];
-
-    const [isLightboxOpen, setIsLightboxOpen] = useState(false);
-    const [currentIndex, setCurrentIndex] = useState(0);
 
     const openLightbox = (index: number) => {
         setCurrentIndex(index);
@@ -49,8 +51,7 @@ export default function PropertyDetails({ property }: { property: Property }) {
             );
         }
 
-        // Handle unsupported media
-        return <p key={index}>Unsupported media type.</p>;
+        return <p key={index}>Unsupported media type.</p>; // Handle unsupported media
     };
 
     return (
