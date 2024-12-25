@@ -32,7 +32,7 @@ export default function LetUsKnow() {
           Ha walwalin. Waa laguu soo habaynaa!😂
           </p>
             <div className="flex justify-center">
-                <div className =  "p-8 mt-20 bg-blue-700 hover:bg-gray-500 text-white font-bold py-2 rounded">  Noo Sheeg  </div>
+                <div className =  "p-8 mt-20 bg-blue-700 hover:bg-gray-500 text-white font-bold py-2 rounded">  Noo Sheeg aynnu ka howl galle </div>
             </div>
         </div>3
       </main>
