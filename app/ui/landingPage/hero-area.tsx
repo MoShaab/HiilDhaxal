@@ -11,7 +11,7 @@ export default  function HeroArea(){
           Hoyga Hiddaha Soomaaliyeed
         </h1>
         <p className="mt-4 text-lg sm:text-xl lg:text-2xl text-gray-300">
-          Wax badan ka ogow sooyaalikii taariiikheed ee Soomaalida.
+          Wax badan ka ogow sooyaalkii taariiikheed ee Soomaalida.
         </p>
         <div className="mt-8">
           <a
