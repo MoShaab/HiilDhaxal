@@ -72,7 +72,8 @@ export default function PropertyDetails({ property }: { property: Property }) {
                     </button>
                     <button
                         onClick={goToPrev}
-                        className="absolute left-4 text-white text-2xl"
+                        className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white text-2xl focus:outline-none"
+                        style={{ zIndex: 60 }}
                     >
                         ◀
                     </button>
@@ -87,7 +88,8 @@ export default function PropertyDetails({ property }: { property: Property }) {
                     </div>
                     <button
                         onClick={goToNext}
-                        className="absolute right-4 text-white text-2xl"
+                        className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white text-2xl focus:outline-none"
+                        style={{ zIndex: 60 }}
                     >
                         ▶
                     </button>
