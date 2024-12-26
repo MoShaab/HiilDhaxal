@@ -5,10 +5,22 @@ import { lusitana } from '@/app/ui/fonts';
 import { notFound } from 'next/navigation';
 import { Blog } from '@/app/lib/definitions';
 
+
 export default async function FullBlogs({ blogs }: { blogs: Blog }) {
     if (!blogs) {
         return notFound(); // Show a 404 page if the property is not found
     }
+
+    function RenderBlogContent({ content }) {
+        // Replace newlines with <br> for HTML rendering
+        const formattedContent = content.replace(/\n/g, '<br />');
+      
+        return (
+          <article className="prose mx-auto">
+            <div dangerouslySetInnerHTML={{ __html: formattedContent }} />
+          </article>
+        );
+      }
 
     // Directly use the array of image URLs
     const mediaPaths: string[] = Array.isArray(blogs.image_url) ? blogs.image_url : [];
@@ -72,9 +84,9 @@ export default async function FullBlogs({ blogs }: { blogs: Blog }) {
                 <h3 className="text-lg font-semibold text-gray-800 group-hover:text-blue-500">
                     {blogs.title}
                 </h3>
-                <p className="text-md text-black">
-                    {blogs.content}
-                </p>
+                <article className="prose mx-auto">
+                    <RenderBlogContent content={blogs.content} />
+                </article>
             </div>
 
             <div className="flex justify-end gap-2 mt-4">

@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { lusitana, inter } from '@/app/ui/fonts';
+import Link from '@/node_modules/next/link';
 
 export default function LetUsKnow() {
   return (
@@ -31,10 +32,12 @@ export default function LetUsKnow() {
           <p className={`${lusitana.className} text-3xl md:text-3xl`}>
           Ha walwalin. Waa laguu soo habaynaa!😂
           </p>
+          <Link href = '#Contact'>
             <div className="flex justify-center">
-                <div className =  "p-8 mt-20 bg-blue-700 hover:bg-gray-500 text-white font-bold py-2 rounded">  Noo Sheeg aynnu ka howl galle </div>
+                <div className =  "p-8 mt-20 bg-blue-700 hover:bg-gray-500 text-white font-bold py-2 rounded">  Noo Sheeg aynnu ka howl gallee </div>
             </div>
-        </div>3
+            </Link>
+        </div>
       </main>
     </>
   );

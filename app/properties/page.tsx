@@ -5,8 +5,10 @@ import PropertyListings from "@/app/ui/properties/listings";
 import { fetchPropertiesPages } from '@/app/lib/data';
 import Link from 'next/link';
 import {
+  HomeIcon,
   ArrowLeftIcon
 } from '@heroicons/react/24/outline';
+
 
 
 export const revalidate = 0;
@@ -34,10 +36,28 @@ export default async function Page({
           </h1>
 
           {/* Navigation Links */}
+
+          <div className="mt-4">
+            <Link href="/">
+              <button>
+              <HomeIcon className = "text-gray-900 w-10" />
+              <span className="gap-2 rounded px-4 py-2 text-gray-900 text-sm md:text-lg font-medium hover:bg-blue-600">
+              Guriga aad
+              
+              </span>
+
+              </button>
+            
+              
+            </Link>
+
+           
+          </div>
+
           <div className="mt-4">
             <Link href="/">
             <ArrowLeftIcon className = "text-gray-900 w-10" />
-              <span className="gap-2  px-4 py-2 text-gray-900 text-sm md:text-lg font-medium hover:bg-blue-600">
+              <span className="gap-2 rounded px-4 py-2 text-gray-900 text-sm md:text-lg font-medium hover:bg-blue-600">
               Dib u laabo
               
               </span>

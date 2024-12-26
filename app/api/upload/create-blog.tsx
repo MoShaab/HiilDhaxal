@@ -9,10 +9,13 @@ import { createBlog } from '@/app/lib/actions';
 export default function Form() {
   return (
     <form action={createBlog} className="max-w-md mx-auto text-black">
-      <div className="rounded-md bg-gray-50 p-4 md:p-6">
+      <div className="rounded-md bg-gray-50 p-4 md:p-6 shadow-md">
         {/* Blog Title */}
-        <div className="mb-4">
-          <label htmlFor="title" className="mb-2 block text-lg text-3xl font-medium">
+        <div className="mb-6">
+          <label
+            htmlFor="title"
+            className="mb-2 block text-lg text-gray-700 font-medium"
+          >
             Blog Title
           </label>
           <div className="relative">
@@ -21,15 +24,18 @@ export default function Form() {
               name="title"
               type="text"
               placeholder="Enter blog title"
-              className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-lg text-3xl outline-2 placeholder:text-gray-500"
+              className="peer block w-full rounded-md border border-gray-300 py-3 pl-12 text-lg text-gray-700 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
             />
-            <PencilIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500" />
+            <PencilIcon className="pointer-events-none absolute left-3 top-1/2 h-6 w-6 -translate-y-1/2 text-gray-400" />
           </div>
         </div>
 
         {/* Blog Content */}
-        <div className="mb-4">
-          <label htmlFor="content" className="mb-2 block text-lg text-3xl font-medium">
+        <div className="mb-6">
+          <label
+            htmlFor="content"
+            className="mb-2 block text-lg text-gray-700 font-medium"
+          >
             Blog Content
           </label>
           <div className="relative">
@@ -37,15 +43,18 @@ export default function Form() {
               id="content"
               name="content"
               placeholder="Enter blog content"
-              className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-lg text-3xl outline-2 placeholder:text-gray-500"
+              className="peer block w-full rounded-md border border-gray-300 py-3 pl-12 text-lg text-gray-700 placeholder:text-gray-500 min-h-[200px] resize-y focus:border-blue-500 focus:ring-blue-500"
             />
-            <DocumentTextIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500" />
+            <DocumentTextIcon className="pointer-events-none absolute left-3 top-3 h-6 w-6 text-gray-400" />
           </div>
         </div>
 
         {/* Blog Image */}
-        <div className="mb-4">
-          <label htmlFor="image" className="mb-2 block text-lg text-3xl text-gray-700 font-medium">
+        <div className="mb-6">
+          <label
+            htmlFor="image"
+            className="mb-2 block text-lg text-gray-700 font-medium"
+          >
             Upload Blog Image
           </label>
           <div className="relative">
@@ -54,7 +63,7 @@ export default function Form() {
               name="images"
               type="file"
               multiple
-              className="block w-full text-lg text-3xl text-gray-500 file:mr-4 file:rounded-md file:border-0 file:bg-gray-200 file:py-2 file:px-4 file:text-sm file:font-semibold file:text-gray-700 hover:file:bg-gray-300"
+              className="block w-full rounded-md border border-gray-300 bg-gray-100 py-3 px-4 text-gray-500 file:mr-4 file:rounded-lg file:border-0 file:bg-blue-50 file:px-4 file:py-2 file:text-sm file:font-medium file:text-blue-600 hover:file:bg-blue-100 focus:border-blue-500 focus:ring-blue-500"
             />
           </div>
         </div>
@@ -63,7 +72,7 @@ export default function Form() {
       <div className="mt-6 flex justify-end gap-4">
         <Link
           href="/properties"
-          className="flex h-10 items-center rounded-lg bg-gray-100 px-4 text-lg text-3xl font-medium text-gray-600 transition-colors hover:bg-gray-200"
+          className="flex h-10 items-center justify-center rounded-lg bg-gray-100 px-4 text-gray-600 font-medium hover:bg-gray-200"
         >
           Cancel
         </Link>
