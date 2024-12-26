@@ -5,13 +5,18 @@ import { lusitana } from '@/app/ui/fonts';
 import { notFound } from 'next/navigation';
 import { Blog } from '@/app/lib/definitions';
 
+type BlogContentProps = {
+    content: string;
+};
+
 
 export default async function FullBlogs({ blogs }: { blogs: Blog }) {
     if (!blogs) {
         return notFound(); // Show a 404 page if the property is not found
     }
+   
 
-    function RenderBlogContent({ content }) {
+    function RenderBlogContent({content}: BlogContentProps) {
         // Replace newlines with <br> for HTML rendering
         const formattedContent = content.replace(/\n/g, '<br />');
       
