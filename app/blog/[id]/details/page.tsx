@@ -47,18 +47,7 @@ export default async function Page({ params }: { params: { id: string } }) {
            
           </div>
 
-          <div className="mt-4">
-            <Link href="/">
-            <ArrowLeftIcon className = "text-gray-900 w-10" />
-              <span className="gap-2 rounded px-4 py-2 text-gray-900 text-sm md:text-lg font-medium hover:bg-blue-600">
-              Dib u laabo
-              
-              </span>
-              
-            </Link>
-
-           
-          </div>
+          
         </div>
 
         {/* Property Details */}

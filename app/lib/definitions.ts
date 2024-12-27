@@ -19,6 +19,7 @@ export type Blog = {
   title: string;
   content: string;
   image_url: string;
+  created_at: string;
 };
 
 export type Booking = {
