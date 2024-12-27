@@ -144,7 +144,7 @@ export default function FullBlogs({ blogs }: { blogs: Blog }) {
         >
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
         </svg>
-        Go Back to Blog
+        Ku Laabo Qormo
       </Link>
 
       <header className="mb-12">
@@ -159,7 +159,7 @@ export default function FullBlogs({ blogs }: { blogs: Blog }) {
           </div>
           <div className="flex items-center mr-6 mb-2">
             <ClockIcon className="w-5 h-5 mr-2" />
-            <span>Reading {readingTime} minutes</span>
+            <span>{readingTime} daqiiqo aqris</span>
           </div>
         </div>
       </header>
@@ -175,7 +175,7 @@ export default function FullBlogs({ blogs }: { blogs: Blog }) {
       </div>
 
       <div className="mt-16 pt-8 border-t border-gray-200">
-        <h2 className="text-2xl font-bold text-gray-900 mb-6">Share this Post</h2>
+        <h2 className="text-2xl font-bold text-gray-900 mb-6">La Wadaag Maqaalkan</h2>
         <ShareButtons title={blogs.title} />
       </div>
 
