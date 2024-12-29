@@ -75,8 +75,8 @@ export default async function DisplayVillas({
             </div>
 
             <div className="flex justify-center">
-                <Link href="/properties/villas">
-                    <div className="p-8 mb-10 bg-gray-500 hover:bg-blue-700 text-white font-bold py-2 rounded">Wax badan soo eeg</div>
+                <Link href="/properties/murti-gabay">
+                    <button className="p-8 mb-10 hover:bg-red text-black font-bold py-2 rounded">Wax badan soo eeg</button>
                 </Link>
             </div>
         </div>

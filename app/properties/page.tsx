@@ -1,3 +1,4 @@
+
 import Pagination from '@/app/ui/properties/pagination';
 import Search from '@/app/ui/search';
 import { lusitana } from '@/app/ui/fonts';
@@ -8,6 +9,8 @@ import {
   HomeIcon,
   ArrowLeftIcon
 } from '@heroicons/react/24/outline';
+import Navigator from '../ui/properties/navigation-events';
+
 
 
 
@@ -20,6 +23,7 @@ export default async function Page({
     page?: string;
   };
 }) {
+  
   const query = searchParams?.query || '';
   const currentPage = Number(searchParams?.page) || 1;
   const totalPages = await fetchPropertiesPages(query);
@@ -27,12 +31,12 @@ export default async function Page({
   return (
     <div className="w-full min-h-screen bg-gradient-to-b from-blue-100 via-white to-blue-50">
       <div className="container mx-auto px-4 py-6 md:py-10">
-        <div className="flex flex-col md:flex-row md:items-center justify-between">
+        <div className=" mt-15 flex flex-col md:flex-row md:items-center justify-between">
           {/* Header */}
           <h1
-            className={`${lusitana.className} text-gray-900 text-3xl md:text-4xl font-bold border-b-4 border-blue-400 pb-2 text-center md:text-left`}
+            className={`${lusitana.className} text-grey-900 text-3xl md:text-4xl font-bold border-b-4 border-red pb-2 text-center md:text-left`}
           >
-            Hoyga Hiddaha Soomaaliyeed
+            Ilaalinta Dhaxalka Soomaaliyeed.
           </h1>
 
           {/* Navigation Links */}
@@ -55,14 +59,14 @@ export default async function Page({
           </div>
 
           <div className="mt-4">
-            <Link href="/">
+            <Navigator />
+
+         
+            {/* <Link href="/">
             <ArrowLeftIcon className = "text-gray-900 w-10" />
-              <span className="gap-2 rounded px-4 py-2 text-gray-900 text-sm md:text-lg font-medium hover:bg-blue-600">
-              Dib u laabo
               
-              </span>
               
-            </Link>
+            </Link> */}
 
            
           </div>
@@ -84,11 +88,8 @@ export default async function Page({
         </div>
 
         {/* Footer with Somali Motifs */}
-        <div className="mt-16 border-t pt-6 text-center text-sm text-gray-700">
-          <p className="font-semibold">
-            “Hiddaha Soomaaliyeed waa ilbaxnimo aan dhamaan.”
-          </p>
-          <p className="text-gray-500">Created with is-xilqaan❤️ by Mohamed Shacab</p>
+        <div className="mt-6 border-t pt-6 text-center text-sm text-gray-700">
+          
         </div>
       </div>
     </div>

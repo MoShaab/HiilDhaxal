@@ -35,7 +35,7 @@ export default async function Page({
           <h1
             className={`${lusitana.className} text-gray-900 text-3xl md:text-4xl font-bold border-b-4 border-blue-400 pb-2 text-center md:text-left`}
           >
-            Hoyga Hiddaha Soomaaliyeed
+            Taarikhdaan Adigaa Iskaleh.
           </h1>
 
            {/* Navigation Links */}
@@ -90,11 +90,8 @@ export default async function Page({
         </div>
 
         {/* Footer with Somali Motifs */}
-        <div className="mt-16 border-t pt-6 text-center text-sm text-gray-700">
-          <p className="font-semibold">
-            “Hiddaha Soomaaliyeed waa ilbaxnimo aan dhamaan.”
-          </p>
-          <p className="text-gray-500">Created with is-xilqaan❤️ by Mohamed Shacab</p>
+        <div className="mt-6 border-t pt-6 text-center text-sm text-gray-700">
+          
         </div>
       </div>
     </div>

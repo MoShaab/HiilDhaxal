@@ -8,7 +8,15 @@ import LetUsKnow from './ui/landingPage/letUsKnow';
 import DisplayAgents from './ui/landingPage/agents';
 import Achieved from './ui/landingPage/achievements';
 import TestimonialSection from './ui/landingPage/testmonials';
-import {fetchFeaturedProperty, fetchDisplayVillas, fetchFeaturedAgents} from '@/app/lib/data';
+import Banner from './ui/landingPage/components/Banner/index';
+import Cook from './ui/landingPage/components/Cook/index';
+import Gallery from './ui/landingPage/components/Gallery/index';
+import Newsletter from './ui/landingPage/components/Newsletter/Newsletter';
+import Features from './ui/landingPage/components/Work/index';
+import Expert from './ui/landingPage/components/Expert/index';
+import Contactusform from './ui/landingPage/components/Navbar/Contactus';
+
+import {fetchFeaturedProperty, fetchDisplayVillas} from '@/app/lib/data';
 
 
 
@@ -17,14 +25,21 @@ export const revalidate = 0;
 export default async function Page(){
   const featuredProperty = await fetchFeaturedProperty();
   const displayVillas = await fetchDisplayVillas();
-  const featuredAgents = await fetchFeaturedAgents();
+  // const featuredAgents = await fetchFeaturedAgents();
   return (
     <main>
-    <div className="min-h-screen bg-gray-100">
+    
+
+      <Banner />
+      <Features />
+      <Cook />
+      <Expert />
+      <Gallery />
+      
      
      
-      <LowerNav />
-      <HeroArea />
+      {/* <LowerNav /> */}
+      {/* <HeroArea /> */}
 
       {/* {<DisplayProperty/>} */}
       <DisplayFromDb featuredProperty = {featuredProperty} />
@@ -33,11 +48,15 @@ export default async function Page(){
       {/* <DisplayAgents featuredAgents={featuredAgents} />
       <Achieved />
       <TestimonialSection /> */}
-      <UpperNav />
+      <Newsletter />
+      {/* <UpperNav /> */}
+      {/* <Contactusform /> */}
+
+
       
     
   
-    </div>
+    
     </main>
   );
 };

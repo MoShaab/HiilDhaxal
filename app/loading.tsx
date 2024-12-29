@@ -1,28 +1,23 @@
-export default function Loading() {
-    return (
-      <div className="w-full min-h-screen bg-gradient-to-b from-blue-100 via-white to-blue-50">
-        <div className="container mx-auto px-4 py-6 md:py-10 animate-pulse">
-          {/* Header */}
-          <div className="h-10 w-1/3 bg-gray-300 rounded"></div>
-  
-          {/* Navigation Links */}
-          <div className="flex gap-4 mt-4">
-            <div className="h-10 w-36 bg-gray-300 rounded"></div>
-            <div className="h-10 w-24 bg-gray-300 rounded"></div>
-          </div>
-  
-          {/* Content Skeleton */}
-          <div className="mt-8">
-            <div className="h-64 w-full bg-gray-300 rounded-lg"></div>
-          </div>
-  
-          {/* Footer */}
-          <div className="mt-16">
-            <div className="h-5 w-1/2 bg-gray-300 rounded mx-auto"></div>
-            <div className="h-5 w-1/3 bg-gray-300 rounded mx-auto mt-2"></div>
-          </div>
+// components/Loading.js
+
+import React from 'react';
+import styles from '@/app/ui/home.module.css';
+
+const Loading = () => {
+  // Number of grid items to display (you can adjust this based on your needs)
+  const items = new Array(12).fill(true);
+
+  return (
+    <div className={styles.loadingContainer}>
+      {items.map((_, index) => (
+        <div key={index} className={styles.loadingItem}>
+          <div className={styles.loadingImage}></div>
+          <div className={`${styles.loadingText} ${styles.loadingTextTop}`}></div>
+          <div className={`${styles.loadingText} ${styles.loadingTextBottom}`}></div>
         </div>
-      </div>
-    );
-  }
-  
+      ))}
+    </div>
+  );
+};
+
+export default Loading;

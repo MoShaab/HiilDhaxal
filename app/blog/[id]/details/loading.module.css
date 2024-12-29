@@ -1,0 +1,50 @@
+/* styles/home.module.css */
+
+.loadingContainer {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.loadingItem {
+  width: 100%;
+  max-width: 800px; /* Limit the width for better readability */
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.loadingImage {
+  width: 100%;
+  height: 300px; /* Adjust the image height as needed */
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite linear;
+  border-radius: 8px;
+}
+
+.loadingText {
+  width: 100%;
+  height: 18px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite linear;
+  border-radius: 4px;
+}
+
+.loadingText + .loadingText {
+  margin-top: 12px; /* Add spacing between lines of text */
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}

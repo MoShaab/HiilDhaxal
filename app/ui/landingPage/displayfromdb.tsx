@@ -46,9 +46,7 @@ export default async function DisplayFromDb({
 
         return(
             <div>
-            <h2 className="text-blue-500 text-center text-3xl mt-10">Milicso Adeegyadeenna</h2>
-        
-            <p className='font-bold text-black text-center text-3xl'>Agabyo laguu soo xulay</p>
+            <h2 className="text-blue-500 text-center text-3xl mt-10">Agabyo laguu soo xulay</h2>
 
             <div className="mt-10 ml-10 mr-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {featuredProperty.map((property) => {

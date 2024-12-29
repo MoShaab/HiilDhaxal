@@ -6,7 +6,7 @@ export async function fetchFeaturedProperty(): Promise<Property[]> {
     console.log('Fetching properties data...');
     const result = await sql<Property>`
       SELECT * FROM properties
-      ORDER BY RANDOM()
+      ORDER BY properties.created_at DESC
       LIMIT 6
     `;
     return result.rows;
@@ -21,11 +21,20 @@ export async function fetchDisplayVillas(): Promise<Property[]> {
     console.log('Fetching villas data...');
     const result = await sql<Property>`
       SELECT * FROM properties
-      WHERE title ILIKE '%gabay%' OR
-            description ILIKE '%gabay%'
+      WHERE title ILIKE '%gabay%' OR 
+            title ILIKE '%Maahmaahyo%' OR
+            title ILIKE '%Maanso%' OR 
+            title ILIKE '%Xikmad%' OR
+
+            description ILIKE '%gabay%' OR
+
+            description ILIKE '%Maahmaah%'  OR
+            description ILIKE '%Xikmad%' OR
+            description ILIKE '%Maansooyin%'
 
 
-      ORDER BY RANDOM()
+
+      ORDER BY properties.created_at DESC
       LIMIT 3
     `;
     return result.rows;
@@ -35,18 +44,18 @@ export async function fetchDisplayVillas(): Promise<Property[]> {
   }
 }
 
-export async function fetchFeaturedAgents(): Promise<Agent[]> {
-  try {
-    console.log('Fetching agents data...');
-    const result = await sql<Agent>`SELECT * FROM agents`;
-    return result.rows;
-  } catch (error) {
-    console.error('Database Error:', error);
-    throw new Error('Failed to fetch the latest agents.');
-  }
-}
+// export async function fetchFeaturedAgents(): Promise<Agent[]> {
+//   try {
+//     console.log('Fetching agents data...');
+//     const result = await sql<Agent>`SELECT * FROM agents`;
+//     return result.rows;
+//   } catch (error) {
+//     console.error('Database Error:', error);
+//     throw new Error('Failed to fetch the latest agents.');
+//   }
+// }
 
-const ITEMS_PER_PAGE = 3;
+const ITEMS_PER_PAGE = 6;
 
 export async function fetchFilteredProperties(query: string, currentPage: number): Promise<Property[]> {
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
@@ -161,9 +170,21 @@ export async function fetchDisplayAllVillas(): Promise<Property[]> {
     console.log('Fetching all villas data...');
     const result = await sql<Property>`
       SELECT * FROM properties
-      WHERE title ILIKE '%gabay%' OR
-            description ILIKE '%gabay%'
-      ORDER BY RANDOM()
+      WHERE title ILIKE '%gabay%' OR 
+            title ILIKE '%Maahmaahyo%' OR
+            title ILIKE '%Maanso%' OR 
+            title ILIKE '%Xikmad%' OR
+            title ILIKE '%suugaan%' OR
+
+            description ILIKE '%gabay%' OR
+            description ILIKE '%suugaan%' OR
+            description ILIKE '%Maahmaah%' OR
+            description ILIKE '%Xikmad%' OR
+            description ILIKE '%Maansooyin%'
+
+
+
+      ORDER BY properties.created_at DESC
     `;
     return result.rows;
   } catch (error) {
@@ -176,7 +197,7 @@ export async function fetchDisplayAllVillas(): Promise<Property[]> {
 export async function fetchBlogs() {
   try {
     const result = await sql`
-      SELECT * FROM blogs ORDER BY RANDOM()
+      SELECT * FROM blogs ORDER BY blogs.created_at DESC
     `;
     return result.rows;
   } catch (error) {
