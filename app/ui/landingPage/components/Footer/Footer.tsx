@@ -1,6 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
-
+import {
+    PhoneIcon,
+    EnvelopeIcon,
+} from '@heroicons/react/24/outline';
+import TrustBox from './reviews'
 
 interface ProductType {
     id: number;
@@ -67,6 +71,7 @@ const footer = () => {
                         </Link>
                     </div>
                     <h3 className='text-textbl text-xs font-medium mt-5 mb-4 lg:mb-16'>Waxaannu ku faanaynaa Soomaalinimada, haddaa nahay <br />jiilka maanta iyo kuwa berri.</h3>
+                    <TrustBox />
                     <div className='flex gap-4'>
 
                         {socialLinks.map((items, i) => (
@@ -77,6 +82,16 @@ const footer = () => {
                         </Link>
                         ))}
 
+                    </div>
+                    <div className  = "mt-5 flex">
+                    <PhoneIcon className = "text-gray-900 w-6" />
+                        
+                        <p>+254729111768</p>
+                    
+                    </div>
+                    <div className  = "mt-5 flex">
+                    <EnvelopeIcon className = "text-gray-900 w-6 mr-1" />
+                        <p>info@hiildhaxal.online</p>
                     </div>
                 </div>
 

@@ -19,6 +19,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       {/* <script src="//code.tidio.co/uxesf4jarnatcc2fltflyi4wtx6taknq.js" async></script> */}
+
+       {/* TrustBox script  */}
+<script type="text/javascript" src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>
+
      
       <body className={inter.className}>
         <Navbar />
