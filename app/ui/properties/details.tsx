@@ -49,10 +49,20 @@ export default function PropertyDetails({ property }: { property: Property }) {
                     />
                 </div>
             );
-        }
+        }else if (['mp4', 'webm', 'ogg'].includes(fileExtension!)) {
+            return (
+                <video width="100%" controls className="rounded-lg shadow-lg">
+                    <source src={mediaPath} type={`video/${fileExtension}`} />
+                    Your browser does not support the video tag.
+                </video>
+            );
 
-        return <p key={index}>Unsupported media type.</p>; // Handle unsupported media
-    };
+       
+    }
+    else {
+        return <p>Unsupported file type.</p>;
+    }
+};
 
     return (
         <div>

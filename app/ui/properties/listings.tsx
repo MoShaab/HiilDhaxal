@@ -29,15 +29,23 @@ export default async function PropertyListings({
         } else if (fileExtension === 'pdf') {
             return (
                 <object data={filePath} type="application/pdf" width="100%" height="64">
-                    <p>PDF preview not available. <a href={filePath} target="_blank">Download the PDF</a>.</p>
+                    <p>
+                        PDF preview not available.{' '}
+                        <a href={filePath} target="_blank">Download the PDF</a>.
+                    </p>
                 </object>
             );
         } else if (['mp4', 'webm', 'ogg'].includes(fileExtension!)) {
             return (
-                <video width="100%" controls className="rounded-lg shadow-lg">
-                    <source src={filePath} type={`video/${fileExtension}`} />
-                    Your browser does not support the video tag.
-                </video>
+                <div className="relative w-full h-64 overflow-hidden rounded-lg shadow-lg">
+                    <video 
+                        className="w-full h-full object-contain" 
+                        controls
+                    >
+                        <source src={filePath} type={`video/${fileExtension}`} />
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
             );
         } else {
             return <p>Unsupported file type.</p>;
@@ -48,8 +56,12 @@ export default async function PropertyListings({
         <div>
             <div className="flex w-full flex-col px-3 py-4 md:px-2"></div>
 
-            <h2 className={`${lusitana.className} text-black text-3xl text-center`}>Aan ilaalinno dhaxalka Soomaaliyeed!</h2>
-            <p className='font-bold text-black text-center text-3xl'>Raadi oo ka bogo kaydkeenna</p>
+            <h2 className={`${lusitana.className} text-black text-3xl text-center`}>
+                Aan ilaalinno dhaxalka Soomaaliyeed!
+            </h2>
+            <p className="font-bold text-black text-center text-3xl">
+                Raadi oo ka bogo kaydkeenna
+            </p>
 
             <div className="mt-10 ml-10 mr-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {properties?.map((property) => {
@@ -73,7 +85,6 @@ export default async function PropertyListings({
                                         <p className={`${lusitana.className} mb-4 text-black text-xl md:text-2xl`}>
                                             {property.location}
                                         </p>
-                                      
                                     </div>
                                 </div>
                             </Link>
