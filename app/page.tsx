@@ -13,7 +13,7 @@ import Cook from './ui/landingPage/components/Cook/index';
 import Gallery from './ui/landingPage/components/Gallery/index';
 import Newsletter from './ui/landingPage/components/Newsletter/Newsletter';
 import Features from './ui/landingPage/components/Work/index';
-import Expert from './ui/landingPage/components/Expert/index';
+// import Expert from './ui/landingPage/components/Expert/index';
 import Contactusform from './ui/landingPage/components/Navbar/Contactus';
 
 import {fetchFeaturedProperty, fetchDisplayVillas} from '@/app/lib/data';
@@ -29,7 +29,7 @@ export default async function Page(){
   return (
     <main>
     
-
+      {/* components */}
       <Banner />
       <Features />
       <Cook />
