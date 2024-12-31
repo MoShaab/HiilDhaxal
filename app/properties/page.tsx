@@ -9,7 +9,7 @@ import {
   HomeIcon,
   ArrowLeftIcon
 } from '@heroicons/react/24/outline';
-import Navigator from '../ui/properties/navigation-events';
+
 
 
 
@@ -59,7 +59,7 @@ export default async function Page({
           </div>
 
           <div className="mt-4">
-            <Navigator />
+            
 
          
             {/* <Link href="/">

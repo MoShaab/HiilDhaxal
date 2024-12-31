@@ -5,6 +5,7 @@ import Navbar from "./ui/landingPage/components/Navbar/Navbar";
 import Footer from "./ui/landingPage/components/Footer/Footer";
 
 
+
 export const metadata: Metadata = {
   title: "HiilDhaxal",
   description: "This is about Somali heritage, culture, history, language and its rich literature. Wuxuu ku saabsanyahay hiddaha, dhaqanka, taariikhda iyo luuqadda Soomaaliyeed. Waxaan meesha ka maqnayn suugaanta qaniga ku tahay Soomaalidu sida heesaha iyo gabayada ama maansooyinka leh murtida.",

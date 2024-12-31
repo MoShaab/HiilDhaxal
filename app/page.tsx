@@ -33,7 +33,7 @@ export default async function Page(){
       <Banner />
       <Features />
       <Cook />
-      <Expert />
+      {/* <Expert /> */}
       <Gallery />
       
      
@@ -48,7 +48,7 @@ export default async function Page(){
       {/* <DisplayAgents featuredAgents={featuredAgents} />
       <Achieved />
       <TestimonialSection /> */}
-      <Newsletter />
+      {/* <Newsletter /> */}
       {/* <UpperNav /> */}
       {/* <Contactusform /> */}
 
