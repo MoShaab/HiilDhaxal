@@ -21,7 +21,7 @@ interface socialLinks {
 const socialLinks: socialLinks[] = [
     {
         imgSrc: '/images/Footer/facebook.svg',
-        link: 'https://facebook.com',
+        link: 'https://www.facebook.com/profile.php?id=61571088016466',
         width: 10
     },
     {
@@ -31,7 +31,7 @@ const socialLinks: socialLinks[] = [
     },
     {
         imgSrc: '/images/Footer/twitter.svg',
-        link: 'https://twitter.com',
+        link: 'https://x.com/dhaxal31420',
         width: 14
     },
 
