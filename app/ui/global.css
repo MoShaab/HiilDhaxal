@@ -124,3 +124,12 @@ html:not([data-scroll="0"]) .navbar {
     text-wrap: balance;
   }
 }
+
+/* Prevent text overflow for all headings */
+h1 {
+  word-wrap: break-word; /* Ensures words wrap to the next line if they are too long */
+  white-space: normal; /* Prevents text from staying on one line */
+  overflow: visible; /* Ensure no text is clipped */
+  text-align: center; /* Aligns text for better readability */
+  padding: 0.5rem; /* Adds spacing around the text */
+}

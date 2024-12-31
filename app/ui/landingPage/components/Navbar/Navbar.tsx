@@ -42,12 +42,14 @@ const Navbar = () => {
                             
 
                             <div className="flex sm:hidden flex-shrink-0 items-center border-right">
-                            <Image src="/logo.png" width={80} height={65} alt="Logo" />
-                                    
-                                <Link href="/" className='text-2xl font-semibold text-black ml-4'>
-                                HiilDhaxal.
-                                       
-                                </Link>
+                            <div className="w-[80px] h-[35px] relative">
+                            <Image 
+                                src="/logo.png" 
+                                alt="Logo" 
+                                fill 
+                                className="object-contain"
+                            />
+                            </div>
                             </div>
                             <div className="hidden sm:flex flex-shrink-0 items-center border-right">
                             <Image src="/logo.png" width={80} height={65} alt="Logo" />

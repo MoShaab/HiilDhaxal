@@ -33,7 +33,7 @@ export default async function Page({
       <div className="flex flex-col md:flex-row md:items-center justify-between">
           {/* Header */}
           <h1
-            className={`${lusitana.className} text-gray-900 text-3xl md:text-4xl font-bold border-b-4 border-blue-400 pb-2 text-center md:text-left`}
+            className={`${lusitana.className} text-gray-900 text-3xl md:text-4xl font-bold pb-2 text-center md:text-left break-words overflow-visible`}
           >
             Taarikhdaan Adigaa Iskaleh.
           </h1>

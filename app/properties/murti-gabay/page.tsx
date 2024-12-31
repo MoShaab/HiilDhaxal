@@ -23,7 +23,7 @@ export default async function Page(){
   
         {/* {<DisplayProperty/>} */}
         <h1
-            className={`${lusitana.className} text-gray-900 text-3xl md:text-4xl font-bold border-b-4 border-blue-400 pb-2 text-center md:text-left`}
+           className={`${lusitana.className} text-gray-900 text-3xl md:text-4xl font-bold pb-2 text-center md:text-left break-words overflow-visible`}
           >
             Murtida Soomaaliyeed waa ilbaxnimo aan dhamaan.
           </h1>

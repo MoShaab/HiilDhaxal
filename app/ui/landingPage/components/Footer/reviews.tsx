@@ -23,7 +23,7 @@ if (window.Trustpilot) {
  className="trustpilot-widget" // Renamed this to className.
  data-locale="en-US" data-template-id="56278e9abfbbba0bdcd568bc" data-businessunit-id="67734c90bb1f9c4d559a9791" data-style-height="52px" data-style-width="100%"
 >
-  <a href="https://www.trustpilot.com/review/hiildhaxal.online" target="_blank"  rel="noopener" > Truslot</a>
+  <a href="https://www.trustpilot.com/review/hiildhaxal.online" target="_blank"  rel="noopener" > Trustpilot</a>
 </div>
   );
 };
