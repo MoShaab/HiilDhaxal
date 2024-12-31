@@ -19,6 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       {/* <script src="//code.tidio.co/uxesf4jarnatcc2fltflyi4wtx6taknq.js" async></script> */}
+      <meta name="trustpilot-one-time-domain-verification-id" content="f7d7461e-dabd-4afc-957f-fa2fa4d04106"/>
       <body className={inter.className}>
         <Navbar />
         
