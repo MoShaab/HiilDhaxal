@@ -33,10 +33,15 @@ export default async function DisplayFromDb({
                 );
             } else if (['mp4', 'webm', 'ogg'].includes(fileExtension!)) {
                 return (
-                    <video width="100%" controls className="rounded-lg shadow-lg">
+                    <div className="relative w-full h-64 overflow-hidden rounded-lg shadow-lg">
+                    <video 
+                        className="w-full h-full object-contain" 
+                        controls
+                    >
                         <source src={filePath} type={`video/${fileExtension}`} />
                         Your browser does not support the video tag.
                     </video>
+                </div>
                 );
             } else {
                 return <p>Unsupported file type.</p>;
