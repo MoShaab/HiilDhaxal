@@ -3,9 +3,10 @@ import { fetchDisplayAllVillas } from "@/app/lib/data";
 import { lusitana } from '@/app/ui/fonts';
 import Link from 'next/link';
 import {
-  ArrowLeftIcon,
+  
   HomeIcon
 } from '@heroicons/react/24/outline'
+import Navigator from "@/app/ui/properties/navigation-events";
 
 export const revalidate = 0;
 
@@ -42,6 +43,13 @@ export default async function Page(){
             
               
             </Link>
+
+           
+          </div>
+          <div className="mt-4">
+          
+
+              <Navigator />
 
            
           </div>
