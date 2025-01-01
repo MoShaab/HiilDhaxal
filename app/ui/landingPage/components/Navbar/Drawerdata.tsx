@@ -9,10 +9,10 @@ interface NavigationItem {
 }
 
 const navigation: NavigationItem[] = [
-    { name: 'Guriga', href: '#home-section', current: false },
-    { name: 'Nagu Saabsan', href: '#about-section', current: false },
-    { name: 'Contact', href: '#cook-section', current: false },
-    { name: 'Rug Bandhig', href: '#gallery-section', current: false },
+    { name: 'Guriga', href: '/#home-section', current: false },
+    { name: 'Nagu Saabsan', href: '/#about-section', current: false },
+    { name: 'Contact', href: '/#contact-section', current: false },
+    { name: 'Rug Bandhig', href: '/#gallery-section', current: false },
     {name: 'Qormo', href: '/blog', current: false},
     {name: 'Taageer Mashruucaan', href:'https://www.paypal.com/donate/?hosted_button_id=RC3WBWZ9GNTSU', current: false}
 ]

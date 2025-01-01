@@ -26,7 +26,7 @@ const socialLinks: socialLinks[] = [
     },
     {
         imgSrc: '/images/Footer/insta.svg',
-        link: 'https://instagram.com',
+        link: 'https://tiktok.com/@hiil_dhaxal',
         width: 14
     },
     {
