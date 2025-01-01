@@ -50,7 +50,7 @@ const products: ProductType[] = [
     },
     {
         id: 3,
-        section: "Wax kale",
+        section: "Wax-kale",
         links: ['Maktabadda', 'Muuqaalada', 'Dhacdooyinka', 'Waxbarashada']
     }
 ]
