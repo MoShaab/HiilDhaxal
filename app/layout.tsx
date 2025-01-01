@@ -3,6 +3,7 @@ import { inter, lusitana } from '@/app/ui/fonts';
 import '@/app/ui/global.css';
 import Navbar from "./ui/landingPage/components/Navbar/Navbar";
 import Footer from "./ui/landingPage/components/Footer/Footer";
+import { Analytics } from "@vercel/analytics/react"
 
 
 
@@ -28,6 +29,7 @@ export default function RootLayout({
         <Navbar />
         
         {children}
+        <Analytics />
         <Footer />
         </body>
     </html>
