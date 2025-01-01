@@ -27,6 +27,8 @@ function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
 }
 
+
+
 const Navbar = () => {
 
     const [isOpen, setIsOpen] = React.useState(false);
@@ -64,10 +66,15 @@ const Navbar = () => {
 
                             <div className="hidden lg:flex items-center border-right ">
                                 <div className="flex justify-end space-x-4">
-                                    {navigation.map((item) => (
+                                    {navigation.map((item) => 
+                                    
+                                    (
+                                        
                                         <Link
                                             key={item.name}
                                             href={item.href}
+                                            target={item.name === 'Taageer Mashruucaan' ? '_blank' : undefined}
+                                            rel={item.name === 'Taageer Mashruucaan' ? 'noopener noreferrer' : undefined}
                                             className={classNames(
                                                 item.current ? 'bg-black' : 'navlinks hover:opacity-100',
                                                 'px-3 py-4 rounded-md text-lg font-normal opacity-50 hover:text-black space-links'
