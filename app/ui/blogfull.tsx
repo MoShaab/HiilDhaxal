@@ -7,6 +7,7 @@ import { notFound } from 'next/navigation';
 import { UpdateListing, DeleteListing } from '@/app/ui/properties/buttons';
 import ShareButtons from './ShareButtons';
 import { lusitana } from '@/app/ui/fonts';
+import RenderBlogContent from './RenderBlogContent';
 
 // Utility Functions
 function formatDate(dateString: string) {
@@ -23,67 +24,16 @@ function estimateReadingTime(content: string) {
   return Math.ceil(wordCount / wordsPerMinute);
 }
 
-// Component: RenderBlogContent
-const headingClasses: Record<'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6', string> = {
-  h1: 'text-4xl font-bold text-gray-900 mt-12 mb-6',
-  h2: 'text-3xl font-semibold text-gray-800 mt-10 mb-5',
-  h3: 'text-2xl font-medium text-gray-700 mt-8 mb-4',
-  h4: 'text-xl font-medium text-gray-600 mt-6 mb-3',
-  h5: 'text-lg font-medium text-gray-600 mt-4 mb-2',
-  h6: 'text-base font-medium text-gray-600 mt-4 mb-2',
-};
 
-function RenderBlogContent({ content }: { content: string }) {
-  const paragraphs = content.split('\n\n');
-
-  return (
-    <div className="space-y-8">
-      {paragraphs.map((paragraph, index) => {
-        const match = paragraph.match(/^#+/);
-
-        if (match) {
-          const level = match[0].length as 1 | 2 | 3 | 4 | 5 | 6; // Restrict header levels
-          const text = paragraph.replace(/^#+\s*/, '');
-          const HeadingTag = `h${level}` as keyof typeof headingClasses;
-
-          return (
-            <HeadingTag key={index} className={headingClasses[HeadingTag]}>
-              {text}
-            </HeadingTag>
-          );
-        } else if (paragraph.startsWith('- ')) {
-          const items = paragraph.split('\n').map((item) => item.replace('- ', ''));
-          return (
-            <ul key={index} className="list-disc list-inside space-y-2 text-gray-700 pl-4">
-              {items.map((item, i) => (
-                <li key={i} className="mb-2">
-                  {item}
-                </li>
-              ))}
-            </ul>
-          );
-        } else {
-          return (
-            <p key={index} className="text-gray-700 leading-relaxed text-lg">
-              {paragraph}
-            </p>
-          );
-        }
-      })}
-    </div>
-  );
-}
-
-// Component: FullBlogs
 export default function FullBlogs({ blogs }: { blogs: Blog }) {
   if (!blogs) {
     return notFound();
   }
 
-  const mediaPaths: string[] = Array.isArray(blogs.image_url) ? blogs.image_url : [];
+  const mediaPaths: string[] = Array.isArray(blogs.image_url) ? blogs.image_url : blogs.image_url ? [blogs.image_url] : [];
   const readingTime = estimateReadingTime(blogs.content);
 
-  const renderMedia = (mediaPath: string, index: number) => {
+    const renderMedia = (mediaPath: string, index: number) => {
     const fileExtension = mediaPath.split('.').pop()?.toLowerCase();
 
     if (['jpg', 'jpeg', 'png', 'gif'].includes(fileExtension!)) {
@@ -134,7 +84,7 @@ export default function FullBlogs({ blogs }: { blogs: Blog }) {
 
   return (
     <article className="max-w-4xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
-      <Link href="/blog" className="inline-flex items-center text-blue-600 hover:underline mb-8 text-lg">
+       <Link href="/blog" className="inline-flex items-center text-blue-600 hover:underline mb-8 text-lg">
         <svg
           className="w-5 h-5 mr-2"
           fill="none"
@@ -169,12 +119,11 @@ export default function FullBlogs({ blogs }: { blogs: Blog }) {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">{mediaPaths.map((media, i) => renderMedia(media, i))}</div>
         </div>
       )}
-
       <div className="prose prose-lg max-w-none">
         <RenderBlogContent content={blogs.content} />
       </div>
 
-      <div className="mt-16 pt-8 border-t border-gray-200">
+     <div className="mt-16 pt-8 border-t border-gray-200">
         <h2 className="text-2xl font-bold text-gray-900 mb-6">La Wadaag Maqaalkan</h2>
         <ShareButtons title={blogs.title} />
       </div>
@@ -186,3 +135,4 @@ export default function FullBlogs({ blogs }: { blogs: Blog }) {
     </article>
   );
 }
+
