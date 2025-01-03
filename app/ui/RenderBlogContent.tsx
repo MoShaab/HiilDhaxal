@@ -50,52 +50,85 @@ function RenderBlogContent({ content }: { content: string }) {
   };
 
   const renderTextWithFormatting = (text: string) => {
-    const parts = [];
+    const parts: (string | JSX.Element)[] = [];
     let lastIndex = 0;
     let currentIndex = 0;
     const length = text.length;
 
     while (currentIndex < length) {
-      // Find opening bracket
-      const linkStart = text.indexOf('[', currentIndex);
-      if (linkStart === -1) break;
+      // Find next formatting marker (either link or bold)
+      const nextLinkStart = text.indexOf('[', currentIndex);
+      const nextBoldStart = text.indexOf('**', currentIndex);
 
-      // Find closing bracket
-      const linkTextEnd = text.indexOf(']', linkStart);
-      if (linkTextEnd === -1) break;
+      // If no more formatting found, break
+      if (nextLinkStart === -1 && nextBoldStart === -1) break;
 
-      // Find opening parenthesis
-      const urlStart = text.indexOf('(', linkTextEnd);
-      if (urlStart === -1 || urlStart !== linkTextEnd + 1) break;
-
-      // Find closing parenthesis
-      const urlEnd = text.indexOf(')', urlStart);
-      if (urlEnd === -1) break;
-
-      // Add text before the link
-      if (linkStart > lastIndex) {
-        parts.push(text.slice(lastIndex, linkStart));
+      // Determine which comes first
+      let isLink = false;
+      let nextFormatStart: number;
+      
+      if (nextLinkStart === -1) {
+        nextFormatStart = nextBoldStart;
+      } else if (nextBoldStart === -1) {
+        nextFormatStart = nextLinkStart;
+        isLink = true;
+      } else {
+        if (nextLinkStart < nextBoldStart) {
+          nextFormatStart = nextLinkStart;
+          isLink = true;
+        } else {
+          nextFormatStart = nextBoldStart;
+        }
       }
 
-      // Extract link text and URL
-      const linkText = text.slice(linkStart + 1, linkTextEnd);
-      const url = text.slice(urlStart + 1, urlEnd);
+      // Add text before the formatting
+      if (nextFormatStart > lastIndex) {
+        parts.push(text.slice(lastIndex, nextFormatStart));
+      }
 
-      // Add the link component
-      parts.push(
-        <Link
-          key={`link-${linkStart}`}
-          href={url}
-          className="text-blue-600 hover:underline"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {linkText}
-        </Link>
-      );
+      if (isLink) {
+        // Handle link formatting
+        const linkTextEnd = text.indexOf(']', nextFormatStart);
+        if (linkTextEnd === -1) break;
 
-      currentIndex = urlEnd + 1;
-      lastIndex = currentIndex;
+        const urlStart = text.indexOf('(', linkTextEnd);
+        if (urlStart === -1 || urlStart !== linkTextEnd + 1) break;
+
+        const urlEnd = text.indexOf(')', urlStart);
+        if (urlEnd === -1) break;
+
+        const linkText = text.slice(nextFormatStart + 1, linkTextEnd);
+        const url = text.slice(urlStart + 1, urlEnd);
+
+        parts.push(
+          <Link
+            key={`link-${nextFormatStart}`}
+            href={url}
+            className="text-blue-600 hover:underline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {linkText}
+          </Link>
+        );
+
+        currentIndex = urlEnd + 1;
+        lastIndex = currentIndex;
+      } else {
+        // Handle bold formatting
+        const boldEnd = text.indexOf('**', nextFormatStart + 2);
+        if (boldEnd === -1) break;
+
+        const boldText = text.slice(nextFormatStart + 2, boldEnd);
+        parts.push(
+          <strong key={`bold-${nextFormatStart}`} className="font-bold">
+            {boldText}
+          </strong>
+        );
+
+        currentIndex = boldEnd + 2;
+        lastIndex = currentIndex;
+      }
     }
 
     // Add remaining text
@@ -114,4 +147,3 @@ function RenderBlogContent({ content }: { content: string }) {
 }
 
 export default RenderBlogContent;
-
