@@ -55,7 +55,7 @@ export async function fetchDisplayVillas(): Promise<Property[]> {
 //   }
 // }
 
-const ITEMS_PER_PAGE = 6;
+const ITEMS_PER_PAGE = 15;
 
 export async function fetchFilteredProperties(query: string, currentPage: number): Promise<Property[]> {
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;

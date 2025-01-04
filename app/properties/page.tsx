@@ -9,6 +9,7 @@ import {
   HomeIcon,
   ArrowLeftIcon
 } from '@heroicons/react/24/outline';
+import Navigator from '../ui/properties/navigation-events';
 
 
 
@@ -59,14 +60,9 @@ export default async function Page({
           </div>
 
           <div className="mt-4">
-            
+          
 
-         
-            {/* <Link href="/">
-            <ArrowLeftIcon className = "text-gray-900 w-10" />
-              
-              
-            </Link> */}
+              <Navigator />
 
            
           </div>

@@ -54,7 +54,7 @@ html:not([data-scroll="0"]) .navbar {
 }
 
 .space-links {
-  transition: .3s;
+  transition: .1s;
 }
 
 .space-links:hover {
@@ -79,7 +79,7 @@ html:not([data-scroll="0"]) .navbar {
   left: 0;
   background-color: #DF6751;
   transform-origin: bottom right;
-  transition: transform .25s ease-out;
+  transition: transform .15s ease-out;
 }
 
 .hover-underline:hover:after {
@@ -96,7 +96,7 @@ html:not([data-scroll="0"]) .navbar {
 }
 
 .inner-img {
-  transition: 0.3s;
+  transition: 0.1s;
 }
 
 .inner-img:hover {
