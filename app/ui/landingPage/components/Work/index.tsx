@@ -47,17 +47,17 @@ const Work = () => {
         <div>
             <div className='mx-auto max-w-7xl py-40 px-6' id="work-section">
                 <div className='text-center mb-14' >
-                    <Fade direction={'up'} delay={400} cascade damping={1e-1} triggerOnce={true}>
+                    <Fade direction={'up'} delay={40} cascade damping={1e-1} triggerOnce={true}>
                         <h3 className='text-pink text-lg font-normal mb-3 ls-51 uppercase'>Guudmar</h3>
                     </Fade>
-                    <Fade direction={'up'} delay={800} cascade damping={1e-1} triggerOnce={true}>
+                    <Fade direction={'up'} delay={80} cascade damping={1e-1} triggerOnce={true}>
                         <p className='text-3xl lg:text-5xl font-semibold text-lightgrey'>Si kooban u eeg  <br /> waxyaabahaan aruurinay.</p>
                     </Fade>
                 </div>
 
 
                 <div className='grid sm:grid-cols-2 lg:grid-cols-4 gap-y-20 gap-x-5 mt-32'>
-                    <Fade direction={'up'} delay={1000} cascade damping={1e-1} triggerOnce={true}>
+                    <Fade direction={'up'} delay={100} cascade damping={1e-1} triggerOnce={true}>
                         {cardData.map((items, i) => (
                             <div className='card-b p-8 relative rounded-3xl' key={i}>
                                 <div className='work-img-bg rounded-full flex justify-center absolute top-[-50%] sm:top-[-40%] md:top-[-55%] lg:top-[-45%] left-[0%]'>

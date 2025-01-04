@@ -76,7 +76,7 @@ export default async function DisplayVillas({
             </div>
 
             <div className="flex justify-center">
-            <Fade direction={'up'} delay={1000} cascade damping={1e-1} triggerOnce={true}>
+            <Fade direction={'up'} delay={10} cascade damping={1e-1} triggerOnce={true}>
                             <div className='md:flex align-middle justify-center lg:justify-start'>
                                 <button className='text-xl w-full md:w-auto font-medium rounded-full text-white py-5 px-6 bg-pink lg:px-14 mr-6'><Link href='/properties/murti-gabay'>Wax badan soo eeg</Link></button>
                                 

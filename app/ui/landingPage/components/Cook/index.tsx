@@ -19,15 +19,15 @@ const Cook = () => {
 
 
                     <div className='col-span-6 flex flex-col justify-center'>
-                        <Fade direction={'up'} delay={400} cascade damping={1e-1} triggerOnce={true}>
+                        <Fade direction={'up'} delay={40} cascade damping={1e-1} triggerOnce={true}>
                             <h2 className='text-pink text-lg font-normal mb-3 ls-51 uppercase text-start'>hiildhaxal</h2>
                         </Fade>
-                        <Fade direction={'up'} delay={800} cascade damping={1e-1} triggerOnce={true}>
+                        <Fade direction={'up'} delay={80} cascade damping={1e-1} triggerOnce={true}>
                             <h3 className="text-3xl lg:text-5xl font-semibold text-black text-start">
                                 Kaydinta Danabaysan ee Dhaxalkeenna.
                             </h3>
                         </Fade>
-                        <Fade direction={'up'} delay={1000} cascade damping={1e-1} triggerOnce={true}>
+                        <Fade direction={'up'} delay={100} cascade damping={1e-1} triggerOnce={true}>
                             <p className='text-grey-100 md:text-lg font-normal mb-10 text-start mt-2'>Waxaanu ku howllannahay in <span className = "text-bold text-pink text-lg">hal meel </span>la iskugu keeno dhammaan agabka ka turjamaya hiddaha, dhaqanka, khayraadka, taariikhda iyo suugaanta Soomaalida. Waxaan u aruurinaynna hab danabaysan si uusan u lumin ama u hallaabin. Tani oo an uga golleennahy iney kor u qaaddo fahamka Soomaalida ee dalkooda ayna kobciso dalxiiska. </p>
                             <p className='text-grey-100 md:text-lg font-normal mb-10 text-start mt-1'>HiilDhaxal waxay u hiillinaysaa jiritaanka Soomaalinimada mar kasta iyo meel kasta.</p>
                             {/* <div className='flex align-middle justify-center md:justify-start'>
