@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { lusitana } from '@/app/ui/fonts';
 import { notFound } from 'next/navigation';
 import { Property } from '@/app/lib/definitions';
+import ShareButtons from '../ShareButtons';
 
 
 export default function PropertyDetails({ property }: { property: Property }) {
@@ -113,6 +114,8 @@ export default function PropertyDetails({ property }: { property: Property }) {
                 <p className="text-md text-black">{property.description}</p>
                 <p className="text-black text-xl">{property.location}</p>
             </div>
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">La Wadaag</h2>
+            < ShareButtons title = {property.title} />
         </div>
     );
 }
