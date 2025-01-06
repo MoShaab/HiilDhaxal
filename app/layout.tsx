@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import { Analytics } from "@vercel/analytics/react";
 import { inter } from "@/app/ui/fonts";
 import "@/app/ui/global.css";
-import GoogleTranslate from "./ui/landingPage/components/google-translate";
+// import GoogleTranslate from "./ui/landingPage/components/google-translate";
 
 const Navbar = dynamic(() => import("./ui/landingPage/components/Navbar/Navbar"), { ssr: true });
 const Footer = dynamic(() => import("./ui/landingPage/components/Footer/Footer"), { ssr: true });
