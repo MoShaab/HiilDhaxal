@@ -1,7 +1,6 @@
 
 import Pagination from '@/app/ui/properties/pagination';
 import Search from '@/app/ui/search';
-import { lusitana } from '@/app/ui/fonts';
 import PropertyListings from "@/app/ui/properties/listings";
 import { fetchPropertiesPages } from '@/app/lib/data';
 import Link from 'next/link';
@@ -35,7 +34,7 @@ export default async function Page({
         <div className=" mt-15 flex flex-col md:flex-row md:items-center justify-between">
           {/* Header */}
           <h1
-            className={`${lusitana.className} text-gray-900 text-3xl md:text-4xl font-bold pb-2 text-center md:text-left break-words overflow-visible`}
+            className='text-gray-900 text-3xl md:text-4xl font-bold pb-2 text-center md:text-left break-words overflow-visible'
           >
             Ilaalinta Dhaxalka Soomaaliyeed.
           </h1>

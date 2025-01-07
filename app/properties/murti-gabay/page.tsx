@@ -1,6 +1,5 @@
 import DisplayAllVillas from "@/app/ui/properties/villas";
 import { fetchDisplayAllVillas } from "@/app/lib/data";
-import { lusitana } from '@/app/ui/fonts';
 import Link from 'next/link';
 import {
   
@@ -23,7 +22,7 @@ export default async function Page(){
   
         {/* {<DisplayProperty/>} */}
         <h1
-           className={`${lusitana.className} text-gray-900 text-3xl md:text-4xl font-bold pb-2 text-center md:text-left break-words overflow-visible`}
+           className='text-gray-900 text-3xl md:text-4xl font-bold pb-2 text-center md:text-left break-words overflow-visible'
           >
             Murtida Soomaaliyeed waa ilbaxnimo aan dhamaan.
           </h1>
