@@ -98,7 +98,7 @@ export default function FullBlogs({ blogs }: { blogs: Blog }) {
       </Link>
 
       <header className="mb-12">
-        <h1 className={`${lusitana.className} text-5xl sm:text-6xl font-bold text-gray-900 mb-6 leading-tight`}>
+        <h1 className='text-5xl sm:text-6xl font-bold text-gray-900 mb-6 leading-tight'>
           {blogs.title}
         </h1>
 
