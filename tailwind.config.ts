@@ -16,6 +16,7 @@ const config: Config = {
       grey: "rgba(0, 0, 0, 0.55)",
       lightpink: "#F8F7F7",
       pink: "#DF6751",
+      blue: "#0000FF",
       bgpink: "rgba(223, 103, 81, 0.15)",
       darkpink: "#FEEDEA",
       lightblack: "#333333",

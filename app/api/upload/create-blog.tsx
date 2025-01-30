@@ -25,14 +25,14 @@ export default function Form() {
             htmlFor="title"
             className={`mb-2 block text-2xl ${lusitana.className} text-gray-900 font-bold`}
           >
-            Blog Title
+            Cinwaanka Qormada
           </label>
           <div className="relative">
             <input
               id="title"
               name="title"
               type="text"
-              placeholder="Enter blog title"
+              placeholder="Gali cinwaanka qormada"
               className="peer block w-full rounded-md border border-gray-300 py-3 pl-12 text-xl text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
             />
             <PencilIcon className="pointer-events-none absolute left-3 top-1/2 h-6 w-6 -translate-y-1/2 text-gray-400" />
@@ -45,13 +45,13 @@ export default function Form() {
             htmlFor="content"
             className="mb-2 block text-xl text-gray-800 font-semibold"
           >
-            Blog Content
+            Qoraalka Qormada
           </label>
           <div className="relative">
             <textarea
               id="content"
               name="content"
-              placeholder="Enter blog content"
+              placeholder="Gali qoraalka qormada oo buuxa"
               className="peer block w-full rounded-md border border-gray-300 py-3 pl-12 text-lg text-gray-700 placeholder:text-gray-500 min-h-[300px] resize-y focus:border-blue-500 focus:ring-blue-500"
               value={content}
               onChange={(e) => setContent(e.target.value)}
@@ -61,13 +61,13 @@ export default function Form() {
           <div className="mt-2 space-y-1 text-sm text-gray-500">
             <div className="flex items-center">
               <LinkIcon className="w-4 h-4 mr-1" />
-              <span>To add a link, use the format: [Link Text](https://example.com)</span>
+              <span>Si aad lifaaq ugu dartid, raac qaaciddadaan: [Qoraal Lifaaq](https://example.com)</span>
             </div>
             <div className="flex items-center">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
                 <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
               </svg>
-              <span>To make text bold, use double asterisks: **Bold Text**</span>
+              <span>(bold ama qad badan haddaa rabtid), isticmaal labo xiddig: **Qoraal Qad badan**</span>
             </div>
           </div>
         </div>
@@ -84,7 +84,7 @@ export default function Form() {
             htmlFor="image"
             className="mb-2 block text-xl text-gray-800 font-semibold"
           >
-            Upload Blog Images
+            Kor u soo qaad sawirada Qormada
           </label>
           <div className="relative">
             <input
@@ -104,14 +104,14 @@ export default function Form() {
       </div>
 
       <div className="mt-6 flex justify-end gap-4">
-        <Link
-          href="/blog"
-          className="flex h-10 items-center justify-center rounded-lg bg-gray-100 px-4 text-gray-600 font-medium hover:bg-gray-200"
-        >
-          Cancel
-        </Link>
-        <Button type="submit">Create Blog</Button>
-      </div>
+      <Link
+        href="/properties/blog"
+        className="flex h-10 items-center rounded-lg bg-gray-100 px-4 text-lg text-3xl font-medium text-gray-600 transition-colors hover:bg-gray-200"
+      >
+        Cancel
+      </Link>
+      <button className = " w-full text-grey-900 text-2xl rounded-full bg-pink" type="submit">Gabagabee</button>
+    </div>
     </form>
   );
 }

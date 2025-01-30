@@ -21,14 +21,14 @@ export default function Form({
       {/* Property Title */}
       <div className="mb-4">
         <label htmlFor="title" className="mb-2 block text-lg text-3xl font-medium">
-          Property Title
+          Content Title
         </label>
         <div className="relative">
           <input
             id="title"
             name="title"
             type="text"
-            placeholder="Enter property title"
+            placeholder="Gali cinwaant content ga"
             className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-lg text-3xl outline-2 placeholder:text-gray-500"
             defaultValue={listings.title}
           />
@@ -39,13 +39,13 @@ export default function Form({
       {/* Property Description */}
       <div className="mb-4">
         <label htmlFor="description" className="mb-2 block text-lg text-3xl font-medium">
-          Property Description
+         Content Description
         </label>
         <div className="relative">
           <textarea
             id="description"
             name="description"
-            placeholder="Enter property description"
+            placeholder="Gali sharaxaad gaaban"
             className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-lg text-3xl outline-2 placeholder:text-gray-500"
             defaultValue={listings.description}
           />
@@ -59,14 +59,14 @@ export default function Form({
       {/* Property Location */}
       <div className="mb-4">
         <label htmlFor="location" className="mb-2 block text-lg text-3xl font-medium">
-          Property Location
+        Content Location
         </label>
         <div className="relative">
           <input
             id="location"
             name="location"
             type="text"
-            placeholder="Enter property location"
+            placeholder="Gali hala asalka u ah content ga"
             className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-lg text-3xl outline-2 placeholder:text-gray-500"
             defaultValue={listings.location}
           />
@@ -77,7 +77,7 @@ export default function Form({
       {/* Property Images */}
       <div className="mb-4">
         <label htmlFor="images" className="mb-2 block text-lg text-3xl text-gray-700 font-medium">
-          Upload Property Images
+          Sawirada kor u soo qaad
         </label>
         <div className="relative">
           <input
@@ -95,12 +95,12 @@ export default function Form({
   
     <div className="mt-6 flex justify-end gap-4">
       <Link
-        href="/properties"
+        href="/properties/sell_property/create"
         className="flex h-10 items-center rounded-lg bg-gray-100 px-4 text-lg text-3xl font-medium text-gray-600 transition-colors hover:bg-gray-200"
       >
         Cancel
       </Link>
-      <Button type="submit"> Edit Listing</Button>
+      <button className = " w-full text-grey-900 text-2xl rounded-full bg-pink" type="submit">Gabagabee Dafaaftirka</button>
     </div>
   </form>
   
