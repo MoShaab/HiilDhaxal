@@ -6,6 +6,8 @@ import { FacebookIcon, LinkedinIcon, ShareIcon } from 'lucide-react';
 type ShareButtonProps = {
   url: string;
   title: string;
+  description?: string;
+  imageUrl?: string;
   platform: 'twitter' | 'facebook' | 'linkedin';
 };
 
@@ -17,11 +19,11 @@ function TwitterIcon() {
   );
 }
 
-function ShareButton({ url, title, platform }: ShareButtonProps) {
+function ShareButton({ url, title, description, imageUrl, platform }: ShareButtonProps) {
   const shareUrls = {
     twitter: `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`,
-    facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
-    linkedin: `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(url)}&title=${encodeURIComponent(title)}`,
+    facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodeURIComponent(description || '')}`,
+    linkedin: `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(url)}&title=${encodeURIComponent(title)}&summary=${encodeURIComponent(description || '')}&source=HiilDhaxal`,
   };
 
   const icons = {
@@ -42,9 +44,6 @@ function ShareButton({ url, title, platform }: ShareButtonProps) {
 
     if (platformUrl) {
       window.open(platformUrl, '_blank', 'width=550,height=450');
-      console.log(`Sharing to ${platform}:`, platformUrl);
-    } else {
-      console.error(`Invalid platform: ${platform}`);
     }
   };
 
@@ -59,7 +58,13 @@ function ShareButton({ url, title, platform }: ShareButtonProps) {
   );
 }
 
-export default function ShareButtons({ title }: { title: string }) {
+interface ShareButtonsProps {
+  title: string;
+  description?: string;
+  imageUrl?: string;
+}
+
+export default function ShareButtons({ title, description, imageUrl }: ShareButtonsProps) {
   const [currentUrl, setCurrentUrl] = useState('');
   const [isClient, setIsClient] = useState(false);
 
@@ -67,7 +72,6 @@ export default function ShareButtons({ title }: { title: string }) {
     if (typeof window !== 'undefined') {
       setCurrentUrl(window.location.href);
       setIsClient(true);
-      console.log('Current URL:', window.location.href);
     }
   }, []);
 
@@ -75,10 +79,10 @@ export default function ShareButtons({ title }: { title: string }) {
     if ('share' in navigator) {
       try {
         await navigator.share({
-          title: title,
+          title,
+          text: description,
           url: currentUrl,
         });
-        console.log('Shared successfully');
       } catch (error) {
         console.error('Error sharing:', error);
       }
@@ -87,9 +91,27 @@ export default function ShareButtons({ title }: { title: string }) {
 
   return (
     <div className="flex items-center space-x-6">
-      <ShareButton url={currentUrl} title={title} platform="twitter" />
-      <ShareButton url={currentUrl} title={title} platform="facebook" />
-      <ShareButton url={currentUrl} title={title} platform="linkedin" />
+      <ShareButton 
+        url={currentUrl} 
+        title={title}
+        description={description}
+        imageUrl={imageUrl}
+        platform="twitter" 
+      />
+      <ShareButton 
+        url={currentUrl} 
+        title={title}
+        description={description}
+        imageUrl={imageUrl}
+        platform="facebook" 
+      />
+      <ShareButton 
+        url={currentUrl} 
+        title={title}
+        description={description}
+        imageUrl={imageUrl}
+        platform="linkedin" 
+      />
       {isClient && 'share' in navigator && (
         <button
           onClick={handleWebShare}

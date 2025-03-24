@@ -10,7 +10,7 @@ export default async function Page() {
         breadcrumbs={[
           { label: 'Listings', href: '/properties/blog' },
           {
-            label: 'Create Listings',
+            label: 'Create Blog',
             href: '/properties/blog',
             active: true,
           },

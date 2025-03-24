@@ -9,6 +9,7 @@ import ShareButtons from './ShareButtons';
 import { lusitana } from '@/app/ui/fonts';
 import RenderBlogContent from './RenderBlogContent';
 
+
 // Utility Functions
 function formatDate(dateString: string) {
   return new Date(dateString).toLocaleDateString('en-US', {
@@ -29,6 +30,13 @@ export default function FullBlogs({ blogs }: { blogs: Blog }) {
   if (!blogs) {
     return notFound();
   }
+
+  // Update ShareButtons component usage in FullBlogs
+  const imageUrl = Array.isArray(blogs.image_url) ? blogs.image_url[0] : blogs.image_url;
+  const absoluteImageUrl = imageUrl?.startsWith('http') 
+    ? imageUrl 
+    : `https://hiildhaxal.online${imageUrl}`;
+
 
   const mediaPaths: string[] = Array.isArray(blogs.image_url) ? blogs.image_url : blogs.image_url ? [blogs.image_url] : [];
   const readingTime = estimateReadingTime(blogs.content);
@@ -123,9 +131,15 @@ export default function FullBlogs({ blogs }: { blogs: Blog }) {
         <RenderBlogContent content={blogs.content} />
       </div>
 
+      
+
      <div className="mt-16 pt-8 border-t border-gray-200">
         <h2 className="text-2xl font-bold text-gray-900 mb-6">La Wadaag Maqaalkan</h2>
-        <ShareButtons title={blogs.title} />
+        <ShareButtons 
+          title={blogs.title}
+          description={blogs.content.slice(0, 160)}
+          imageUrl={absoluteImageUrl}
+          />
       </div>
 
       <div className="mt-16 flex justify-end space-x-4">

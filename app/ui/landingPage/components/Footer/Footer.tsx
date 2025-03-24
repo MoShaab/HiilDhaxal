@@ -100,12 +100,12 @@ const footer = () => {
 
                 {products.map((product) => (
                     <div key={product.id} className="sm:col-span-2">
-                        <p className="text-black text-xl font-semibold mb-9">{product.section}</p>
+                        <p className="text-black text-xl font-semibold mb-9">{product.section} </p>
                         <ul>
                             {product.links.map((link: string, index: number) => (
                                 <li key={index} className='mb-5'>
                                     <Link 
-                                            href={`/${product.section.toLowerCase()}/${link.toLowerCase().replace(/ /g, '-')}`} 
+                                            href={`/#${product.section.toLowerCase()}/${link.toLowerCase().replace(/ /g, '-')}`} 
                                             className="text-footerlinks text-base font-normal mb-6 space-links"
                                         >
                                             {link}

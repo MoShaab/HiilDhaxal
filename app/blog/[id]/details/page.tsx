@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation';
+import { Metadata } from 'next';
 import { fetchBlogById } from '@/app/lib/data';
 import { lusitana } from '@/app/ui/fonts';
 import FullBlogs from '@/app/ui/blogfull';
@@ -7,6 +8,35 @@ import {
   ArrowLeftIcon,
   HomeIcon
 } from '@heroicons/react/24/outline'
+
+type Props = {
+  params: { id: string }
+};
+
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const blog = await fetchBlogById(params.id);
+  const baseUrl = 'https://hiildhaxal.online';
+  
+  const imageUrl = Array.isArray(blog.image_url) 
+    ? blog.image_url[0] 
+    : blog.image_url;
+  const absoluteImageUrl = imageUrl?.startsWith('http') 
+    ? imageUrl 
+    : `${baseUrl}${imageUrl}`;
+
+  return {
+    metadataBase: new URL(baseUrl),
+    title: blog.title,
+    description: blog.content.slice(0, 160),
+    openGraph: {
+      url: `${baseUrl}/blog/${params.id}`,
+      title: blog.title,
+      description: blog.content.slice(0, 160),
+      images: [absoluteImageUrl],
+    }
+  };
+}
 
 export default async function Page({ params }: { params: { id: string } }) {
   const fullblogs = await fetchBlogById(params.id);
