@@ -2,10 +2,10 @@ import Link from 'next/link';
 
 export default function Page(){
     return (
-        <div className = 'w-full min-h-screen bg-gray-100'>
+        <div className = 'w-full min-h-screen bg-gray-300'>
 
         <div >
-        <p className = 'text-center text-3xl text-blue-700 ' >Successfully Uploaded!</p>;
+        <p className = 'mt-20 text-center text-3xl text-blue-700 ' >Successfully Uploaded!</p>
         </div>
 
         <Link href = '/properties'>

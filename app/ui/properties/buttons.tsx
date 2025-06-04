@@ -27,7 +27,7 @@ export async function UpdateListing({ id }: { id: string }) {
       href={`/properties/${id}/edit`}
       className="rounded-md border p-2 hover:bg-black bg-gray-700 "
     >
-      <span>Update Listing</span>
+      <span>Cusboonaysii Boostiga</span>
       <PencilIcon className="w-6 ml-8" />
     </Link>
   );
@@ -36,6 +36,7 @@ export async function UpdateListing({ id }: { id: string }) {
 export async function DeleteListing({ id }: { id: string }) {
   const session = await auth();
   const deleteListingWithId = deleteListing.bind(null, id);
+  
 
   // Only render the Delete button if the user is logged in
   if (!session) return null;
@@ -43,7 +44,7 @@ export async function DeleteListing({ id }: { id: string }) {
   return (
     <form action={deleteListingWithId}>
       <button className="rounded-md border p-2 hover:bg-black bg-gray-700 ">
-        <span>Delete Listing</span>
+        <span>Tuur Boostiga</span>
         <TrashIcon className="w-6 ml-8" />
       </button>
     </form>
