@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import { Analytics } from "@vercel/analytics/react";
 import { inter } from "@/app/ui/fonts";
 import "@/app/ui/global.css";
-// import GoogleTranslate from "./ui/landingPage/components/google-translate";
+import GoogleTranslate from "./ui/landingPage/components/google-translate";
 
 
 
@@ -47,7 +47,7 @@ export default function RootLayout({
       </head>
       <body>
         <Navbar />
-        {/* <GoogleTranslate /> */}
+         <GoogleTranslate /> 
           {children}
         <Analytics />
         <Footer />

@@ -105,7 +105,7 @@ const footer = () => {
                             {product.links.map((link: string, index: number) => (
                                 <li key={index} className='mb-5'>
                                     <Link 
-                                            href={`/#${product.section.toLowerCase()}/${link.toLowerCase().replace(/ /g, '-')}`} 
+                                            href={`/#${link.toLowerCase().replace(/ /g, '-')}`} 
                                             className="text-footerlinks text-base font-normal mb-6 space-links"
                                         >
                                             {link}

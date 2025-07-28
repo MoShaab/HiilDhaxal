@@ -15,6 +15,7 @@ import Newsletter from './ui/landingPage/components/Newsletter/Newsletter';
 import Features from './ui/landingPage/components/Work/index';
 // import Expert from './ui/landingPage/components/Expert/index';
 import Contactusform from './ui/landingPage/components/Navbar/Contactus';
+import Faq from './ui/landingPage/components/faqs/faqs';
 
 import {fetchFeaturedProperty, fetchDisplayVillas} from '@/app/lib/data';
 
@@ -45,6 +46,7 @@ export default async function Page(){
       <DisplayFromDb featuredProperty = {featuredProperty} />
       <DisplayVillas displayVillas = {displayVillas} />
       <LetUsKnow />
+      <Faq />
       {/* <DisplayAgents featuredAgents={featuredAgents} />
       <Achieved />
       <TestimonialSection /> */}

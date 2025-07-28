@@ -43,7 +43,7 @@ export async function DeleteListing({ id }: { id: string }) {
 
   return (
     <form action={deleteListingWithId}>
-      <button className="rounded-md border p-2 hover:bg-black bg-gray-700 ">
+      <button className="rounded-md border p-2 hover:bg-red bg-gray-700 ">
         <span>Tuur Boostiga</span>
         <TrashIcon className="w-6 ml-8" />
       </button>
