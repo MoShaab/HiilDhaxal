@@ -50,7 +50,7 @@ export default async function Page({ params }: { params: { id: string } }) {
   return (
     <div className="w-full min-h-screen bg-gradient-to-b from-blue-100 via-white to-blue-50">
       <div className="container mx-auto px-4 py-6 md:py-10">
-      <div className="flex flex-col md:flex-row md:items-center justify-between">
+      <div className="mt-12 flex flex-col md:flex-row md:items-center justify-between">
           {/* Header */}
           <h1
             className={`${lusitana.className} text-gray-900 text-3xl md:text-4xl font-bold pb-2 text-center md:text-left break-words overflow-visible`}
