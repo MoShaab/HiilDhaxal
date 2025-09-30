@@ -117,6 +117,7 @@ html:not([data-scroll="0"]) .navbar {
   --background-end-rgb: 255, 255, 255;
 }
 
+
 body {
   font-family: 'Poppins', sans-serif;
 }

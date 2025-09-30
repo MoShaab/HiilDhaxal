@@ -34,16 +34,16 @@ const Navbar = () => {
     const [isOpen, setIsOpen] = React.useState(false);
 
     return (
-        <Disclosure as="nav" className="navbar">
+        <Disclosure as="nav" className="navbar ">
             <>
-                <div className="mx-auto max-w-7xl p-3 md:p-6 lg:px-8">
+                <div className="mx-auto mt-10 max-w-7xl p-3 md:p-6 lg:px-8">
                     <div className="relative flex h-3 sm:h-2 items-center">
                         <div className="flex flex-1 items-center sm:justify-between">
 
                             {/* LOGO */}
                             
 
-                            <div className="flex sm:hidden flex-shrink-0 items-center border-right">
+                            <div className="flex sm:hidden flex-shrink-0 items-center">
                             <div className="w-[80px] h-[35px] relative">
                             <Image 
                                 src="/logo.png" 
@@ -53,10 +53,10 @@ const Navbar = () => {
                             />
                             </div>
                             </div>
-                            <div className="hidden sm:flex flex-shrink-0 items-center border-right">
+                            <div className="hidden sm:flex flex-shrink-0 items-center">
                             <Image src="/logo.png" width={80} height={65} alt="Logo" />
                                     
-                                <Link href="/" className='text-2xl font-semibold text-black ml-4'>
+                                <Link href="/" className='text-2xl font-semibold text-black'>
                                     
                                     HiilDhaxal.
                                 </Link>
@@ -64,7 +64,7 @@ const Navbar = () => {
 
                             {/* LINKS */}
 
-                            <div className="hidden lg:flex items-center border-right ">
+                            <div className="hidden lg:flex items-center ">
                                 <div className="flex justify-end space-x-4">
                                     {navigation.map((item) => 
                                     

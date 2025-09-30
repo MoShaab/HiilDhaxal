@@ -18,7 +18,7 @@ export default function GoogleTranslate() {
         {
           pageLanguage: 'so', // Set Somali as source language
           includedLanguages: 'en,ar,fr,it', // Add more languages as needed
-          layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+          layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE,
           autoDisplay: false,
         },
         'google_translate_element'
@@ -37,7 +37,7 @@ export default function GoogleTranslate() {
       />
       <div 
         id="google_translate_element" 
-        className="fixed top-4 right-4 z-50"
+        className="fixed top-0 left-72 z-50"
       />
       <style jsx global>{`
         // Hide Google Translate attribution
@@ -52,7 +52,7 @@ export default function GoogleTranslate() {
           border: 1px solid #ccc;
           padding: 4px;
           border-radius: 4px;
-          background: white;
+          background: black;
         }
         // Hide the top frame on translated pages
         .goog-te-banner-frame {
