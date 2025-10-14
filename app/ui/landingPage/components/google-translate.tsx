@@ -52,7 +52,7 @@ export default function GoogleTranslate() {
           border: 1px solid #ccc;
           padding: 4px;
           border-radius: 4px;
-          background: black;
+          background: white;
         }
         // Hide the top frame on translated pages
         .goog-te-banner-frame {

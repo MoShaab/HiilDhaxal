@@ -31,6 +31,7 @@ export default function Form() {
             <input
               id="title"
               name="title"
+              required
               type="text"
               placeholder="Gali cinwaanka qormada"
               className="peer block w-full rounded-md border border-gray-300 py-3 pl-12 text-xl text-gray-900 placeholder:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
@@ -51,6 +52,7 @@ export default function Form() {
             <textarea
               id="content"
               name="content"
+              required
               placeholder="Gali qoraalka qormada oo buuxa"
               className="peer block w-full rounded-md border border-gray-300 py-3 pl-12 text-lg text-gray-700 placeholder:text-gray-500 min-h-[300px] resize-y focus:border-blue-500 focus:ring-blue-500"
               value={content}
@@ -90,6 +92,7 @@ export default function Form() {
             <input
               id="image"
               name="images"
+              required
               type="file"
               multiple
               accept="image/*,.pdf,video/*"

@@ -12,7 +12,7 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "types": ["react/canary"],
+    "types": ["react/canary", "next-auth"],
     "plugins": [
       {
         "name": "next"

@@ -7,7 +7,7 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { randomUUID } from 'crypto';
 import bcrypt from 'bcrypt';
-import { signIn } from '@/auth';
+import { auth, signIn } from '@/auth';
 import { AuthError } from 'next-auth';
 
 const endpoint = process.env.R2_ENDPOINT ?? '';
@@ -92,6 +92,8 @@ const FormSchema = z.object({
 });
 
 export async function createListing(formData: FormData) {
+  const user = await auth();
+  if (!user) return null;
   const { title, description, location, images } = FormSchema.parse({
     title: formData.get('title'),
     description: formData.get('description'),
@@ -113,12 +115,12 @@ export async function createListing(formData: FormData) {
 
   try {
     await sql`
-      INSERT INTO properties (title, description, location, image_path)
-      VALUES (${title}, ${description}, ${location}, ${JSON.stringify(imageUrls)})
+      INSERT INTO properties (title, description, location, image_path, user_id)
+      VALUES (${title}, ${description}, ${location}, ${JSON.stringify(imageUrls)}, ${auth.user})
     `;
   } catch (dbError) {
     console.error('Database insertion error:', dbError);
-    throw new Error('Failed to insert listing into database.');
+    throw new Error('Failed to insert content into database.');
   }
 
   revalidatePath('/properties');

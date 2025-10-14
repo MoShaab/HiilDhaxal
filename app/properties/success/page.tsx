@@ -5,7 +5,7 @@ export default function Page(){
         <div className = 'w-full min-h-screen bg-gray-300'>
 
         <div >
-        <p className = 'mt-20 text-center text-3xl text-blue-700 ' >Successfully Uploaded!</p>
+        <p className = 'mt-24 text-center text-3xl text-blue-700 ' >Successfully Uploaded!</p>
         </div>
 
         <Link href = '/properties'>

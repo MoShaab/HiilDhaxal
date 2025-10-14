@@ -10,7 +10,7 @@ export default async function Page() {
  
   return (
     
-    <main className = "flex min-h-screen bg-gray-100 ">
+    <main className = "flex min-h-screen mt-24 bg-gray-100 ">
               <form
         action={async () => {
             'use server';
@@ -24,9 +24,9 @@ export default async function Page() {
       </form>
       <Breadcrumbs
         breadcrumbs={[
-          { label: 'Listings', href: '/properties/sell_property/create' },
+          { label: 'Content', href: '/properties/sell_property/create' },
           {
-            label: 'Create Listings',
+            label: 'Curi Content',
             href: '/properties/sell_property/create',
             active: true,
           },
