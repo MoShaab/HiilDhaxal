@@ -92,8 +92,8 @@ const FormSchema = z.object({
 });
 
 export async function createListing(formData: FormData) {
-  const user = await auth();
-  if (!user) return null;
+  const session = await auth();
+  if (!session) return null;
   const { title, description, location, images } = FormSchema.parse({
     title: formData.get('title'),
     description: formData.get('description'),
@@ -116,7 +116,7 @@ export async function createListing(formData: FormData) {
   try {
     await sql`
       INSERT INTO properties (title, description, location, image_path, user_id)
-      VALUES (${title}, ${description}, ${location}, ${JSON.stringify(imageUrls)}, ${auth.user})
+      VALUES (${title}, ${description}, ${location}, ${JSON.stringify(imageUrls)}, ${session.user.id})
     `;
   } catch (dbError) {
     console.error('Database insertion error:', dbError);
